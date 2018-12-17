@@ -1,0 +1,97 @@
+{
+  "harvested": {
+    "iconUrl": "tractor.svg",
+    "backgroundColor": "#b86c30",
+    "fontColor": "#fff"
+  },
+  "arrived": {
+    "iconUrl": "pin.svg",
+    "backgroundColor": "#c99826",
+    "fontColor": "#fff"
+  },
+  "location": {
+    "iconUrl": "pin.svg",
+    "backgroundColor": "#93784d",
+    "fontColor": "#fff"
+  },
+  "shipped": {
+    "iconUrl": "pin.svg",
+    "backgroundColor": "#93784d",
+    "fontColor": "#fff"
+  },
+  "displayed": {
+    "iconUrl": "pin.svg",
+    "backgroundColor": "#5a5b7d",
+    "fontColor": "#fff"
+  },
+  "customs": {
+    "iconUrl": "pin.svg",
+    "backgroundColor": "#5a5b7d",
+    "fontColor": "#fff"
+  },
+  "qualityControlled": {
+    "iconUrl": "thermometer.svg",
+    "backgroundColor": "#759abb",
+    "fontColor": "#fff"
+  },
+  "manufactured": {
+    "iconUrl": "barn.svg",
+    "backgroundColor": "#414450",
+    "fontColor": "#fff"
+  },
+  "sold": {
+    "iconUrl": "dollar.svg",
+    "backgroundColor": "#5fa153",
+    "fontColor": "#fff"
+  },
+  "imported": {
+    "iconUrl": "import-export.svg",
+    "backgroundColor": "forestgreen",
+    "fontColor": "#fff"
+  },
+  "exported": {
+    "iconUrl": "import-export.svg",
+    "backgroundColor": "forestgreen",
+    "fontColor": "#fff"
+  },
+  "drying": {
+    "iconUrl": "drying.svg",
+    "backgroundColor": "royalblue",
+    "fontColor": "#fff"
+  },
+  "bagging": {
+    "iconUrl": "tea-bagging.svg",
+    "backgroundColor": "green",
+    "fontColor": "#fff"
+  },
+  "steaming": {
+    "iconUrl": "steaming.svg",
+    "backgroundColor": "maroon",
+    "fontColor": "#fff"
+  },
+  "withering": {
+    "iconUrl": "withering.svg",
+    "backgroundColor": "forestgreen",
+    "fontColor": "#fff"
+  },
+  "recall": {
+    "iconUrl": "recall.svg",
+    "backgroundColor": "firebrick",
+    "fontColor": "#fff"
+  },
+  "recalled": {
+    "iconUrl": "recall.svg",
+    "backgroundColor": "firebrick",
+    "fontColor": "#fff"
+  },
+  "processed": {
+    "iconUrl": "process.svg",
+    "backgroundColor": "#b86c30",
+    "fontColor": "#fff"
+  },
+  "process": {
+    "iconUrl": "process.svg",
+    "backgroundColor": "#b86c30",
+    "fontColor": "#fff"
+  }
+}
