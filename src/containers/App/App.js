@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../assets/images/logo.svg';
 import './App.scss';
 import Search from '../Search';
+import Footer from '../../components/Footer';
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
         {/* <header className="App-header">
         </header> */}
         <Search/>
+        <Footer/>
       </div>
     );
   }
