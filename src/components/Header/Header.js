@@ -36,30 +36,30 @@ class Header extends Component {
         return (
           <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">reactstrap</NavbarBrand>
+              <NavbarBrand href="/">amb.to</NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink href="/components/">Components</NavLink>
+                    <NavLink href="https://explorer.ambrosus-test.com">Explorer</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                    <NavLink href="https://dashboard.ambrosus-test.com">Dashbord</NavLink>
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      Options
+                      Others
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>
-                        Option 1
+                        Amb.to
                       </DropdownItem>
                       <DropdownItem>
-                        Option 2
+                        Validator
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>
-                        Reset
+                        Amb Nodes
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
