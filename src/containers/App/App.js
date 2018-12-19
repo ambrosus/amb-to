@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import logo from '../../assets/images/logo.svg';
+import logo from 'assets/images/logo.svg';
 import './App.scss';
-import Search from '../Search';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Search from 'containers/Search';
+import Asset from 'containers/Asset';
+import Event from 'containers/Event';
+
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
+import { AssetWrapper, SelectStyle } from 'common';
 
 class App extends Component {
   render() {
@@ -17,9 +22,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Search} />
 
-            {/* <Route path="/:assetId" render={(props) => (
+            <Route path="/:assetId" render={(props) => (
               <Asset key={props.match.params.assetId} {...props} />)
-            } /> */}
+            } />
 
             <Route path="*" component={Search} />
           </Switch>

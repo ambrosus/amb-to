@@ -1,5 +1,7 @@
-import AssetWrapper from './AssetWrapper'
+import AssetWrapper from './AssetWrapper';
+import SelectStyle from './SelectStyle';
 
-module.exports = {
-    AssetWrapper
+export default {
+    AssetWrapper,
+    SelectStyle
 }
