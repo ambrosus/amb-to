@@ -16,10 +16,21 @@ class Maps extends Component {
     zoom: 11,
     width: '100%',
     height: '100vh',
+    places: []
   }
   static propTypes = {}
 
   render() {
+    const places = this.props.places.map((p) => {
+      return (
+        <Place
+        lat={p.lat}
+        lng={p.lng}
+        text={p.text}
+      />
+      )
+    });
+
     return (
       <div className="maps" style={{ height: this.props.height, width: this.props.width }}>
       <GoogleMapReact
@@ -27,11 +38,7 @@ class Maps extends Component {
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
       >
-        <Place
-          lat={59.955413}
-          lng={30.337844}
-          text={'Tallinn, Estonia'}
-        />
+      {places}
       </GoogleMapReact>
     </div>
     )
