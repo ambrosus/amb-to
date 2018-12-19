@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 import SVG from 'react-svg';
 
-import bitcoinTalkIcon from '../../assets/icons/bitcointalk-icon.svg';
-import facebookIcon from '../../assets/icons/fb-icon.svg';
-import githubIcon from '../../assets/icons/github-icon.svg';
-import mediumIcon from '../../assets/icons/medium-icon.svg';
-import redditIcon from '../../assets/icons/reddit-icon.svg';
-import telegramIcon from '../../assets/icons/telegram-icon.svg';
-import twitterIcon from '../../assets/icons/twitter-icon.svg';
-import youtubeIcon from '../../assets/icons/youtube-icon.svg';
+import bitcoinTalkIcon from 'assets/icons/bitcointalk-icon.svg';
+import facebookIcon from 'assets/icons/fb-icon.svg';
+import githubIcon from 'assets/icons/github-icon.svg';
+import mediumIcon from 'assets/icons/medium-icon.svg';
+import redditIcon from 'assets/icons/reddit-icon.svg';
+import telegramIcon from 'assets/icons/telegram-icon.svg';
+import twitterIcon from 'assets/icons/twitter-icon.svg';
+import youtubeIcon from 'assets/icons/youtube-icon.svg';
 
 import './style.scss';
 
