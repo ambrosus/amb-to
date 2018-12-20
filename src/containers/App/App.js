@@ -10,7 +10,7 @@ import Event from 'containers/Event';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-import { AssetWrapper, SelectStyle } from 'common';
+import { shouldRedirect, SelectStyle } from 'common';
 
 class App extends Component {
   render() {
