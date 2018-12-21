@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 
 import './style.scss';
 
@@ -16,7 +17,8 @@ class Header extends Component {
 
     render() {
         return (
-          <div>
+          <div className="Header">
+            <Navbar />
           </div>
         );
     }
