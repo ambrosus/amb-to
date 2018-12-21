@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.scss';
 
-import amblogo from '../../assets/images/amb-logo.png';
+import amblogo from 'assets/images/amb-logo.png';
 
 class Search extends Component {
   constructor(props) {
