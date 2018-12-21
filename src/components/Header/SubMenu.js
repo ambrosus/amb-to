@@ -16,7 +16,7 @@ class Submenu extends Component {
         const itemsUi = items.map((item) => {
             return (
               <li className="nav__submenu-item ">
-               <Link to={item.link}>{item.label}</Link>
+                <Link to={item.link}>{item.label}</Link>
               </li>
             )
         });

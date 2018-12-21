@@ -90,9 +90,9 @@ class Search extends Component {
     return (
       <div className="Search">
           <div className="wrapper">
-            <div className="logo">
+            {/* <div className="logo">
               <img className="logo__image" src={amblogo} />
-            </div>
+            </div> */}
             <div className="page">
               <h3 className="title">Search for an asset</h3>
               <div className="form-search">

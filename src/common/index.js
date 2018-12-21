@@ -1,7 +1,7 @@
-import AssetWrapper from './AssetWrapper';
+import shouldRedirect from './shouldRedirect';
 import SelectStyle from './SelectStyle';
 
 export default {
-    AssetWrapper,
+    shouldRedirect,
     SelectStyle
 }

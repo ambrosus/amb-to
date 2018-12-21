@@ -1,14 +1,4 @@
 .Header {
-    .nav__submenu {
-        display: none;
-    }
-
-    .nav__menu-item:hover {
-        .nav__submenu {
-            display: block;
-        }
-    }
-
     $color-blue: #00aeef;
     $color-blue-dark: #0d2035;
     $submenu-width: 180px;
@@ -35,21 +25,36 @@
         text-align: center;
     }
 
+    .nav__submenu {
+        display: none;
+    }
+
+    .nav__menu-item:hover {
+        .nav__submenu {
+            display: block;
+        }
+    }
+
     nav {
         ul {
             list-style: none;
             padding-left: 0;
             margin-top: 0;
             margin-bottom: 0;
+            text-align: center;
         }
     }
 
     .nav {
+        padding: 20px 0;
         display: inline-block;
-        margin: 2rem auto 0;
-        background: $color-blue-dark;
+        margin: 0 20px;
         color: #fff;
         text-align: left;
+
+        li {
+            display: inline;
+        }
 
         a {
             display: block;
@@ -57,12 +62,21 @@
             line-height: inherit;
             cursor: pointer;
         }
+
+        .logo {
+            &__image {
+                max-width: 200px;
+            }
+        }
     }
 
     .nav__menu {
-        line-height: 45px;
-        font-weight: 700;
-        text-transform: uppercase;
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    .nav__menu li:first-child {
+        margin-right: auto;
     }
 
     .nav__menu-item {
@@ -70,7 +84,7 @@
         position: relative;
 
         &:hover {
-            background-color: $color-blue;
+            // background-color: $color-blue;
 
             .nav__submenu {
                 display: block;
