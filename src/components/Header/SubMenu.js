@@ -9,11 +9,6 @@ class Submenu extends Component {
     constructor(props) {
         super(props);
     }
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
 
     render() {
 
