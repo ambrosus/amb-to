@@ -1,7 +1,7 @@
-import shouldRedirect from './shouldRedirect';
-import SelectStyle from './SelectStyle';
+import AssetRedirect from './assetRedirect';
+import selectStyle from './selectStyle';
 
 export default {
-    shouldRedirect,
-    SelectStyle
+    AssetRedirect,
+    selectStyle
 }
