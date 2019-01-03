@@ -6,8 +6,8 @@ import './styles.scss';
 
 import amblogo from 'assets/images/amb-logo.png';
 
-class Search extends Component {
-  constructor(props) {
+class Search extends Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       search: "",
@@ -18,7 +18,7 @@ class Search extends Component {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.loadHistory();
   }
 
@@ -39,7 +39,7 @@ class Search extends Component {
   onSearch() {
     const search = this.state.search;
     if (!search || /^\s*$/.test(search)) {
-      this.setState = {
+      this.state = {
         errorSearchEmpty: true
       };
     } else {
@@ -65,19 +65,19 @@ class Search extends Component {
 
   }
 
-  updateInputValue(e) {
+  updateInputValue(e: any) {
     this.state = {
       search: e.target.value
     };
   }
 
-  render() {
+  public render() {
     const history = this.state.history;
     const spinner = this.state.spinner;
     const errorNoAsset = this.state.errorNoAsset;
     const errorSearchEmpty = this.state.errorSearchEmpty;
 
-    const historyDivs = history.map((item) => {
+    const historyDivs = history.map((item:any) => {
       return (
         <Link className="history__item" to={`/${item.id}`}>
           <div>{ item.title}</div>
@@ -133,9 +133,5 @@ class Search extends Component {
     )
   }
 }
-
-Search.propTypes = {}
-
-Search.defaultProps = {}
 
 export default Search

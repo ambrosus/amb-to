@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import Event from 'app/containers/Asset/Event';
+import Event from './Event';
 
 import './Asset.scss';
 
-class Asset extends Component {
-  constructor(props) {
+class Asset extends Component<any, any> {
+  constructor(props: any) {
     super(props);
   }
 
@@ -30,7 +30,7 @@ class Asset extends Component {
     const asset = this.props.asset;
     const events = this.props.events;
     const style = this._getSyle();
-    const eventDivs = events.map((e, index) => {
+    const eventDivs = events.map((e: any, index: any) => {
       return (
         <Event event={e} key={index} />
       )
@@ -44,8 +44,8 @@ class Asset extends Component {
   }
 }
 
-Asset.propTypes = {}
+// Asset.propTypes = {}
 
-Asset.defaultProps = {}
+// Asset.defaultProps = {}
 
 export default Asset

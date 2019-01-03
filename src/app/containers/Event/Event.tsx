@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
-import './style.scss';
+import './styles.scss';
 
 class Event extends React.Component<any, any> {
   constructor(props: any) {

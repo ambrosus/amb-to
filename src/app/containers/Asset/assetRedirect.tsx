@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import API from '../../services/api';
 
-import Preloader from 'app/components/Preloader/Preloader'
+import Preloader from '../../components/Preloader/Preloader'
 
-export default function (ComposedComponent) {
-    class AssetRedirect extends Component {
+export default function (ComposedComponent: any) {
+    class AssetRedirect extends Component<any, any> {
         static contextTypes = {
             router: PropTypes.object
         }
 
-        constructor(props) {
+        constructor(props: any) {
             super(props);
             this.state = {
                 data: null
             };
         }
 
-        componentWillMount() {
+        public componentWillMount() {
             const assetId = this.props.match.params.assetId;
             if (!assetId) {
                 alert('no alert assetID');
@@ -37,7 +37,7 @@ export default function (ComposedComponent) {
         //     }
         // }
 
-        componentWillReceiveProps(nextProps) {
+        public componentWillReceiveProps(nextProps: any) {
             const oldAssetId = this.props.match.params.assetId;
             const newAssetId = nextProps.match.params.assetId;
             const assetIdExist = oldAssetId && newAssetId;
@@ -47,11 +47,11 @@ export default function (ComposedComponent) {
             }
         }
 
-        componentWillUnmount() {
+        public componentWillUnmount() {
 
         }
 
-        async _getAssetAndRedirect(assetId) {
+        async _getAssetAndRedirect(assetId: any) {
             let [asset, events] = await Promise.all([API.getAsset(assetId), API.getEvents(assetId)]);
             this.setState({
                 asset: asset.data,
@@ -59,7 +59,7 @@ export default function (ComposedComponent) {
             });
         }
 
-        render() {
+        public render() {
             if (this.state.asset && this.state.events) {
                 return <ComposedComponent {...this.state} {...this.props} />
             } else {
