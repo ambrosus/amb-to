@@ -27,12 +27,18 @@ class Asset extends Component {
   }
 
   render() {
-    const asset = this.props.data;
+    const asset = this.props.asset;
+    const events = this.props.events;
     const style = this._getSyle();
+    const eventDivs = events.map((e, index) => {
+      return (
+        <Event event={e} key={index} />
+      )
+    });
 
     return (
       <div className="Asset" style={style}>
-        {/* <Event asset={asset}/> */}
+        { eventDivs }
       </div>
     )
   }

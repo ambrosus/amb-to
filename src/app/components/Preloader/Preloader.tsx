@@ -4,16 +4,16 @@ import React, { Component } from 'react'
 import './Preloader.scss';
 
 const Preloader = () => {
-    return <div class="asset-preloader">
+    return <div className="asset-preloader">
         <div>
-            <div class="asset-preloader__image"></div>
-            <div class="asset-preloader__details">
+            <div className="asset-preloader__image"></div>
+            <div className="asset-preloader__details">
                 <div></div>
                 <div></div>
             </div>
         </div>
         <div>
-            <div class="asset-preloader__details">
+            <div className="asset-preloader__details">
                 <div></div>
                 <div></div>
                 <div></div>

@@ -27,15 +27,15 @@ export default function (ComposedComponent) {
             }
         }
 
-        componentWillUpdate(nextProps) {
-            const oldAssetId = this.props.match.params.assetId;
-            const newAssetId = nextProps.match.params.assetId;
-            const assetIdExist = oldAssetId && newAssetId;
+        // componentWillUpdate(nextProps) {
+        //     const oldAssetId = this.props.match.params.assetId;
+        //     const newAssetId = nextProps.match.params.assetId;
+        //     const assetIdExist = oldAssetId && newAssetId;
 
-            if (assetIdExist && oldAssetId !== newAssetId) {
-                this._getAssetAndRedirect(newAssetId);
-            }
-        }
+        //     if (assetIdExist && oldAssetId !== newAssetId) {
+        //         this._getAssetAndRedirect(newAssetId);
+        //     }
+        // }
 
         componentWillReceiveProps(nextProps) {
             const oldAssetId = this.props.match.params.assetId;
@@ -47,20 +47,23 @@ export default function (ComposedComponent) {
             }
         }
 
-        _getAssetAndRedirect(assetId) {
-            API.getAsset(assetId)
-                .then((res) => {
-                    this.setState({
-                        data: res.data
-                    });
-                });
+        componentWillUnmount() {
+
+        }
+
+        async _getAssetAndRedirect(assetId) {
+            let [asset, events] = await Promise.all([API.getAsset(assetId), API.getEvents(assetId)]);
+            this.setState({
+                asset: asset.data,
+                events: events.data.results
+            });
         }
 
         render() {
-            if(this.state.data) {
+            if (this.state.asset && this.state.events) {
                 return <ComposedComponent {...this.state} {...this.props} />
             } else {
-                return <Preloader/>
+                return <Preloader />
             }
         }
     }

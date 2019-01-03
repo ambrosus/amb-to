@@ -19,8 +19,14 @@ class Event extends Component {
     }
   }
 
+  _toggleMap(e) {
+    console.log('toggle');
+    //expandEvents[i] = !expandEvents[i]
+  }
+
   render() {
-    const event = this.props.event | {};
+    const event = this.props.event || {};
+    console.log(event);
     const places = [];
     if ((event && event.location.location.geometry.coordinates) && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2) {
       places.push({
@@ -32,6 +38,7 @@ class Event extends Component {
     let expandEvents = [];
     let i = event.eventId;
     let eventTypeToStyle = this._eventTypeToStyle;
+    let assetId = "";
 
 
     return (
@@ -43,7 +50,7 @@ class Event extends Component {
             <p className="item__event__timeline__date ">{event.timestamp}</p>
           </div>
           <div className={'item__event__button' + expandEvents[i] ? '--active' : ''}>
-            <div onClick={expandEvents[i] = !expandEvents[i]} className="item__event__single" style={{ 'background-color': (event.type | eventTypeToStyle).backgroundColor }}>
+            <div onClick={this._toggleMap} className="item__event__single" style={{ 'backgroundColor': (event.type | eventTypeToStyle).backgroundColor }}>
               <div className="item__event__single__image">
                 <img src="/assets/images/{{(event.type | eventTypeToStyle ).iconUrl}}" />
               </div>
@@ -86,7 +93,10 @@ class Event extends Component {
                 <p className="item__event__more-details__cell ">{event.author}</p>
               </div>
               <div className="item__event__more-details__row ">
-                <a className="item__event__more-details__button " routerLink="/{{assetId}}/events/{{event.eventId}}">VIEW EVENT DETAILS...</a>
+              <Link className="item__event__more-details__button " to={`/${assetId}/events/${event.eventId}`}>
+              VIEW EVENT DETAILS...
+              </Link>
+                {/* <a className="item__event__more-details__button " routerLink="/{{assetId}}/events/{{event.eventId}}">VIEW EVENT DETAILS...</a> */}
               </div>
             </div>
           </div>

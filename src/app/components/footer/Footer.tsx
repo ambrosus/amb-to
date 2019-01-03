@@ -8,7 +8,7 @@ const Footer = (prop: any) => {
     <footer className='Footer'>
       <div className='sub-footer'>
         <div className='copyright'>
-          <p>&copy; Ambrosus Technologies {new Date().getFullYear} - All Rights Reserved</p>
+          <p>&copy; Ambrosus Technologies { new Date().getFullYear() } - All Rights Reserved</p>
         </div>
         <div className='logo'>
           <SVG className='SVG' wrapper='span' src={iconLogo}></SVG>
