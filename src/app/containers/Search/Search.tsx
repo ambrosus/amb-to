@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+import ReactSVG from 'react-svg'
 
 import './styles.scss';
 
 import amblogo from 'assets/images/amb-logo.png';
+import spinnerLogo from 'assets/svg/spinner.svg';
+
 
 class Search extends Component<any, any> {
   constructor(props: any) {
@@ -24,29 +27,30 @@ class Search extends Component<any, any> {
 
   loadHistory() {
     let history = localStorage.getItem("history)");
-    this.state = {
+    this.setState({
       history: history ? JSON.parse(history) : []
-    };
+    });
   }
 
   clearHistory() {
     localStorage.clear();
-    this.state = {
+    this.setState({
       history : []
-    };
+    });
   }
 
   onSearch() {
     const search = this.state.search;
+    console.log(search);
     if (!search || /^\s*$/.test(search)) {
-      this.state = {
+      this.setState({
         errorSearchEmpty: true
-      };
+      });
     } else {
-      this.state = {
+      this.setState({
         errorSearchEmpty: false,
         spinner: true
-      };
+      });
 
       // this.assetService.getAsset(search).subscribe(
       //   resp => {
@@ -62,6 +66,7 @@ class Search extends Component<any, any> {
       //   }
       // );
     }
+
 
   }
 
@@ -97,11 +102,11 @@ class Search extends Component<any, any> {
             <div className="page">
               <h3 className="title">Search for an asset</h3>
               <div className="form-search">
-                <input type="text" placeholder="assetId" onChange={this.updateInputValue.bind(this)}/>
-                <button className="btn" onClick={this.onSearch.bind(this)}>Search</button>
+                <input type="text" placeholder="assetId" onChange={(e) => this.updateInputValue(e)}/>
+                <button className="btn" onClick={() => this.onSearch()}>Search</button>
               </div>
               {spinner ?
-              `<app-spinner *ngIf="spinner"></app-spinner>` : ''
+                <ReactSVG className="spinner" src={spinnerLogo} />: ''
               }
 
               <div className="errors">
