@@ -56,12 +56,12 @@ export default function (ComposedComponent: any) {
             const parseEvents = await API.parseEvents(events.data);
             this.setState({
                 asset: asset.data,
-                events: parseEvents
+                assetDetails: parseEvents
             });
         }
 
         public render() {
-            if (this.state.asset && this.state.events) {
+            if (this.state.asset && this.state.assetDetails) {
                 return <ComposedComponent {...this.state} {...this.props} />
             } else {
                 return <Preloader />

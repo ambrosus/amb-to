@@ -28,8 +28,12 @@ class Asset extends Component<any, any> {
 
   render() {
     const asset = this.props.asset;
-    const events = this.props.events;
+    const assetDetails = this.props.assetDetails;
+    const events = assetDetails.events;
+    
     const style = this._getSyle();
+    console.log(events);
+
     const eventDivs = events.map((e: any, index: any) => {
       return (
         <Event event={e} key={index} />
