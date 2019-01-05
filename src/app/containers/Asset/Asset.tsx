@@ -36,6 +36,8 @@ class Asset extends Component<any, any> {
       )
     });
 
+    console.log(events);
+
     return (
       <div className="Asset" style={style}>
         { eventDivs }

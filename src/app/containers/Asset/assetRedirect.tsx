@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import API from '../../services/api';
-
 import Preloader from '../../components/Preloader/Preloader'
+import { parse } from 'path';
 
 export default function (ComposedComponent: any) {
     class AssetRedirect extends Component<any, any> {
@@ -53,9 +53,10 @@ export default function (ComposedComponent: any) {
 
         async _getAssetAndRedirect(assetId: any) {
             let [asset, events] = await Promise.all([API.getAsset(assetId), API.getEvents(assetId)]);
+            const parseEvents = await API.parseEvents(events.data);
             this.setState({
                 asset: asset.data,
-                events: events.data.results
+                events: parseEvents
             });
         }
 

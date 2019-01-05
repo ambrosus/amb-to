@@ -37,9 +37,24 @@ const getEvents = assetId => {
   return ambrosusAPI.getEvents({assetId: assetId});
 };
 
+const parseEvents = eventsArray => {
+  return new Promise((resolve, reject) => {
+    ambrosusAPI
+      .parseEvents(eventsArray)
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        console.log('parseEvents: ', error);
+        reject(error);
+      });
+  });
+}
+
 export default {
   API,
   getAsset,
   getEvent,
-  getEvents
+  getEvents,
+  parseEvents
 };
