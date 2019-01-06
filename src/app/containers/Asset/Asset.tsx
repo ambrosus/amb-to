@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import Event from './Event';
+import Info from './Info';
 
 import './Asset.scss';
 
@@ -30,9 +31,8 @@ class Asset extends Component<any, any> {
     const asset = this.props.asset;
     const assetDetails = this.props.assetDetails;
     const events = assetDetails.events;
-    
+
     const style = this._getSyle();
-    console.log(events);
 
     const eventDivs = events.map((e: any, index: any) => {
       return (
@@ -40,11 +40,10 @@ class Asset extends Component<any, any> {
       )
     });
 
-    console.log(events);
-
     return (
       <div className="Asset" style={style}>
-        { eventDivs }
+      <Info asset={assetDetails} />
+        {/* { eventDivs } */}
       </div>
     )
   }
