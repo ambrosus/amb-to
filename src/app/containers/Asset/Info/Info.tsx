@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import './Info.scss';
 import { isObject } from 'util';
+import Timeline from '../Timeline'
 
 const styles = require('assets/data/styles.json');
 
@@ -163,9 +164,10 @@ class Info extends Component<any, any> {
 
             </div >
 
-            {/* <div className="item__container">
-        <app-events-timeline [events]="assetService.asset.events" [assetId]="assetService.assetId"></app-events-timeline>
-      </div > */}
+
+            <div className="item__container">
+            <Timeline events={asset.events} asset={asset} />
+            </div >
 
           </div >
         </div >

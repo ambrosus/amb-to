@@ -43,7 +43,6 @@ class Asset extends Component<any, any> {
     return (
       <div className="Asset" style={style}>
       <Info asset={assetDetails} />
-        {/* { eventDivs } */}
       </div>
     )
   }

@@ -4,11 +4,19 @@ import { Link } from 'react-router-dom';
 import Maps from 'app/components/Maps/Maps';
 import './Event.scss';
 
+import pinLogo from '../../../../assets/images/pin.svg'
+import dolarLogo from '../../../../assets/images/dollar.svg'
+
 const styles = require('assets/data/styles.json');
+
 
 class Event extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      expandEvent: false
+    }
   }
 
   _eventTypeToStyle(value) {
@@ -19,14 +27,28 @@ class Event extends Component {
     }
   }
 
+  _expandEvent() {
+    console.log('expand')
+    this.state = {
+      expandEvent: !this.state.expandEvent
+    }
+  }
+
+
   _toggleMap(e) {
     console.log('toggle');
     //expandEvents[i] = !expandEvents[i]
   }
 
   render() {
-    const event = this.props.event || {};
-    console.log(event);
+    const event = this.props.event;
+    const assetId = this.props.asset;
+    const i = this.props.index;
+
+    const objectKeys = Object.keys;
+    const expandEvents = [];
+    const isArray = Array.isArray;
+
     const places = [];
     if ((event && event.location.location.geometry.coordinates) && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2) {
       places.push({
@@ -35,73 +57,76 @@ class Event extends Component {
       })
     }
 
-    let expandEvents = [];
-    let i = event.eventId;
-    let eventTypeToStyle = this._eventTypeToStyle;
-    let assetId = "";
-
 
     return (
-      <div className="Event">
-        <div id={event.eventId} className="item__event__container ">
-          <div className="item__event__timeline ">
-            <h5 className="item__event__timeline__heading ">{event.type}</h5>
-            <div className="item__event__timeline__dot"></div>
-            <p className="item__event__timeline__date ">{event.timestamp}</p>
-          </div>
-          <div className={'item__event__button' + expandEvents[i] ? '--active' : ''}>
-            <div onClick={this._toggleMap} className="item__event__single" style={{ 'backgroundColor': (event.type | eventTypeToStyle).backgroundColor }}>
-              <div className="item__event__single__image">
-                <img src="/assets/images/{{(event.type | eventTypeToStyle ).iconUrl}}" />
-              </div>
-              <div className="item__event__single__copy ">
-                <div className="item__event__single__container ">
-                  <h4 className="item__event__single__heading ">{event.name}}
-                  <img src="/assets/images/blockchain.svg" className="item__event__single__heading--icon" />
-                  </h4>
-                </div>
-                <div className="item__event__single__container ">
-                  <p className="item__event__single__time ">{event.timestamp * 1000} ago</p>
-                  {event.location ?
-                    <div className="item__event__single__place-container ">
-                      <img src="/assets/images/pin.svg " alt=" " className="item__event__single__place--icon " />
-                      {event.location.city || event.location.country ?
-                        <p className="item__event__single__place ">
-                          {event.location.city ? event.location.city : ''}{event.location.country ? ', ' + event.location.country : ''}
-                        </p> : ''}
-                    </div> : ''}
-                </div>
-              </div>
-            </div>
-
-            <div className="item__event__more-details item__event__more-details{{expandEvents[i] ? '--active' : ''}} ">
-              {/* <div className="item__event__more-details item__event__more-details--active"> */}
-              {/* goole map */}
-
-              {places && places.length > 0 ? <Maps places={places} /> : ''}
-
-              <div className="item__event__more-details__row ">
-                <h5 className="item__event__more-details__cell--title ">AMB-id</h5>
-                <p className="item__event__more-details__cell ">{event.eventId}</p>
-              </div>
-              <div className="item__event__more-details__row ">
-                <h5 className="item__event__more-details__cell--title ">Timestamp</h5>
-                <p className="item__event__more-details__cell ">{event.timestamp}</p>
-              </div>
-              <div className="item__event__more-details__row ">
-                <h5 className="item__event__more-details__cell--title ">Created by</h5>
-                <p className="item__event__more-details__cell ">{event.author}</p>
-              </div>
-              <div className="item__event__more-details__row ">
-              <Link className="item__event__more-details__button " to={`/${assetId}/events/${event.eventId}`}>
-              VIEW EVENT DETAILS...
-              </Link>
-                {/* <a className="item__event__more-details__button " routerLink="/{{assetId}}/events/{{event.eventId}}">VIEW EVENT DETAILS...</a> */}
-              </div>
-            </div>
-          </div>
-        </div >
+      <div id={event.eventId} className="item__event__container">
+      <div className="item__event__timeline ">
+        <h5 className="item__event__timeline__heading ">{event.type}</h5>
+        <div className="item__event__timeline__dot"></div>
+        <p className="item__event__timeline__date ">{event.timestamp * 1000}</p>
       </div>
+
+      <div className={'item__event__button' + this.state.expandEvent ? '--active' : ''}>
+        <div onClick={() => { this._expandEvent() }} className="item__event__single" style={{ 'backgroundColor': this._eventTypeToStyle(event.type).backgroundColor }}>
+          <div className="item__event__single__image">
+            <img src={dolarLogo} />
+          </div>
+          <div className="item__event__single__copy ">
+            <div className="item__event__single__container ">
+              <h4 className="item__event__single__heading ">{event.name}
+                {/* <img *ngIf="false " src="/assets/images/blockchain.svg" className="item__event__single__heading--icon"> */}
+              </h4>
+            </div>
+            <div className="item__event__single__container ">
+              <p className="item__event__single__time ">{event.timestamp * 1000} ago</p>
+
+
+              {event.location ?
+                <div className="item__event__single__place-container">
+                  <img src={pinLogo} className="item__event__single__place--icon " />
+                  {event.location.city || event.location.country ?
+                    <p className="item__event__single__place">
+                      {event.location.city ? event.location.city : ''}{event.location.country ? ', ' + event.location.country : ''}
+                    </p> : ''}
+                </div> : ''}
+
+            </div>
+          </div>
+        </div>
+
+        <div className={'item__event__more-details item__event__more-details' + this.state.expandEvent ? '--active' : ''}>
+          {/* div className="item__event__more-details item__event__more-details--active"> */}
+    {/* <!-- Google map --> */}
+
+    {event && event.location.location.geometry.coordinates && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+    <Maps places={[{lat: event.location.location.geometry.coordinates[0], lng: event.location.location.geometry.coordinates[1] }]} />
+    : ''}
+
+    {/* <app-map *ngIf="(event | checkIf: 'event.location.location.geometry.coordinates') && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2"
+      [pins]="[{lat: event.location.location.geometry.coordinates[0], lng: event.location.location.geometry.coordinates[1] }]"></app-map> */}
+
+
+          <div className="item__event__more-details__row ">
+            <h5 className="item__event__more-details__cell--title ">AMB-id</h5>
+            <p className="item__event__more-details__cell ">{ event.eventId }</p>
+          </div>
+          <div className="item__event__more-details__row ">
+            <h5 className="item__event__more-details__cell--title ">Timestamp</h5>
+            <p className="item__event__more-details__cell ">{ event.timestamp * 1000}</p>
+          </div>
+          <div className="item__event__more-details__row ">
+            <h5 className="item__event__more-details__cell--title ">Created by</h5>
+            <p className="item__event__more-details__cell ">{ event.author }</p>
+          </div>
+          <div className="item__event__more-details__row ">
+          <Link className="item__event__more-details__button " to={`/${assetId}/events/${event.eventId}`}>
+          VIEW EVENT DETAILS...
+          </Link>
+            {/* <a className="item__event__more-details__button " routerLink="/{{assetId}}/events/{{event.eventId}}">VIEW EVENT DETAILS...</a> */}
+          </div>
+        </div>
+      </div>
+    </div >
     )
   }
 }
