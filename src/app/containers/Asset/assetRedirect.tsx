@@ -18,24 +18,20 @@ export default function (ComposedComponent: any) {
         }
 
         public componentWillMount() {
-            const assetId = this.props.match.params.assetId;
-            if (!assetId) {
-                alert('no alert assetID');
-                this.context.router.history.push('/');
+            if(this.props.asset && this.props.assetDetails) {
+                this.setState({
+                    asset: this.props.asset,
+                    assetDetails: this.props.assetDetails
+                });
             } else {
-                this._getAssetAndRedirect(assetId);
+                const assetId = this.props.match.params.assetId;
+                if (!assetId) {
+                    this.context.router.history.push('/');
+                } else {
+                    this._getAssetAndRedirect(assetId);
+                }
             }
         }
-
-        // componentWillUpdate(nextProps) {
-        //     const oldAssetId = this.props.match.params.assetId;
-        //     const newAssetId = nextProps.match.params.assetId;
-        //     const assetIdExist = oldAssetId && newAssetId;
-
-        //     if (assetIdExist && oldAssetId !== newAssetId) {
-        //         this._getAssetAndRedirect(newAssetId);
-        //     }
-        // }
 
         public componentWillReceiveProps(nextProps: any) {
             const oldAssetId = this.props.match.params.assetId;

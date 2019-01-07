@@ -10,6 +10,7 @@ import Login from './containers/login/Login';
 import Settings from './containers/settings/Settings';
 import Home from './containers/home/Home';
 import Asset from './containers/Asset/Asset';
+import Event from './containers/Event';
 import Search from './containers/Search/Search';
 import AssetRedirect from './containers/Asset/assetRedirect';
 
@@ -54,7 +55,7 @@ class App extends React.Component<any, any> {
         <main className='Main'>
           <Switch>
             {/* all app routes */}
-            <Route exact path='/:assetId/event/:eventId' component={Login} />
+            <Route exact path='/:assetId/event/:eventId' component={Event} />
             <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
             <Route exact path='/settings' component={Settings} />
             <Route path="*" component={Search} />

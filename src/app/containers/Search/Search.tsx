@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg'
+import API from '../../services/api';
+import Asset from '../Asset';
+import AssetRedirect from '../Asset/assetRedirect';
+
+
 
 import './styles.scss';
 
@@ -41,7 +46,6 @@ class Search extends Component<any, any> {
 
   onSearch() {
     const search = this.state.search;
-    console.log(search);
     if (!search || /^\s*$/.test(search)) {
       this.setState({
         errorSearchEmpty: true
@@ -52,23 +56,31 @@ class Search extends Component<any, any> {
         spinner: true
       });
 
-      // this.assetService.getAsset(search).subscribe(
-      //   resp => {
-      //     this.router.navigate([search]);
-      //   },
-      //   err => {
-      //     console.log('err ', err);
-      //     this.spinner = false;
-      //     this.errorNoAsset = true;
-      //     setTimeout(() => {
-      //       this.errorNoAsset = false;
-      //     }, 3000);
-      //   }
-      // );
+      this._getAssetAndRedirect(search);
     }
-
-
   }
+
+  async _getAssetAndRedirect(assetId: any) {
+    try {
+      let asset = await API.getAsset(assetId);
+      if(asset) {
+        this.props.history.push('/' + assetId);
+        console.log('navigating');
+      } else {
+        console.log('no asset');
+        this.setState({
+          errorNoAsset: true,
+          spinner: false
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        errorNoAsset: true,
+        spinner: true
+      });
+    }
+}
 
   updateInputValue(e: any) {
     this.state = {
