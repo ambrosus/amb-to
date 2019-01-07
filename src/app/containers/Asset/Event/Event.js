@@ -44,11 +44,7 @@ class Event extends Component {
 
   render() {
     const event = this.props.event;
-    const assetId = this.props.asset;
-    const i = this.props.index;
-
-    const objectKeys = Object.keys;
-    const expandEvents = [];
+    const assetId = this.props.assetId;
     const isArray = Array.isArray;
 
     const places = [];
@@ -115,10 +111,6 @@ class Event extends Component {
 
               : ''}
 
-            {/* <app-map *ngIf="(event | checkIf: 'event.location.location.geometry.coordinates') && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2"
-      [pins]="[{lat: event.location.location.geometry.coordinates[0], lng: event.location.location.geometry.coordinates[1] }]"></app-map> */}
-
-
             <div className="item__event__more-details__row ">
               <h5 className="item__event__more-details__cell--title ">AMB-id</h5>
               <p className="item__event__more-details__cell ">{event.eventId}</p>
@@ -135,7 +127,6 @@ class Event extends Component {
               <Link className="item__event__more-details__button " to={`/${assetId}/events/${event.eventId}`}>
                 VIEW EVENT DETAILS...
           </Link>
-              {/* <a className="item__event__more-details__button " routerLink="/{{assetId}}/events/{{event.eventId}}">VIEW EVENT DETAILS...</a> */}
             </div>
           </div>
         </div>

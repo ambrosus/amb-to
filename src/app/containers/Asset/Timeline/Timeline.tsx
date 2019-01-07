@@ -39,17 +39,11 @@ class Timeline extends Component<any, any> {
   public render() {
 
     const events = this.props.events;
-    const asset = this.props.asset;
-    const objectKeys = Object.keys;
-    const expandEvents = [];
-    const isArray = Array.isArray;
-
-    console.log(events);
-
+    const assetId = this.props.assetId;
 
     const eventDivs = events.map((event: any, i: any) => {
       return (
-        <Event event={event} assetId={asset.assetId} index={i} key={i} />
+        <Event event={event} assetId={assetId} index={i} key={i} />
       )
     });
 
@@ -61,9 +55,5 @@ class Timeline extends Component<any, any> {
     )
   }
 }
-
-// Timeline.propTypes = {}
-
-// Timeline.defaultProps = {}
 
 export default Timeline

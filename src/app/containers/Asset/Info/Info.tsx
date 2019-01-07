@@ -34,6 +34,7 @@ class Info extends Component<any, any> {
   public render() {
     let selectedImage = "";
     const asset = this.props.asset;
+    const assetId = this.props.assetId;
 
     const assetCustomData = asset.customData ? asset.customData : [];
 
@@ -166,7 +167,7 @@ class Info extends Component<any, any> {
 
 
             <div className="item__container">
-            <Timeline events={asset.events} asset={asset} />
+            <Timeline events={asset.events} assetId={assetId} />
             </div >
 
           </div >
