@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import './Info.scss';
-import { isObject } from 'util';
+import { isObject  } from 'util';
+import { valueJSON  } from '../../../utils';
 import Timeline from '../Timeline'
 
 const styles = require('assets/data/styles.json');
@@ -12,23 +13,12 @@ class Info extends Component<any, any> {
     super(props);
   }
 
-  _getStyles(key: any) {
+  _getStyles(key: string) {
     try {
       return this.props.asset.branding[key] || {};
     } catch (error) {
       return {};
     }
-  }
-
-  _valueJSON(value: any) {
-    return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
-  }
-
-  _isObject(value: any) {
-    if ((typeof value === "object") && (value !== null)) {
-      return true;
-    }
-    return false;
   }
 
   public render() {
@@ -96,12 +86,12 @@ class Info extends Component<any, any> {
                     }
                     return (
                       <div className="item__table__row" key={key}>
-                        {!this._isObject(value) && !Array.isArray(value) ?
+                        {!isObject(value) && !Array.isArray(value) ?
                           <div className="item__table__cell--title" style={this._getStyles('components_keys')}>{key}</div>
                           : ''}
-                        {!this._isObject(value) ?
-                          <div className={this._isObject(value) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this._getStyles('components_values')}>
-                            {this._isObject(value) ? this._valueJSON(JSON.stringify(value, null, 5)) : value}
+                        {!isObject(value) ?
+                          <div className={isObject(value) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this._getStyles('components_values')}>
+                            {isObject(value) ? valueJSON(JSON.stringify(value, null, 5)) : value}
                           </div>
                           : ''}
                       </div>
@@ -113,7 +103,7 @@ class Info extends Component<any, any> {
                   if (['type', 'images', 'action', 'author', 'eventId'].includes(key)) {
                     return;
                   }
-                  if (this._isObject(value)) {
+                  if (isObject(value)) {
                     return (
                       <div key={key}>
                         <hr className="item__table__separator " />
@@ -126,8 +116,8 @@ class Info extends Component<any, any> {
                                 {!Array.isArray(value) ?
                                   <div className="item__table__cell--title" style={this._getStyles('components_keys')}>{k}</div>
                                   : ''}
-                                <div className={this._isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this._getStyles('components_values')}>
-                                  {this._isObject(v) ? this._valueJSON(JSON.stringify(v, null, 5)) : v}
+                                <div className={isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this._getStyles('components_values')}>
+                                  {isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v}
                                 </div>
                               </div>
                             )
@@ -150,7 +140,7 @@ class Info extends Component<any, any> {
                             <div className="item__table__row">
                               <div className="item__table__cell--title" style={this._getStyles('components_keys')}>{custom.title}</div>
                               <div className={isObject(custom.value) ? 'item__table__cell item__table__cell--json' : 'item__table__cell--json'} style={this._getStyles('components_values')}>
-                                {this._isObject(custom.value) ? this._valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value}
+                                {isObject(custom.value) ? valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value}
 
                               </div>
                             </div>
