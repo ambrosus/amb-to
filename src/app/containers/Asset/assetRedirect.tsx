@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import API from '../../services/api';
+import AssetService from '../../services/asset.service';
 import Preloader from '../../components/Preloader/Preloader'
-import { parse } from 'path';
+
 
 export default function (ComposedComponent: any) {
     class AssetRedirect extends Component<any, any> {
+        ambrosus: AssetService;
+
         static contextTypes = {
             router: PropTypes.object
         }
 
         constructor(props: any) {
             super(props);
+            this.ambrosus = new AssetService();
             this.state = {
                 data: null
             };
@@ -48,13 +51,17 @@ export default function (ComposedComponent: any) {
         }
 
         async _getAssetAndRedirect(assetId: any) {
-            let [asset, events] = await Promise.all([API.getAsset(assetId), API.getEvents(assetId)]);
-            const parseEvents = await API.parseEvents(events.data);
-            
-            this.setState({
-                asset: asset.data,
-                assetDetails: parseEvents
-            });
+            try {
+                let [asset, events] = await Promise.all([this.ambrosus.getAsset(assetId), this.ambrosus.getEvents(assetId)]);
+                const parseEvents = await this.ambrosus.parseEvents(events.data);
+                
+                this.setState({
+                    asset: asset.data,
+                    assetDetails: parseEvents
+                });
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         public render() {

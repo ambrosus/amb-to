@@ -4,10 +4,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import './App.scss';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
-import AuthService from './services/auth.service';
 
-import Login from './containers/login/Login';
-import Settings from './containers/settings/Settings';
 import Home from './containers/home/Home';
 import Asset from './containers/Asset/Asset';
 import Event from './containers/Event';
@@ -18,7 +15,6 @@ class App extends React.Component<any, any> {
   public state = {
     hideHeader: false,
   };
-  private authService = new AuthService();
   private _class = '';
 
   constructor(props: any) {
@@ -57,7 +53,6 @@ class App extends React.Component<any, any> {
             {/* all app routes */}
             <Route exact path='/:assetId/events/:eventId' component={Event} />
             <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
-            <Route exact path='/settings' component={Settings} />
             <Route path="*" component={Search} />
           </Switch>
         </main>

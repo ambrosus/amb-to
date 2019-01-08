@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.scss';
 import SVG from 'react-svg';
-import iconLogo from '../../../assets/svg/logo-light.svg';
+import iconLogo from '../../../assets/icons/logo-light.svg';
 
 const Footer = (prop: any) => {
   return (
