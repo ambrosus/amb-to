@@ -114,7 +114,6 @@ class Event extends React.Component<any, any> {
     return (
       <div className="Event" style={this.getStyles('content')}>
         <div className="wrapper">
-          {/* <a routerLink="/{{assetService.assetId}}" className="button">Back to Asset</a> */}
           <Link className="button" to={`/${assetId}`}>Back to Asset</Link>
 
           {!event ? <h3 style={{ 'textAlign': 'center' }}>No event data</h3> : ''}
@@ -309,8 +308,6 @@ class Event extends React.Component<any, any> {
                 </div>
 
                 : ''}
-
-
             </div>
           </div>
         </div >
