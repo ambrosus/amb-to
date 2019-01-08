@@ -97,17 +97,17 @@ class Event extends Component<any, any> {
             {/* <!-- Google map --> */}
 
             {event && event.location.location.geometry.coordinates && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
-              <Maps
-                height={'300px'}
-                width={'100%'}
-                lat={event.location.location.geometry.coordinates[0]}
-                lng={event.location.location.geometry.coordinates[1]} />
-
-              // <Map
-              //   containerElement={<div style={{ height: `400px` }} />}
-              //   mapElement={<div style={{ height: `100%` }} />}
+              // <Maps
+              //   height={'300px'}
+              //   width={'100%'}
               //   lat={event.location.location.geometry.coordinates[0]}
               //   lng={event.location.location.geometry.coordinates[1]} />
+
+              <Map
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+                lat={event.location.location.geometry.coordinates[0]}
+                lng={event.location.location.geometry.coordinates[1]} />
 
               : ''}
 

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import API from '../../services/api';
 import Preloader from '../../components/Preloader/Preloader'
+import Maps from '../../components/Maps/Maps';
+import Map from '../../components/Maps/Map';
 
 import './Event.scss';
 
@@ -270,13 +272,20 @@ class Event extends React.Component<any, any> {
                   <div className="item__details" style={this.getStyles('components')}>
                     <h2 className="item__table__title" style={{ ...{ 'margin': 0 }, ...this.getStyles('components_titles') }}>Location</h2>
 
-                    {/* <div *ngIf="event | checkIf: 'event.location.location.geometry.coordinates'">
-                <agm-map *ngIf="isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2"
-                  [zoom]="15" [zoomControl]="false" [streetViewControl]="false" [latitude]="event.location.location.geometry.coordinates[0]"
-                  [longitude]="event.location.location.geometry.coordinates[1]">
-                  <agm-marker [latitude]="event.location.location.geometry.coordinates[0]" [longitude]="event.location.location.geometry.coordinates[1]"></agm-marker>
-                </agm-map>
-              </div> */}
+                    {event && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+                      // <Maps
+                      //   height={'300px'}
+                      //   width={'100%'}
+                      //   lat={event.location.location.geometry.coordinates[0]}
+                      //   lng={event.location.location.geometry.coordinates[1]} />
+
+                      <Map
+                        containerElement={<div style={{ height: `400px` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                        lat={event.location.location.geometry.coordinates[0]}
+                        lng={event.location.location.geometry.coordinates[1]} />
+
+                      : ''}
 
                     <div className="item__table">
                       <div className="item__table__row">
