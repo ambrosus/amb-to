@@ -41,8 +41,4 @@ class Asset extends Component<any, any> {
   }
 }
 
-// Asset.propTypes = {}
-
-// Asset.defaultProps = {}
-
 export default Asset

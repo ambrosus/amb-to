@@ -1,1 +1,82 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
+.history {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  
+    &__item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 50px;
+      padding: 7px 15px;
+      font-size: 13px;
+  
+      @media (min-width:320px) {
+  
+        &__div {
+          margin-left: 20px;
+        }
+    
+        &__small {
+          word-break: break-all;
+        }
+  
+      }
+  
+    }
+  }
+  
+  .clear__history {
+    padding: 15px 0px 10px 0px;
+  }
+  
+  .history_page {
+    margin: 30px auto 75px auto;
+  }
+  
+
+
+
+  .spinner {
+    animation: rotate 2s linear infinite;
+    height: 32px;
+    width: 32px;
+    transform-origin: center centxer;
+  }
+  
+  .spinner-path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite;
+    stroke: $blue;
+  
+    &.dark {
+      stroke: $blue;
+    }
+  }
+  
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  

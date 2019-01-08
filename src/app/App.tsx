@@ -5,10 +5,9 @@ import './App.scss';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 
-import Home from './containers/home/Home';
 import Asset from './containers/Asset/Asset';
 import Event from './containers/Event';
-import Search from './containers/Search/Search';
+import Search from './containers/Home/Home';
 import AssetRedirect from './containers/Asset/assetRedirect';
 
 class App extends React.Component<any, any> {

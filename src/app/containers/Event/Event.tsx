@@ -32,8 +32,8 @@ class Event extends React.Component<any, any> {
       if (this.props.event) {
         this.setState({
           event: this.props.event,
-          assetId: assetId,
-          eventId: eventId
+          assetId,
+          eventId
         });
       } else {
         this.loadEvent(eventId, assetId);
@@ -55,7 +55,7 @@ class Event extends React.Component<any, any> {
     }
   }
 
-  async loadEvent(eventId: any, assetId: any) {
+  async loadEvent(eventId: string, assetId: string) {
     let events = await this.ambrosus.getEvents(assetId);
     const parseEvents = await this.ambrosus.parseEvents(events.data);
 
@@ -63,8 +63,8 @@ class Event extends React.Component<any, any> {
 
     this.setState({
       event: event[0],
-      assetId: assetId,
-      eventId: eventId
+      assetId,
+      eventId
     });
   }
 
@@ -76,7 +76,7 @@ class Event extends React.Component<any, any> {
     }
   }
 
-  _eventTypeToStyle(value: any) {
+  _eventTypeToStyle(value: string) {
     if (styles[value] === undefined) {
       return styles['harvested'];
     } else {
@@ -109,7 +109,6 @@ class Event extends React.Component<any, any> {
     const eventId = this.state.eventId;
 
     if (!event) { return <Preloader /> }
-    console.log(event);
 
     return (
       <div className="Event" style={this.getStyles('content')}>

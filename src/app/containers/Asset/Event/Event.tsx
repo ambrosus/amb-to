@@ -116,8 +116,8 @@ class Event extends Component<any, any> {
             </div>
             <div className="item__event__more-details__row ">
               <Link className="item__event__more-details__button " to={`/${assetId}/events/${event.eventId}`}>
-                VIEW EVENT DETAILS...
-          </Link>
+              VIEW EVENT DETAILS...
+              </Link>
             </div>
           </div>
         </div>

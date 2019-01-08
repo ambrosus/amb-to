@@ -5,9 +5,7 @@ export default class AssetService {
 
   constructor() {
     const apiEndpoint = 'https://gateway-test.ambrosus.com';
-    this.ambrosus = new AmbrosusSDK({
-      apiEndpoint: apiEndpoint
-    });
+    this.ambrosus = new AmbrosusSDK({ apiEndpoint});
   }
 
 
@@ -20,7 +18,7 @@ export default class AssetService {
   }
 
   public getEvents(assetId: string) {
-    return this.ambrosus.getEvents({assetId: assetId});
+    return this.ambrosus.getEvents({assetId});
   }
 
   public parseEvents(eventsArray: any) {
