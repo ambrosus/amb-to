@@ -272,7 +272,7 @@ class Event extends React.Component<any, any> {
                   <div className="item__details" style={this.getStyles('components')}>
                     <h2 className="item__table__title" style={{ ...{ 'margin': 0 }, ...this.getStyles('components_titles') }}>Location</h2>
 
-                    {event && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+                    {event && event.location && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
                       // <Maps
                       //   height={'300px'}
                       //   width={'100%'}
