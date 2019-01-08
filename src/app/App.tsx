@@ -55,7 +55,7 @@ class App extends React.Component<any, any> {
         <main className='Main'>
           <Switch>
             {/* all app routes */}
-            <Route exact path='/:assetId/event/:eventId' component={Event} />
+            <Route exact path='/:assetId/events/:eventId' component={Event} />
             <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
             <Route exact path='/settings' component={Settings} />
             <Route path="*" component={Search} />

@@ -50,6 +50,7 @@ export default function (ComposedComponent: any) {
         async _getAssetAndRedirect(assetId: any) {
             let [asset, events] = await Promise.all([API.getAsset(assetId), API.getEvents(assetId)]);
             const parseEvents = await API.parseEvents(events.data);
+            
             this.setState({
                 asset: asset.data,
                 assetDetails: parseEvents

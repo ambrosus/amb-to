@@ -45,7 +45,6 @@ const parseEvents = eventsArray => {
         resolve(response.data);
       })
       .catch(error => {
-        console.log('parseEvents: ', error);
         reject(error);
       });
   });

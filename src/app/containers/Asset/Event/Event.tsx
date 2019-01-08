@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import Maps from 'app/components/Maps/Maps';
-import Map from 'app/components/Maps/Map';
+import Maps from '../../../components/Maps/Maps';
+import Map from '../../../components/Maps/Map';
 
 import './Event.scss';
 
@@ -12,8 +12,8 @@ import dolarLogo from '../../../../assets/images/dollar.svg'
 const styles = require('assets/data/styles.json');
 
 
-class Event extends Component {
-  constructor(props) {
+class Event extends Component<any, any> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -21,7 +21,7 @@ class Event extends Component {
     }
   }
 
-  _eventTypeToStyle(value) {
+  _eventTypeToStyle(value: any) {
     if (styles[value] === undefined) {
       return styles['harvested'];
     } else {
@@ -37,7 +37,7 @@ class Event extends Component {
   }
 
 
-  _toggleMap(e) {
+  _toggleMap(e: any) {
     console.log('toggle');
     //expandEvents[i] = !expandEvents[i]
   }
@@ -134,9 +134,5 @@ class Event extends Component {
     )
   }
 }
-
-Event.propTypes = {}
-
-Event.defaultProps = {}
 
 export default Event
