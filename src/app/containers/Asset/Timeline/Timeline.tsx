@@ -41,7 +41,7 @@ class Timeline extends Component<any, any> {
     const events = this.props.events;
     const assetId = this.props.assetId;
 
-    const eventDivs = events.map((event: any, i: any) => {
+    const eventDivs = events.map((event: any, i: number) => {
       return (
         <Event event={event} assetId={assetId} index={i} key={i} />
       )
