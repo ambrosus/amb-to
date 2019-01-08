@@ -47,15 +47,6 @@ class Event extends Component<any, any> {
     const assetId = this.props.assetId;
     const isArray = Array.isArray;
 
-    const places = [];
-    if ((event && event.location.location.geometry.coordinates) && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2) {
-      places.push({
-        lat: event.location.location.geometry.coordinates[0],
-        lng: event.location.location.geometry.coordinates[1]
-      })
-    }
-
-
     return (
       <div id={event.eventId} className="item__event__container">
         <div className="item__event__timeline ">
@@ -96,7 +87,7 @@ class Event extends Component<any, any> {
             {/* div className="item__event__more-details item__event__more-details--active"> */}
             {/* <!-- Google map --> */}
 
-            {event && event.location.location.geometry.coordinates && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+            {event && event.location && event.location.location.geometry.coordinates && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
               // <Maps
               //   height={'300px'}
               //   width={'100%'}
