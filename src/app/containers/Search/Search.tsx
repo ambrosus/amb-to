@@ -11,7 +11,7 @@ import AssetRedirect from '../Asset/assetRedirect';
 import './styles.scss';
 
 import amblogo from 'assets/images/amb-logo.png';
-import spinnerLogo from 'assets/svg/spinner.svg';
+import spinnerLogo from 'assets/icons/spinner.svg';
 
 
 class Search extends Component<any, any> {

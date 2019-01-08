@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import './Header.scss';
 
-import AuthService from '../../services/auth.service';
 import { Link } from 'react-router-dom';
 import SVG from 'react-svg';
 import iconLogo from '../../../assets/images/amb-logo.png';
 import StorageService from '../../services/storage.service';
 import DropDown from '../dropDown/DropDown';
-import iconSettings from '../../../assets/svg/settings.svg';
-import iconLogout from '../../../assets/svg/logout.svg';
+import iconSettings from '../../../assets/icons/settings.svg';
+import iconLogout from '../../../assets/icons/logout.svg';
 import { toggleMenu } from '../../utils';
 
 export default class Header extends Component<any, any> {
-  private authService: any = new AuthService();
   private storageService: any = new StorageService();
   private account = this.storageService.get('account') || {};
   private avatar = this.account.email ? this.account.email.charAt(0) : this.account.firstName ? this.account.firstName.charAt(0) : 'T';
@@ -35,13 +33,6 @@ export default class Header extends Component<any, any> {
       },
       {
         type: 'separator',
-      },
-      {
-        type: 'action',
-        title: 'Logout',
-        icon: iconLogout,
-        click: this.authService.logout,
-        args: [],
       },
     ],
   };

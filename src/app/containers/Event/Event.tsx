@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import API from '../../services/api';
 import Preloader from '../../components/Preloader/Preloader'
 import Maps from '../../components/Maps/Maps';
 import Map from '../../components/Maps/Map';
+import AssetService from '../../services/asset.service';
+
 
 import './Event.scss';
 
 const styles = require('assets/data/styles.json');
 
 class Event extends React.Component<any, any> {
+  ambrosus: any;
+
   constructor(props: any) {
     super(props);
-
+    this.ambrosus = new AssetService();
     this.state = {
       event: null
     }
@@ -53,8 +56,8 @@ class Event extends React.Component<any, any> {
   }
 
   async loadEvent(eventId: any, assetId: any) {
-    let events = await API.getEvents(assetId);
-    const parseEvents = await API.parseEvents(events.data);
+    let events = await this.ambrosus.getEvents(assetId);
+    const parseEvents = await this.ambrosus.parseEvents(events.data);
 
     const event = parseEvents.events.filter((event: any) => event && event.eventId === eventId);
 
