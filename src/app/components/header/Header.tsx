@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './Header.scss';
-
 import { Link } from 'react-router-dom';
 import SVG from 'react-svg';
 import iconLogo from '../../../assets/images/amb-logo.png';
@@ -9,6 +7,7 @@ import DropDown from '../dropDown/DropDown';
 import iconSettings from '../../../assets/icons/settings.svg';
 import iconLogout from '../../../assets/icons/logout.svg';
 import { toggleMenu } from '../../utils';
+import './Header.scss';
 
 export default class Header extends Component<any, any> {
   private storageService: any = new StorageService();
@@ -46,19 +45,8 @@ export default class Header extends Component<any, any> {
       <header className='Header'>
         <div className='wrapper'>
           <Link className='logo' to={'/'}>
-            <img src={iconLogo} alt=""/>
-            {/* <SVG className='SVG' wrapper='span' src={iconLogo}></SVG> */}
+            <img src={iconLogo} />
           </Link>
-
-          {/* {
-            this.authService.isLoggedIn() &&
-            (
-              <div className='avatar'>
-                <div onClick={toggleMenu}>{this.avatar}</div>
-                <DropDown items={this.dropDown} />
-              </div>
-            )
-          } */}
         </div>
       </header>
     );

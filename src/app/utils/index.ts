@@ -1,22 +1,11 @@
-const toggleMenu = (event: any) => {
-  event.preventDefault();
-  const parent = event.currentTarget.parentElement;
-  parent.classList.toggle('menu--active');
-};
-
-const valueJSON = (value: any) => {
-    return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
-  }
-
-const isObject = (value: any) => {
-    if ((typeof value === "object") && (value !== null)) {
-      return true;
-    }
-    return false;
-  }
+import {toggleMenu, valueJSON, isObject} from './helpers';
+import timeSince from './timeSince';
+import formatDate from './formatDate';
 
 export {
     toggleMenu,
     valueJSON,
-    isObject
-}
+    isObject,
+    timeSince,
+    formatDate
+};
