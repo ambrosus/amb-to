@@ -6,6 +6,7 @@ import Maps from '../../components/Maps/Maps';
 import Map from '../../components/Maps/Map';
 import AssetService from '../../services/asset.service';
 import './Event.scss';
+import { timeSince, formatDate } from '../../utils';
 
 // tslint:disable-next-line:no-var-requires
 const styles = require('assets/data/styles.json');
@@ -124,7 +125,7 @@ class Event extends React.Component<any, any> {
                 </h4>
               </div>
               <div className='notification__container'>
-                <p className='notification__time'>{event.timestamp * 1000} ago</p>
+                <p className='notification__time'>{timeSince(event.timestamp * 1000)} ago</p>
 
                 {event.location ? <img src='/assets/images/pin.svg' className='notification__place--icon' /> : ''}
                 {event.location ? <p className='notification__place'>{event.location.name}</p> : ''}
