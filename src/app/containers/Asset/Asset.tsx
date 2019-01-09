@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Event from './Event';
 import Info from './Info';
-import AssetHeader from '../../components/header/AssetHeader';
+import { AssetHeader } from '../../components';
 
 import './Asset.scss';
 

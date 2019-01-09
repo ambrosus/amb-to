@@ -1,11 +1,10 @@
 import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import './App.scss';
-import Footer from './components/footer/Footer';
-import Asset from './containers/Asset/Asset';
+import {AssetRedirect, Footer} from './components';
+import Asset from './containers/Asset';
 import Event from './containers/Event';
-import Home from './containers/Home/Home';
-import AssetRedirect from './containers/Asset/assetRedirect';
+import Home from './containers/Home';
 
 class App extends React.Component<any, any> {
   public state = {

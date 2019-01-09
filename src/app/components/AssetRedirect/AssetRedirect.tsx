@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AssetService } from '../../services';
-import Preloader from '../../components/Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 
 export default function (ComposedComponent: any) {
     class AssetRedirect extends Component<any, any> {

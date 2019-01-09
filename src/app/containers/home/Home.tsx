@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 import Asset from '../Asset';
 import AssetService from '../../services/asset.service';
-import AssetRedirect from '../Asset/assetRedirect';
-import Header from '../../components/header/Header';
+import { Header, AssetRedirect } from '../../components';
 
 import './Home.scss';
 
