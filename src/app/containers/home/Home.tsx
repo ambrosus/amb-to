@@ -114,18 +114,11 @@ class Search extends Component<any, any> {
                 <input type='text' placeholder='assetId' onChange={(e) => this.updateInputValue(e)} />
                 <button className='btn' onClick={() => this.onSearch()}>Search</button>
               </div>
-              {spinner ?
-                <ReactSVG className='spinner' src={spinnerLogo} /> : ''
-              }
+              {spinner && <ReactSVG className='spinner' src={spinnerLogo} /> }
 
               <div className='errors'>
-                {errorNoAsset ?
-                  <p>No asset with that assetId.</p> : ''
-                }
-
-                {errorSearchEmpty ?
-                  <p>Please enter something first.</p> : ''
-                }
+                {errorNoAsset && <p>No asset with that assetId.</p>}
+                {errorSearchEmpty && <p>Please enter something first.</p>}
               </div>
             </div>
 

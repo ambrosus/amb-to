@@ -9,6 +9,9 @@ import Timeline from '../Timeline';
 class Info extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      selectedImage: null,
+    };
   }
 
   public getStyles(key: string) {
@@ -19,8 +22,14 @@ class Info extends Component<any, any> {
     }
   }
 
+  public switchImage(image: string) {
+    this.setState({
+      selectedImage: image,
+    });
+  }
+
   public render() {
-    let selectedImage = '';
+    const selectedImage = this.state.selectedImage;
     const asset = this.props.asset;
     const assetId = this.props.assetId;
 
@@ -47,7 +56,7 @@ class Info extends Component<any, any> {
                       <div className='item__photo-container'>
                         {Object.keys(asset.info.images).map((image) => {
                           return (
-                            <div onClick={() => { selectedImage = asset.info.images[image].url; }} className='item__photo' style={{ 'backgroundImage': `url(${asset.info.images[image].url})` }}>
+                            <div onClick={() => { this.switchImage(asset.info.images[image].url); }} className='item__photo' style={{ 'backgroundImage': `url(${asset.info.images[image].url})` }}>
                             </div>
                           );
                         })}
