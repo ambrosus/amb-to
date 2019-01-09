@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import Event from './Event';
 import Info from './Info';
+import AssetHeader from '../../components/header/AssetHeader';
 
 import './Asset.scss';
 
@@ -34,8 +35,11 @@ class Asset extends Component<any, any> {
     const style = this._getSyle();
 
     return (
-      <div className="Asset" style={style}>
-        <Info asset={assetDetails} assetId={assetId} />
+      <div>
+        <AssetHeader asset={assetDetails} assetId={assetId} />
+        <div className="Asset" style={style}>
+          <Info asset={assetDetails} assetId={assetId} />
+        </div>
       </div>
     )
   }

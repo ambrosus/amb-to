@@ -5,6 +5,7 @@ import ReactSVG from 'react-svg'
 import API from '../../services/api';
 import Asset from '../Asset';
 import AssetRedirect from '../Asset/assetRedirect';
+import Header from '../../components/header/Header';
 
 
 
@@ -40,7 +41,7 @@ class Search extends Component<any, any> {
   clearHistory() {
     localStorage.clear();
     this.setState({
-      history : []
+      history: []
     });
   }
 
@@ -63,7 +64,7 @@ class Search extends Component<any, any> {
   async _getAssetAndRedirect(assetId: any) {
     try {
       let asset = await API.getAsset(assetId);
-      if(asset) {
+      if (asset) {
         this.props.history.push('/' + assetId);
       } else {
         this.setState({
@@ -77,7 +78,7 @@ class Search extends Component<any, any> {
         spinner: true
       });
     }
-}
+  }
 
   updateInputValue(e: any) {
     this.state = {
@@ -91,19 +92,21 @@ class Search extends Component<any, any> {
     const errorNoAsset = this.state.errorNoAsset;
     const errorSearchEmpty = this.state.errorSearchEmpty;
 
-    const historyDivs = history.map((item:any) => {
+    const historyDivs = history.map((item: any) => {
       return (
         <Link className="history__item" to={`/${item.id}`}>
-          <div>{ item.title}</div>
+          <div>{item.title}</div>
           <div className="history__item__div">
-            <small className="history__item__small">{ item.id }</small>
+            <small className="history__item__small">{item.id}</small>
           </div>
         </Link>
       );
     });
 
     return (
-      <div className="Search">
+      <div>
+        <Header />
+        <div className="Search">
           <div className="wrapper">
             {/* <div className="logo">
               <img className="logo__image" src={amblogo} />
@@ -111,38 +114,39 @@ class Search extends Component<any, any> {
             <div className="page">
               <h3 className="title">Search for an asset</h3>
               <div className="form-search">
-                <input type="text" placeholder="assetId" onChange={(e) => this.updateInputValue(e)}/>
+                <input type="text" placeholder="assetId" onChange={(e) => this.updateInputValue(e)} />
                 <button className="btn" onClick={() => this.onSearch()}>Search</button>
               </div>
               {spinner ?
-                <ReactSVG className="spinner" src={spinnerLogo} />: ''
+                <ReactSVG className="spinner" src={spinnerLogo} /> : ''
               }
 
               <div className="errors">
-              {errorNoAsset ?
-                <p>No asset with that assetId.</p> : ''
-              }
+                {errorNoAsset ?
+                  <p>No asset with that assetId.</p> : ''
+                }
 
-              {errorSearchEmpty ?
-                <p>Please enter something first.</p> : ''
-              }
+                {errorSearchEmpty ?
+                  <p>Please enter something first.</p> : ''
+                }
               </div>
             </div>
 
-            { history ?
-            <div>
-              <div className="page history_page">
-                <h3 className="title">Previously viewed</h3>
-                <div className="history">
-                {historyDivs}
+            {history ?
+              <div>
+                <div className="page history_page">
+                  <h3 className="title">Previously viewed</h3>
+                  <div className="history">
+                    {historyDivs}
+                  </div>
+                  <div className="clear__history">
+                    <button className="btn" onClick={this.clearHistory.bind(this)}>Clear Search History</button>
+                  </div>
                 </div>
-                <div className="clear__history">
-                  <button className="btn" onClick={this.clearHistory.bind(this)}>Clear Search History</button>
-                </div>
-              </div>
-            </div> : ''
+              </div> : ''
             }
           </div>
+        </div>
       </div>
     )
   }

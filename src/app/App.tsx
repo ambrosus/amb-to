@@ -7,7 +7,7 @@ import Footer from './components/footer/Footer';
 
 import Asset from './containers/Asset/Asset';
 import Event from './containers/Event';
-import Search from './containers/Home/Home';
+import Home from './containers/Home/Home';
 import AssetRedirect from './containers/Asset/assetRedirect';
 
 class App extends React.Component<any, any> {
@@ -43,7 +43,6 @@ class App extends React.Component<any, any> {
       <div className='App'>
         {/* {!this.state.hideHeader ? <Header /> : null} */}
         {/* render header */}
-        <Header />
 
 
         {/* render app */}
@@ -52,7 +51,7 @@ class App extends React.Component<any, any> {
             {/* all app routes */}
             <Route exact path='/:assetId/events/:eventId' component={Event} />
             <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
-            <Route path="*" component={Search} />
+            <Route path="*" component={Home} />
           </Switch>
         </main>
 

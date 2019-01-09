@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './Header.scss';
-
 import { Link } from 'react-router-dom';
 import SVG from 'react-svg';
 import iconLogo from '../../../assets/images/amb-logo.png';
@@ -9,6 +7,9 @@ import DropDown from '../dropDown/DropDown';
 import iconSettings from '../../../assets/icons/settings.svg';
 import iconLogout from '../../../assets/icons/logout.svg';
 import { toggleMenu } from '../../utils';
+
+import './Header.scss';
+
 
 export default class Header extends Component<any, any> {
   private storageService: any = new StorageService();
