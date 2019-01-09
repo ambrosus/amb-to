@@ -8,9 +8,10 @@
  */
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+// const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export default function formatDate(timestamp: number, showDate = false) {
+export default function formatDate(timestamp: number, showDate = false, showTime = false) {
   const date = new Date(timestamp);
 
   const dayName = days[date.getDay()];
@@ -21,6 +22,8 @@ export default function formatDate(timestamp: number, showDate = false) {
   const minutes = (`0${date.getMinutes()}`).slice(-2);
   const seconds = (`0${date.getSeconds()}`).slice(-2);
 
-  return `${showDate ? `${dayName}, ${day} ${months[month]} ${year} ` : ''}${hours}:${minutes}:${seconds}`;
-
+  if (showTime) {
+    return `${showDate ? `${dayName}, ${day} ${months[month]} ${year} ` : ''}${hours}:${minutes}:${seconds}`;
+  }
+  return `${showDate ? `${day} ${months[month]} ${year} ` : ''}`;
 }

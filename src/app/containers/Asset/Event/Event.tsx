@@ -7,6 +7,7 @@ import Map from '../../../components/Maps/Map';
 import './Event.scss';
 import pinLogo from '../../../../assets/images/pin.svg';
 import dolarLogo from '../../../../assets/images/dollar.svg';
+import { timeSince, formatDate } from '../../../utils';
 
 // tslint:disable-next-line:no-var-requires
 const styles = require('assets/data/styles.json');
@@ -49,7 +50,7 @@ class Event extends Component<any, any> {
         <div className='item__event__timeline '>
           <h5 className='item__event__timeline__heading '>{event.type}</h5>
           <div className='item__event__timeline__dot'></div>
-          <p className='item__event__timeline__date '>{event.timestamp * 1000}</p>
+          <p className='item__event__timeline__date '>{formatDate(event.timestamp * 1000, true)}</p>
         </div>
 
         <div className={this.state.expandEvent ? 'item__event__button--active' : 'item__event__button'}>
@@ -64,7 +65,7 @@ class Event extends Component<any, any> {
                 </h4>
               </div>
               <div className='item__event__single__container '>
-                <p className='item__event__single__time '>{event.timestamp * 1000} ago</p>
+                <p className='item__event__single__time '>{ timeSince(event.timestamp * 1000)} ago</p>
 
                 {event.location &&
                   <div className='item__event__single__place-container'>
