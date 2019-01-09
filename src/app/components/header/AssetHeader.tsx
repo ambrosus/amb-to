@@ -6,9 +6,7 @@ import StorageService from '../../services/storage.service';
 import DropDown from '../dropDown/DropDown';
 import iconSettings from '../../../assets/icons/settings.svg';
 import iconLogout from '../../../assets/icons/logout.svg';
-
 import './AssetHeader.scss';
-
 
 export default class Header extends Component<any, any> {
   private storageService: any = new StorageService();
@@ -43,17 +41,17 @@ export default class Header extends Component<any, any> {
     this.state = {
       revealMenu: false,
       asset: this.props.asset,
-      assetId: this.props.assetId
-    }
+      assetId: this.props.assetId,
+    };
   }
 
-  toggleMenu() {
+  public toggleMenu() {
     this.setState({
-      revealMenu: !this.state.revealMenu
+      revealMenu: !this.state.revealMenu,
     });
   }
 
-  getNavbarStyle() {
+  public getNavbarStyle() {
     try {
       return this.state.asset.branding.nav || {};
     } catch (error) {
@@ -61,7 +59,7 @@ export default class Header extends Component<any, any> {
     }
   }
 
-  getLogoStyle() {
+  public getLogoStyle() {
     try {
       return this.state.asset.branding.logo || {};
     } catch (error) {
@@ -69,7 +67,7 @@ export default class Header extends Component<any, any> {
     }
   }
 
-  getNavbarLogo() {
+  public getNavbarLogo() {
     try {
       return this.state.asset.branding.logoUrl || {};
     } catch (error) {
@@ -84,34 +82,28 @@ export default class Header extends Component<any, any> {
     const logo = this.getNavbarLogo() || iconLogo;
     const navColor = this.state.asset.branding['color-header'];
 
-    console.log('asset', asset);
-    console.log('assetId', assetId);
-    console.log('revealMenu', revealMenu);
-    console.log('logo', logo);
-
     return (
-      <div className="navigation" style={{'backgroundColor': navColor}}>
-        <div className="wrapper">
-          <div className="navigation__menu">
+      <div className='navigation' style={{ 'backgroundColor': navColor }}>
+        <div className='wrapper'>
+          <div className='navigation__menu'>
 
-            {asset ?
-              <Link className="navigation__logo--link" to={`/${assetId}`}>
-                <img src={logo} style={this.getLogoStyle()} alt="Ambrosus Logo" className="navigation__logo" />
-              </Link>
-              : ''}
+            {asset &&
+              <Link className='navigation__logo--link' to={`/${assetId}`}>
+                <img src={logo} style={this.getLogoStyle()} alt='Ambrosus Logo' className='navigation__logo' />
+              </Link>}
 
-            <div className="navigation--right-side">
+            <div className='navigation--right-side'>
               <button className={revealMenu ? 'navigation__menu__icon active' : 'navigation__menu__icon'} onClick={() => this.toggleMenu()}>
-                <span className="navigation__menu--icon1"></span>
-                <span className="navigation__menu--icon2"></span>
-                <span className="navigation__menu--icon3"></span>
+                <span className='navigation__menu--icon1'></span>
+                <span className='navigation__menu--icon2'></span>
+                <span className='navigation__menu--icon3'></span>
               </button>
             </div>
           </div >
 
           {asset ?
             <div className={revealMenu ? 'navigation__container navigation__container--active' : 'navigation__container'} style={this.getNavbarStyle()}>
-              <Link className="navigation__logo--link" to={`/${assetId}/settings`}>Settings</Link>
+              <Link className='navigation__logo--link' to={`/${assetId}/settings`}>Settings</Link>
             </div >
             : ''}
 

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Event from './Event';
 import Info from './Info';
@@ -12,7 +12,7 @@ class Asset extends Component<any, any> {
     super(props);
   }
 
-  _getSyle() {
+  public getSyle() {
     try {
       return this.props.data.branding['content'] || {};
     } catch (error) {
@@ -20,7 +20,7 @@ class Asset extends Component<any, any> {
     }
   }
 
-  _getImages() {
+  public getImages() {
     try {
       return this.props.data.info.images;
     } catch (error) {
@@ -28,21 +28,21 @@ class Asset extends Component<any, any> {
     }
   }
 
-  render() {
+  public render() {
     const asset = this.props.asset;
     const assetDetails = this.props.assetDetails;
     const assetId = asset.assetId;
-    const style = this._getSyle();
+    const style = this.getSyle();
 
     return (
       <div>
         <AssetHeader asset={assetDetails} assetId={assetId} />
-        <div className="Asset" style={style}>
+        <div className='Asset' style={style}>
           <Info asset={assetDetails} assetId={assetId} />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Asset
+export default Asset;

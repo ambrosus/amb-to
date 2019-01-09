@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 const Map = withGoogleMap((props: any) =>
   <GoogleMap
@@ -8,6 +8,6 @@ const Map = withGoogleMap((props: any) =>
   >
     <Marker position={{ lat: props.lat, lng: props.lng }} />
   </GoogleMap>
-)
+);
 
 export default Map;

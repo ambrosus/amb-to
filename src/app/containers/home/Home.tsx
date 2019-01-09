@@ -1,29 +1,29 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ReactSVG from 'react-svg'
-import API from '../../services/api';
+import ReactSVG from 'react-svg';
 import Asset from '../Asset';
+import AssetService from '../../services/asset.service';
 import AssetRedirect from '../Asset/assetRedirect';
 import Header from '../../components/header/Header';
-
-
 
 import './Home.scss';
 
 import amblogo from 'assets/images/amb-logo.png';
 import spinnerLogo from 'assets/icons/spinner.svg';
 
-
 class Search extends Component<any, any> {
+  public ambrosus: AssetService;
+
   constructor(props: any) {
     super(props);
+    this.ambrosus = new AssetService();
     this.state = {
-      search: "",
+      search: '',
       errorNoAsset: false,
       errorSearchEmpty: false,
       spinner: false,
-      history: []
+      history: [],
     };
   }
 
@@ -31,58 +31,58 @@ class Search extends Component<any, any> {
     this.loadHistory();
   }
 
-  loadHistory() {
-    let history = localStorage.getItem("history)");
+  public loadHistory() {
+    const history = localStorage.getItem('history)');
     this.setState({
-      history: history ? JSON.parse(history) : []
+      history: history ? JSON.parse(history) : [],
     });
   }
 
-  clearHistory() {
+  public clearHistory() {
     localStorage.clear();
     this.setState({
-      history: []
+      history: [],
     });
   }
 
-  onSearch() {
+  public onSearch() {
     const search = this.state.search;
     if (!search || /^\s*$/.test(search)) {
       this.setState({
-        errorSearchEmpty: true
+        errorSearchEmpty: true,
       });
     } else {
       this.setState({
         errorSearchEmpty: false,
-        spinner: true
+        spinner: true,
       });
 
-      this._getAssetAndRedirect(search);
+      this.getAssetAndRedirect(search);
     }
   }
 
-  async _getAssetAndRedirect(assetId: any) {
+  public async getAssetAndRedirect(assetId: any) {
     try {
-      let asset = await API.getAsset(assetId);
+      const asset = await this.ambrosus.getAsset(assetId);
       if (asset) {
-        this.props.history.push('/' + assetId);
+        this.props.history.push(`/${assetId}`);
       } else {
         this.setState({
           errorNoAsset: true,
-          spinner: false
+          spinner: false,
         });
       }
     } catch (error) {
       this.setState({
         errorNoAsset: true,
-        spinner: true
+        spinner: true,
       });
     }
   }
 
-  updateInputValue(e: any) {
+  public updateInputValue(e: any) {
     this.state = {
-      search: e.target.value
+      search: e.target.value,
     };
   }
 
@@ -94,10 +94,10 @@ class Search extends Component<any, any> {
 
     const historyDivs = history.map((item: any) => {
       return (
-        <Link className="history__item" to={`/${item.id}`}>
+        <Link className='history__item' to={`/${item.id}`}>
           <div>{item.title}</div>
-          <div className="history__item__div">
-            <small className="history__item__small">{item.id}</small>
+          <div className='history__item__div'>
+            <small className='history__item__small'>{item.id}</small>
           </div>
         </Link>
       );
@@ -106,22 +106,19 @@ class Search extends Component<any, any> {
     return (
       <div>
         <Header />
-        <div className="Search">
-          <div className="wrapper">
-            {/* <div className="logo">
-              <img className="logo__image" src={amblogo} />
-            </div> */}
-            <div className="page">
-              <h3 className="title">Search for an asset</h3>
-              <div className="form-search">
-                <input type="text" placeholder="assetId" onChange={(e) => this.updateInputValue(e)} />
-                <button className="btn" onClick={() => this.onSearch()}>Search</button>
+        <div className='Search'>
+          <div className='wrapper'>
+            <div className='page'>
+              <h3 className='title'>Search for an asset</h3>
+              <div className='form-search'>
+                <input type='text' placeholder='assetId' onChange={(e) => this.updateInputValue(e)} />
+                <button className='btn' onClick={() => this.onSearch()}>Search</button>
               </div>
               {spinner ?
-                <ReactSVG className="spinner" src={spinnerLogo} /> : ''
+                <ReactSVG className='spinner' src={spinnerLogo} /> : ''
               }
 
-              <div className="errors">
+              <div className='errors'>
                 {errorNoAsset ?
                   <p>No asset with that assetId.</p> : ''
                 }
@@ -134,13 +131,13 @@ class Search extends Component<any, any> {
 
             {history ?
               <div>
-                <div className="page history_page">
-                  <h3 className="title">Previously viewed</h3>
-                  <div className="history">
+                <div className='page history_page'>
+                  <h3 className='title'>Previously viewed</h3>
+                  <div className='history'>
                     {historyDivs}
                   </div>
-                  <div className="clear__history">
-                    <button className="btn" onClick={this.clearHistory.bind(this)}>Clear Search History</button>
+                  <div className='clear__history'>
+                    <button className='btn' onClick={this.clearHistory.bind(this)}>Clear Search History</button>
                   </div>
                 </div>
               </div> : ''
@@ -148,8 +145,8 @@ class Search extends Component<any, any> {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Search
+export default Search;

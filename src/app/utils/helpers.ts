@@ -6,17 +6,17 @@ const toggleMenu = (event: any) => {
 
 const valueJSON = (value: any) => {
     return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
-}
+};
 
 const isObject = (value: any) => {
-    if ((typeof value === "object") && (value !== null)) {
+    if ((typeof value === 'object') && (value !== null)) {
         return true;
     }
     return false;
-}
+};
 
 export {
     toggleMenu,
     valueJSON,
     isObject
-}
+};

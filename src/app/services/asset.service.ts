@@ -1,13 +1,12 @@
 declare let AmbrosusSDK: any;
 
 export default class AssetService {
-  ambrosus: any;
+  public ambrosus: any;
 
   constructor() {
     const apiEndpoint = 'https://gateway-test.ambrosus.com';
     this.ambrosus = new AmbrosusSDK({ apiEndpoint});
   }
-
 
   public getAsset(assetId: string) {
     return this.ambrosus.getAssetById(assetId);
