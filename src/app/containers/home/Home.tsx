@@ -66,6 +66,11 @@ class Search extends Component<any, any> {
     try {
       const asset = await this.ambrosus.getAsset(assetId);
       if (asset) {
+        const history = this.state.history;
+        if (!history.includes(assetId)) {
+          history.push(assetId);
+          this.storage.set('history', history);
+        }
         this.props.history.push(`/${assetId}`);
       } else {
         this.setState({
