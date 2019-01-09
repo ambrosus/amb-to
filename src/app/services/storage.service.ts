@@ -1,6 +1,6 @@
 
 export default class StorageService {
-  private namespace = 'todo_';
+  private namespace = 'amb.to_';
   private storage: any = localStorage;
 
   // localStorage wrapper

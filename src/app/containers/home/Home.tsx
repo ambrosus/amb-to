@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 import Asset from '../Asset';
-import AssetService from '../../services/asset.service';
+import {AssetService, StorageService} from '../../services';
 import { Header, AssetRedirect } from '../../components';
 
 import './Home.scss';
@@ -13,10 +13,12 @@ import spinnerLogo from 'assets/icons/spinner.svg';
 
 class Search extends Component<any, any> {
   public ambrosus: AssetService;
+  public storage: StorageService;
 
   constructor(props: any) {
     super(props);
     this.ambrosus = new AssetService();
+    this.storage = new StorageService();
     this.state = {
       search: '',
       errorNoAsset: false,
@@ -31,14 +33,14 @@ class Search extends Component<any, any> {
   }
 
   public loadHistory() {
-    const history = localStorage.getItem('history)');
+    const history = this.storage.get('history)');
     this.setState({
-      history: history ? JSON.parse(history) : [],
+      history: history ? history : [],
     });
   }
 
   public clearHistory() {
-    localStorage.clear();
+    this.storage.clear();
     this.setState({
       history: [],
     });
