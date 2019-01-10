@@ -7,10 +7,11 @@ import Map from '../../../components/Maps/Map';
 import './Event.scss';
 import pinLogo from '../../../../assets/images/pin.svg';
 import dolarLogo from '../../../../assets/images/dollar.svg';
-import { timeSince, formatDate } from '../../../utils';
+import { timeSince, formatDate, images } from '../../../utils';
 
 // tslint:disable-next-line:no-var-requires
 const styles = require('assets/data/styles.json');
+const ImagesLogo: any = images;
 
 class Event extends Component<any, any> {
   constructor(props: any) {
@@ -44,9 +45,10 @@ class Event extends Component<any, any> {
     const event = this.props.event;
     const assetId = this.props.assetId;
     const isArray = Array.isArray;
-    const imageUrl = `assets/images/${this.eventTypeToStyle(event.type).iconUrl}`;
+    const eventTypeImage = (this.eventTypeToStyle(event.type).iconUrl).split('.')[0];
+    const imageLogo = ImagesLogo[eventTypeImage];
 
-    console.log('event type', imageUrl);
+    console.log('images', images);
 
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -59,8 +61,7 @@ class Event extends Component<any, any> {
         <div className={this.state.expandEvent ? 'item__event__button--active' : 'item__event__button'}>
           <div onClick={() => { this.expandEvent(); }} className='item__event__single' style={{ 'backgroundColor': this.eventTypeToStyle(event.type).backgroundColor }}>
             <div className='item__event__single__image'>
-              {/* <img src={require(`${imageUrl}`)} /> */}
-              <img src={dolarLogo} />
+              <img src={imageLogo} />
             </div>
             <div className='item__event__single__copy '>
               <div className='item__event__single__container '>

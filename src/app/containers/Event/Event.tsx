@@ -6,7 +6,7 @@ import Maps from '../../components/Maps/Maps';
 import Map from '../../components/Maps/Map';
 import AssetService from '../../services/asset.service';
 import './Event.scss';
-import { timeSince, formatDate } from '../../utils';
+import { timeSince, isObject, valueJSON } from '../../utils';
 import { AssetHeader } from '../../components';
 
 // tslint:disable-next-line:no-var-requires
@@ -14,6 +14,10 @@ const styles = require('assets/data/styles.json');
 
 class Event extends React.Component<any, any> {
   public ambrosus: any;
+
+  public static contextTypes = {
+    router: PropTypes.object,
+  };
 
   constructor(props: any) {
     super(props);
@@ -57,16 +61,24 @@ class Event extends React.Component<any, any> {
   }
 
   public async loadEvent(eventId: string, assetId: string) {
-    const events = await this.ambrosus.getEvents(assetId);
-    const parseEvents = await this.ambrosus.parseEvents(events.data);
+    try {
+      const events = await this.ambrosus.getEvents(assetId);
+      const parseEvents = await this.ambrosus.parseEvents(events.data);
+      const event = parseEvents.events.filter((e: any) => e && e.eventId === eventId)[0];
 
-    const event = parseEvents.events.filter((e: any) => e && e.eventId === eventId);
+      if (!event) {
+        this.context.router.history.push('/');
+      }
 
-    this.setState({
-      assetId,
-      eventId,
-      event: event[0],
-    });
+      this.setState({
+        assetId,
+        eventId,
+        event,
+      });
+    } catch (error) {
+      this.context.router.history.push('/');
+    }
+
   }
 
   public getStyles(key: string) {
@@ -82,17 +94,6 @@ class Event extends React.Component<any, any> {
       return styles['harvested'];
     }
     return styles[value];
-  }
-
-  public isObject(value: any) {
-    if ((typeof value === 'object') && (value !== null)) {
-      return true;
-    }
-    return false;
-  }
-
-  public valueJSON(value: any) {
-    return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
   }
 
   public getImages() {
@@ -118,7 +119,7 @@ class Event extends React.Component<any, any> {
           <div className='wrapper'>
             <Link className='button' to={`/${assetId}`}>Back to Asset</Link>
 
-            {!event ? <h3 style={{ 'textAlign': 'center' }}>No event data</h3> : ''}
+            {!event && <h3 style={{ 'textAlign': 'center' }}>No event data</h3>}
 
             <div className='notification' style={{ 'backgroundColor': this.eventTypeToStyle(event.type).backgroundColor }}>
               <img src='/assets/images/{{(event.type | eventTypeToStyle ).iconUrl}}' alt='' className='notification__image' />
@@ -131,8 +132,8 @@ class Event extends React.Component<any, any> {
                 <div className='notification__container'>
                   <p className='notification__time'>{timeSince(event.timestamp * 1000)} ago</p>
 
-                  {event.location ? <img src='/assets/images/pin.svg' className='notification__place--icon' /> : ''}
-                  {event.location ? <p className='notification__place'>{event.location.name}</p> : ''}
+                  {event.location && <img src='/assets/images/pin.svg' className='notification__place--icon' />}
+                  {event.location && <p className='notification__place'>{event.location.name}</p>}
 
                 </div>
               </div>
@@ -174,13 +175,13 @@ class Event extends React.Component<any, any> {
                             return;
                           }
 
-                          if (!this.isObject(value)) {
+                          if (!isObject(value)) {
                             return (
                               <div className='item__table__row' key={key}>
 
-                                {!Array.isArray(value) ? <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{key}</div> : ''}
-                                <div className={this.isObject(value) ? 'item__table__cell event-details-json item__table__cell--json' : 'item__table__cell event-details-json'} style={this.getStyles('components_values')}>
-                                  {this.isObject(value) ? this.valueJSON(JSON.stringify(value, null, 5)) : value}
+                                {!Array.isArray(value) && <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{key}</div>}
+                                <div className={isObject(value) ? 'item__table__cell event-details-json item__table__cell--json' : 'item__table__cell event-details-json'} style={this.getStyles('components_values')}>
+                                  {isObject(value) ? valueJSON(JSON.stringify(value, null, 5)) : value}
                                 </div>
                               </div>
                             );
@@ -197,7 +198,7 @@ class Event extends React.Component<any, any> {
                         return;
                       }
 
-                      if (this.isObject(value)) {
+                      if (isObject(value)) {
                         return (
                           <div>
                             <hr className='item__table__separator' />
@@ -208,11 +209,9 @@ class Event extends React.Component<any, any> {
                               {Object.entries(value).map(([k, v]) => {
                                 return (
                                   <div className='item__table__row' key={k}>
-                                    {!Array.isArray(value) ?
-                                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>
-                                      : ''}
-                                    <div className={this.isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this.getStyles('components_values')}>
-                                      {this.isObject(v) ? this.valueJSON(JSON.stringify(v, null, 5)) : v}
+                                    {!Array.isArray(value) && <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>}
+                                    <div className={isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this.getStyles('components_values')}>
+                                      {isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v}
                                     </div>
                                   </div>
                                 );
@@ -226,7 +225,7 @@ class Event extends React.Component<any, any> {
                     }
                   </div>
 
-                  {event.documents ?
+                  {event.documents &&
                     <div className='item__details'>
                       <h2 className='item__table__title' style={this.getStyles('components_titles')}>Event Documents</h2>
 
@@ -249,8 +248,7 @@ class Event extends React.Component<any, any> {
                         );
                       })}
 
-                    </div>
-                    : ''}
+                    </div>}
 
                   {/* CHECK VALIDATION */}
                   <div className='item__details' style={this.getStyles('components')}>
@@ -267,13 +265,13 @@ class Event extends React.Component<any, any> {
                   </div>
                 </div>
 
-                {event.location ?
+                {event.location &&
                   <div className='item__container' style={{ margin: '0 20px' }}>
 
                     <div className='item__details' style={this.getStyles('components')}>
                       <h2 className='item__table__title' style={{ ...{ 'margin': 0 }, ...this.getStyles('components_titles') }}>Location</h2>
 
-                      {event && event.location && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+                      {event && event.location && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 &&
                         // <Maps
                         //   height={'300px'}
                         //   width={'100%'}
@@ -284,9 +282,7 @@ class Event extends React.Component<any, any> {
                           containerElement={<div style={{ height: `400px` }} />}
                           mapElement={<div style={{ height: `100%` }} />}
                           lat={event.location.location.geometry.coordinates[0]}
-                          lng={event.location.location.geometry.coordinates[1]} />
-
-                        : ''}
+                          lng={event.location.location.geometry.coordinates[1]} />}
 
                       <div className='item__table'>
                         <div className='item__table__row'>
@@ -304,9 +300,7 @@ class Event extends React.Component<any, any> {
                       </div>
                     </div>
 
-                  </div>
-
-                  : ''}
+                  </div>}
               </div>
             </div>
           </div >
