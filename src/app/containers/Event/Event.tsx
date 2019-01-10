@@ -114,7 +114,7 @@ class Event extends React.Component<any, any> {
       <div>
         <AssetHeader asset={null} assetId={assetId} />
 
-        <div className='Event' style={this.getStyles('content')}>
+        <div className='event' style={this.getStyles('content')}>
           <div className='wrapper'>
             <Link className='button' to={`/${assetId}`}>Back to Asset</Link>
 
