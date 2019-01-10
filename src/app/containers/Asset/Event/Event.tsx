@@ -44,6 +44,9 @@ class Event extends Component<any, any> {
     const event = this.props.event;
     const assetId = this.props.assetId;
     const isArray = Array.isArray;
+    const imageUrl = `assets/images/${this.eventTypeToStyle(event.type).iconUrl}`;
+
+    console.log('event type', imageUrl);
 
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -56,6 +59,7 @@ class Event extends Component<any, any> {
         <div className={this.state.expandEvent ? 'item__event__button--active' : 'item__event__button'}>
           <div onClick={() => { this.expandEvent(); }} className='item__event__single' style={{ 'backgroundColor': this.eventTypeToStyle(event.type).backgroundColor }}>
             <div className='item__event__single__image'>
+              {/* <img src={require(`${imageUrl}`)} /> */}
               <img src={dolarLogo} />
             </div>
             <div className='item__event__single__copy '>

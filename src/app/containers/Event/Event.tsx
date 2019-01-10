@@ -7,6 +7,7 @@ import Map from '../../components/Maps/Map';
 import AssetService from '../../services/asset.service';
 import './Event.scss';
 import { timeSince, formatDate } from '../../utils';
+import { AssetHeader } from '../../components';
 
 // tslint:disable-next-line:no-var-requires
 const styles = require('assets/data/styles.json');
@@ -110,204 +111,207 @@ class Event extends React.Component<any, any> {
     if (!event) { return <Preloader />; }
 
     return (
-      <div className='Event' style={this.getStyles('content')}>
-        <div className='wrapper'>
-          <Link className='button' to={`/${assetId}`}>Back to Asset</Link>
+      <div>
+        <AssetHeader asset={null} assetId={assetId} />
 
-          {!event ? <h3 style={{ 'textAlign': 'center' }}>No event data</h3> : ''}
+        <div className='Event' style={this.getStyles('content')}>
+          <div className='wrapper'>
+            <Link className='button' to={`/${assetId}`}>Back to Asset</Link>
 
-          <div className='notification' style={{ 'backgroundColor': this.eventTypeToStyle(event.type).backgroundColor }}>
-            <img src='/assets/images/{{(event.type | eventTypeToStyle ).iconUrl}}' alt='' className='notification__image' />
-            <div className='notification__copy'>
-              <div className='notification__container'>
-                <h4 className='notification__heading'>{event.name}
-                  <img src='/assets/images/key.svg' alt='' className='notification__heading--icon' />
-                </h4>
-              </div>
-              <div className='notification__container'>
-                <p className='notification__time'>{timeSince(event.timestamp * 1000)} ago</p>
+            {!event ? <h3 style={{ 'textAlign': 'center' }}>No event data</h3> : ''}
 
-                {event.location ? <img src='/assets/images/pin.svg' className='notification__place--icon' /> : ''}
-                {event.location ? <p className='notification__place'>{event.location.name}</p> : ''}
+            <div className='notification' style={{ 'backgroundColor': this.eventTypeToStyle(event.type).backgroundColor }}>
+              <img src='/assets/images/{{(event.type | eventTypeToStyle ).iconUrl}}' alt='' className='notification__image' />
+              <div className='notification__copy'>
+                <div className='notification__container'>
+                  <h4 className='notification__heading'>{event.name}
+                    <img src='/assets/images/key.svg' alt='' className='notification__heading--icon' />
+                  </h4>
+                </div>
+                <div className='notification__container'>
+                  <p className='notification__time'>{timeSince(event.timestamp * 1000)} ago</p>
 
+                  {event.location ? <img src='/assets/images/pin.svg' className='notification__place--icon' /> : ''}
+                  {event.location ? <p className='notification__place'>{event.location.name}</p> : ''}
+
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className='item wrapper'>
-            <div className='event__container'>
-              <div className='item__container' style={{ margin: '0 20px' }}>
-
-                <div className='item__details' style={this.getStyles('components')}>
-                  <h2 className='item__table__title' style={this.getStyles('components_titles')}>Event Details</h2>
-
-                  <div className='item__table'>
-                    <div className='item__table__row'>
-                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Event ID</div>
-                      <div className='item__table__cell' style={this.getStyles('components_values')}>{event.eventId}</div>
-                    </div>
-                    <div className='item__table__row'>
-                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Created by</div>
-                      <div className='item__table__cell' style={this.getStyles('components_values')}>{event.author}</div>
-                    </div>
-                    <div className='item__table__row'>
-                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Timestamp</div>
-                      <div className='item__table__cell' style={this.getStyles('components_values')}>{event.timestamp * 1000}</div>
-                    </div>
-                    <div className='item__table__row'>
-                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Type</div>
-                      <div className='item__table__cell' style={this.getStyles('components_values')}>{event.action}</div>
-                    </div>
-                  </div>
-
-                  {/* key value */}
-
-                  <div>
-                    <div className='item__table'>
-                      <hr className='item__table__separator' />
-                      {Object.entries(event).map(([key, value]) => {
-                        if (['location', 'eventId', 'type', 'documents'].includes(key)) {
-                          return;
-                        }
-
-                        if (!this.isObject(value)) {
-                          return (
-                            <div className='item__table__row' key={key}>
-
-                              {!Array.isArray(value) ? <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{key}</div> : ''}
-                              <div className={this.isObject(value) ? 'item__table__cell event-details-json item__table__cell--json' : 'item__table__cell event-details-json'} style={this.getStyles('components_values')}>
-                                {this.isObject(value) ? this.valueJSON(JSON.stringify(value, null, 5)) : value}
-                              </div>
-                            </div>
-                          );
-                        }
-
-                      })}
-
-                    </div>
-                  </div>
-
-                  {/* group */}
-                  {Object.entries(event).map(([key, value]) => {
-                    if (['location', 'eventId', 'type', 'documents'].includes(key)) {
-                      return;
-                    }
-
-                    if (this.isObject(value)) {
-                      return (
-                        <div>
-                          <hr className='item__table__separator' />
-                          <h3 className='item__table__subtitle' style={this.getStyles('components_subtitles')}>{key}</h3>
-
-                          <div className='item__table'>
-
-                            {Object.entries(value).map(([k, v]) => {
-                              return (
-                                <div className='item__table__row' key={k}>
-                                  {!Array.isArray(value) ?
-                                    <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>
-                                    : ''}
-                                  <div className={this.isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this.getStyles('components_values')}>
-                                    {this.isObject(v) ? this.valueJSON(JSON.stringify(v, null, 5)) : v}
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-
-                        </div>
-                      );
-                    }
-                  })
-                  }
-                </div>
-
-                {event.documents ?
-                  <div className='item__details'>
-                    <h2 className='item__table__title' style={this.getStyles('components_titles')}>Event Documents</h2>
-
-                    {Object.entries(event.documents).map(([key, value]) => {
-                      return (
-                        <div key={key}>
-                          <h3 className='item__table__subtitle' style={this.getStyles('components_subtitles')}>{key}</h3>
-                          <div className='item__table'>
-
-                            {Object.entries(value).map(([k, v]) => {
-                              return (
-                                <div className='item__table__row' key={k}>
-                                  <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>
-                                  <div className='item__table__cell event-details-json' style={this.getStyles('components_values')}>{v}</div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                  </div>
-                  : ''}
-
-                {/* CHECK VALIDATION */}
-                <div className='item__details' style={this.getStyles('components')}>
-                  <div className='item__table'>
-                    <div className='item__table__row'>
-
-                      <div className='item__table__cell--title'>Check Event Validation</div>
-                      <div className='item__table__cell event-details-json'>
-                        <Link target='_blank' className='button' to={`https://ambrosus.github.io/app-checker/?eventId=${eventId}`}>Click Here</Link>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {event.location ?
+            <div className='item wrapper'>
+              <div className='event__container'>
                 <div className='item__container' style={{ margin: '0 20px' }}>
 
                   <div className='item__details' style={this.getStyles('components')}>
-                    <h2 className='item__table__title' style={{ ...{ 'margin': 0 }, ...this.getStyles('components_titles') }}>Location</h2>
-
-                    {event && event.location && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
-                      // <Maps
-                      //   height={'300px'}
-                      //   width={'100%'}
-                      //   lat={event.location.location.geometry.coordinates[0]}
-                      //   lng={event.location.location.geometry.coordinates[1]} />
-
-                      <Map
-                        containerElement={<div style={{ height: `400px` }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        lat={event.location.location.geometry.coordinates[0]}
-                        lng={event.location.location.geometry.coordinates[1]} />
-
-                      : ''}
+                    <h2 className='item__table__title' style={this.getStyles('components_titles')}>Event Details</h2>
 
                     <div className='item__table'>
                       <div className='item__table__row'>
-                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Name</div>
-                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.name}</div>
+                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Event ID</div>
+                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.eventId}</div>
                       </div>
                       <div className='item__table__row'>
-                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>City</div>
-                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.city}</div>
+                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Created by</div>
+                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.author}</div>
                       </div>
                       <div className='item__table__row'>
-                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Country</div>
-                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.country}</div>
+                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Timestamp</div>
+                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.timestamp * 1000}</div>
+                      </div>
+                      <div className='item__table__row'>
+                        <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Type</div>
+                        <div className='item__table__cell' style={this.getStyles('components_values')}>{event.action}</div>
+                      </div>
+                    </div>
+
+                    {/* key value */}
+
+                    <div>
+                      <div className='item__table'>
+                        <hr className='item__table__separator' />
+                        {Object.entries(event).map(([key, value]) => {
+                          if (['location', 'eventId', 'type', 'documents'].includes(key)) {
+                            return;
+                          }
+
+                          if (!this.isObject(value)) {
+                            return (
+                              <div className='item__table__row' key={key}>
+
+                                {!Array.isArray(value) ? <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{key}</div> : ''}
+                                <div className={this.isObject(value) ? 'item__table__cell event-details-json item__table__cell--json' : 'item__table__cell event-details-json'} style={this.getStyles('components_values')}>
+                                  {this.isObject(value) ? this.valueJSON(JSON.stringify(value, null, 5)) : value}
+                                </div>
+                              </div>
+                            );
+                          }
+
+                        })}
+
+                      </div>
+                    </div>
+
+                    {/* group */}
+                    {Object.entries(event).map(([key, value]) => {
+                      if (['location', 'eventId', 'type', 'documents'].includes(key)) {
+                        return;
+                      }
+
+                      if (this.isObject(value)) {
+                        return (
+                          <div>
+                            <hr className='item__table__separator' />
+                            <h3 className='item__table__subtitle' style={this.getStyles('components_subtitles')}>{key}</h3>
+
+                            <div className='item__table'>
+
+                              {Object.entries(value).map(([k, v]) => {
+                                return (
+                                  <div className='item__table__row' key={k}>
+                                    {!Array.isArray(value) ?
+                                      <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>
+                                      : ''}
+                                    <div className={this.isObject(v) ? 'item__table__cell item__table__cell--json' : 'item__table__cell'} style={this.getStyles('components_values')}>
+                                      {this.isObject(v) ? this.valueJSON(JSON.stringify(v, null, 5)) : v}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                          </div>
+                        );
+                      }
+                    })
+                    }
+                  </div>
+
+                  {event.documents ?
+                    <div className='item__details'>
+                      <h2 className='item__table__title' style={this.getStyles('components_titles')}>Event Documents</h2>
+
+                      {Object.entries(event.documents).map(([key, value]) => {
+                        return (
+                          <div key={key}>
+                            <h3 className='item__table__subtitle' style={this.getStyles('components_subtitles')}>{key}</h3>
+                            <div className='item__table'>
+
+                              {Object.entries(value).map(([k, v]) => {
+                                return (
+                                  <div className='item__table__row' key={k}>
+                                    <div className='item__table__cell--title' style={this.getStyles('components_keys')}>{k}</div>
+                                    <div className='item__table__cell event-details-json' style={this.getStyles('components_values')}>{v}</div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                    </div>
+                    : ''}
+
+                  {/* CHECK VALIDATION */}
+                  <div className='item__details' style={this.getStyles('components')}>
+                    <div className='item__table'>
+                      <div className='item__table__row'>
+
+                        <div className='item__table__cell--title'>Check Event Validation</div>
+                        <div className='item__table__cell event-details-json'>
+                          <Link target='_blank' className='button' to={`https://ambrosus.github.io/app-checker/?eventId=${eventId}`}>Click Here</Link>
+                        </div>
+
                       </div>
                     </div>
                   </div>
-
                 </div>
 
-                : ''}
-            </div>
-          </div>
-        </div >
-      </div>
+                {event.location ?
+                  <div className='item__container' style={{ margin: '0 20px' }}>
 
+                    <div className='item__details' style={this.getStyles('components')}>
+                      <h2 className='item__table__title' style={{ ...{ 'margin': 0 }, ...this.getStyles('components_titles') }}>Location</h2>
+
+                      {event && event.location && event.location.location.geometry.coordinates && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 ?
+                        // <Maps
+                        //   height={'300px'}
+                        //   width={'100%'}
+                        //   lat={event.location.location.geometry.coordinates[0]}
+                        //   lng={event.location.location.geometry.coordinates[1]} />
+
+                        <Map
+                          containerElement={<div style={{ height: `400px` }} />}
+                          mapElement={<div style={{ height: `100%` }} />}
+                          lat={event.location.location.geometry.coordinates[0]}
+                          lng={event.location.location.geometry.coordinates[1]} />
+
+                        : ''}
+
+                      <div className='item__table'>
+                        <div className='item__table__row'>
+                          <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Name</div>
+                          <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.name}</div>
+                        </div>
+                        <div className='item__table__row'>
+                          <div className='item__table__cell--title' style={this.getStyles('components_keys')}>City</div>
+                          <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.city}</div>
+                        </div>
+                        <div className='item__table__row'>
+                          <div className='item__table__cell--title' style={this.getStyles('components_keys')}>Country</div>
+                          <div className='item__table__cell' style={this.getStyles('components_values')}>{event.location.country}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  : ''}
+              </div>
+            </div>
+          </div >
+        </div>
+      </div>
     );
   }
 }

@@ -71,7 +71,7 @@ export default class Header extends Component<any, any> {
     try {
       return this.state.asset.branding.logoUrl || {};
     } catch (error) {
-      return {};
+      return null;
     }
   }
 
@@ -80,14 +80,16 @@ export default class Header extends Component<any, any> {
     const assetId = this.state.assetId;
     const revealMenu = this.state.revealMenu;
     const logo = this.getNavbarLogo() || iconLogo;
-    const navColor = this.state.asset.branding['color-header'];
+    const navColor = asset ? this.state.asset.branding['color-header'] : '#c0cccc';
+
+    console.log('logo', logo);
 
     return (
       <div className='navigation' style={{ 'backgroundColor': navColor }}>
         <div className='wrapper'>
           <div className='navigation__menu'>
 
-            {asset &&
+            {assetId &&
               <Link className='navigation__logo--link' to={`/${assetId}`}>
                 <img src={logo} style={this.getLogoStyle()} alt='Ambrosus Logo' className='navigation__logo' />
               </Link>}
@@ -101,7 +103,7 @@ export default class Header extends Component<any, any> {
             </div>
           </div >
 
-          {asset ?
+          {assetId ?
             <div className={revealMenu ? 'navigation__container navigation__container--active' : 'navigation__container'} style={this.getNavbarStyle()}>
               <Link className='navigation__logo--link' to={`/${assetId}/settings`}>Settings</Link>
             </div >
