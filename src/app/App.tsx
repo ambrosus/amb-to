@@ -1,16 +1,16 @@
 import React from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import './App.scss';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import {AssetRedirect, Footer} from './components';
 import Asset from './containers/Asset';
 import Event from './containers/Event';
 import Home from './containers/Home';
 
+import './App.scss';
+
 class App extends React.Component<any, any> {
   public state = {
     hideHeader: false,
   };
-  private _class = '';
 
   constructor(props: any) {
     super(props);
