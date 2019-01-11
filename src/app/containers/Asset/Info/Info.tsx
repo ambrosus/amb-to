@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import './Info.scss';
 import { isObject } from 'util';
 import { valueJSON } from '../../../utils';
 import Timeline from '../Timeline';
 
-class Info extends Component<any, any> {
+import './Info.scss';
+
+export default class Info extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -170,5 +169,3 @@ class Info extends Component<any, any> {
     );
   }
 }
-
-export default Info;

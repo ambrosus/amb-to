@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Maps from '../../../components/Maps/Maps';
-import Map from '../../../components/Maps/Map';
+import Maps from '../../../components/Maps';
+import pinLogo from '../../../../assets/images/pin.svg';
+import { timeSince, formatDate, images } from '../../../utils';
+import assetStyles from '../../../../assets/data/styles.json';
 
 import './Event.scss';
-import pinLogo from '../../../../assets/images/pin.svg';
-import dolarLogo from '../../../../assets/images/dollar.svg';
-import { timeSince, formatDate, images } from '../../../utils';
 
-// tslint:disable-next-line:no-var-requires
-const styles = require('assets/data/styles.json');
+const styles: any = assetStyles;
 const ImagesLogo: any = images;
 
-class Event extends Component<any, any> {
+export default class Event extends Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -30,15 +27,9 @@ class Event extends Component<any, any> {
   }
 
   private expandEvent() {
-    console.log('expand');
     this.setState({
       expandEvent: !this.state.expandEvent,
     });
-  }
-
-  private toggleMap(e: any) {
-    console.log('toggle');
-    // expandEvents[i] = !expandEvents[i]
   }
 
   public render() {
@@ -47,8 +38,6 @@ class Event extends Component<any, any> {
     const isArray = Array.isArray;
     const eventTypeImage = (this.eventTypeToStyle(event.type).iconUrl).split('.')[0];
     const imageLogo = ImagesLogo[eventTypeImage];
-
-    console.log('images', images);
 
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -90,16 +79,12 @@ class Event extends Component<any, any> {
 
             {event && event.location && event.location.location.geometry.coordinates && isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2 &&
               <Maps
-                height={'300px'}
-                width={'100%'}
+                containerElement={<div style={{ height: `400px`, width: '100%' }} />}
+                googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+                loadingElement={<div style={{ height: `100%` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
                 lat={event.location.location.geometry.coordinates[0]}
                 lng={event.location.location.geometry.coordinates[1]} />
-
-              // <Map
-              //   containerElement={<div style={{ height: `400px` }} />}
-              //   mapElement={<div style={{ height: `100%` }} />}
-              //   lat={event.location.location.geometry.coordinates[0]}
-              //   lng={event.location.location.geometry.coordinates[1]} />
               }
 
             <div className='item__event__more-details__row '>
@@ -125,5 +110,3 @@ class Event extends Component<any, any> {
     );
   }
 }
-
-export default Event;

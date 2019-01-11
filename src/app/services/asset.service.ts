@@ -1,10 +1,12 @@
+import config from '../config';
+
 declare let AmbrosusSDK: any;
 
 export default class AssetService {
   public ambrosus: any;
 
   constructor() {
-    const apiEndpoint = 'https://gateway-test.ambrosus.com';
+    const apiEndpoint = config.API_ENDPOINT;
     this.ambrosus = new AmbrosusSDK({ apiEndpoint});
   }
 

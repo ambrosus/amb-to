@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
-import Asset from '../Asset';
 import {AssetService, StorageService} from '../../services';
-import { Header, AssetRedirect } from '../../components';
+import { Header } from '../../components';
+import spinnerLogo from 'assets/icons/spinner.svg';
 
 import './Home.scss';
 
-import amblogo from 'assets/images/amb-logo.png';
-import spinnerLogo from 'assets/icons/spinner.svg';
-
-class Search extends Component<any, any> {
-  public ambrosus: AssetService;
-  public storage: StorageService;
+export default class Search extends React.Component<any, any> {
+  public ambrosus: AssetService = new AssetService();
+  public storage: StorageService = new StorageService();
 
   constructor(props: any) {
     super(props);
-    this.ambrosus = new AssetService();
-    this.storage = new StorageService();
     this.state = {
       search: '',
       errorNoAsset: false,
@@ -33,7 +27,7 @@ class Search extends Component<any, any> {
   }
 
   public loadHistory() {
-    const history = this.storage.get('history)');
+    const history = this.storage.get('history');
     this.setState({
       history: history ? history : [],
     });
@@ -66,11 +60,6 @@ class Search extends Component<any, any> {
     try {
       const asset = await this.ambrosus.getAsset(assetId);
       if (asset) {
-        const history = this.state.history;
-        if (!history.includes(assetId)) {
-          history.push(assetId);
-          this.storage.set('history', history);
-        }
         this.props.history.push(`/${assetId}`);
       } else {
         this.setState({
@@ -100,7 +89,7 @@ class Search extends Component<any, any> {
 
     const historyDivs = history.map((item: any) => {
       return (
-        <Link className='history__item' to={`/${item.id}`}>
+        <Link className='history__item' key={item.id} to={`/${item.id}`}>
           <div>{item.title}</div>
           <div className='history__item__div'>
             <small className='history__item__small'>{item.id}</small>
@@ -128,7 +117,7 @@ class Search extends Component<any, any> {
               </div>
             </div>
 
-            {history ?
+            {history &&
               <div>
                 <div className='page history_page'>
                   <h3 className='title'>Previously viewed</h3>
@@ -139,7 +128,7 @@ class Search extends Component<any, any> {
                     <button className='btn' onClick={this.clearHistory.bind(this)}>Clear Search History</button>
                   </div>
                 </div>
-              </div> : ''
+              </div>
             }
           </div>
         </div>
@@ -147,5 +136,3 @@ class Search extends Component<any, any> {
     );
   }
 }
-
-export default Search;

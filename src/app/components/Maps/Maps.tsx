@@ -1,24 +1,11 @@
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-import config from '../../config';
+import React from 'react';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
-import './style.scss';
-
-class Maps extends Component<any, any> {
-
-  public render() {
-    return (
-      <div className='maps' style={{height: this.props.height, width: this.props.width}} >
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: config.MAPS_KEY }}
-        defaultCenter={{lat: this.props.lat, lng: this.props.lng}}
-        defaultZoom={10}
-      >
-      {/* {places} */}
-      </GoogleMapReact>
-    </div>
-    );
-  }
-}
-
-export default Maps;
+export default (withGoogleMap((props: any) =>
+  <GoogleMap
+  defaultZoom={10}
+    defaultCenter={{ lat: props.lat, lng: props.lng }}
+  >
+    <Marker position={{ lat: props.lat, lng: props.lng }} />
+  </GoogleMap>
+));

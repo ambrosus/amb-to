@@ -1,6 +1,7 @@
+import config from '../config';
 
 export default class StorageService {
-  private namespace = 'amb.to_';
+  private namespace = config.NAMESPACE;
   private storage: any = localStorage;
 
   // localStorage wrapper

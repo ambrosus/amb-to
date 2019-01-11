@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Map from '../../../components/Maps';
 import Event from '../Event';
 
 import './Timeline.scss';
-import pinLogo from '/assets/images/pin.svg';
+
 // tslint:disable-next-line:no-var-requires
 const styles = require('assets/data/styles.json');
 
-class Timeline extends Component<any, any> {
+export default class Timeline extends Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -27,23 +24,10 @@ class Timeline extends Component<any, any> {
     };
   }
 
-  public eventTypeToStyle(value: any, args?: any): any {
-    if (styles[value] === undefined) {
-      return styles['harvested'];
-    }
-    return styles[value];
-  }
-
   public render() {
-
     const events = this.props.events;
     const assetId = this.props.assetId;
-
-    const eventDivs = events.map((event: any, i: number) => {
-      return (
-        <Event event={event} assetId={assetId} index={i} key={i} />
-      );
-    });
+    const eventDivs = events.map((event: any, i: number) => <Event event={event} assetId={assetId} index={i} key={i} />);
 
     return (
       <div className='item__events '>
@@ -53,5 +37,3 @@ class Timeline extends Component<any, any> {
     );
   }
 }
-
-export default Timeline;

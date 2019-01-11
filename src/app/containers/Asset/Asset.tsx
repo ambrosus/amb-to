@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Event from './Event';
 import Info from './Info';
 import { AssetHeader } from '../../components';
+import { StorageService } from '../../services';
 
 import './Asset.scss';
 
-class Asset extends Component<any, any> {
+export default class Asset extends Component<any, any> {
+  public storage: StorageService = new StorageService();
+
   constructor(props: any) {
     super(props);
   }
@@ -20,19 +20,26 @@ class Asset extends Component<any, any> {
     }
   }
 
-  public getImages() {
-    try {
-      return this.props.data.info.images;
-    } catch (error) {
-      return {};
+  public saveHistory(assetId: string, asset: any) {
+    const title = asset.info.name;
+    const history = { title, id: assetId };
+    const tempHistory: any = this.storage.get('history');
+    if (tempHistory && tempHistory.length > 0) {
+      if (tempHistory.filter((e: any) => e.id === assetId).length === 0) {
+        tempHistory.push(history);
+        this.storage.set('history', tempHistory);
+      }
+    } else {
+      this.storage.set('history', [history]);
     }
   }
 
   public render() {
-    const asset = this.props.asset;
+    const assetId = this.props.assetId;
     const assetDetails = this.props.assetDetails;
-    const assetId = asset.assetId;
     const style = this.getSyle();
+
+    this.saveHistory(assetId, assetDetails);
 
     return (
       <div>
@@ -44,5 +51,3 @@ class Asset extends Component<any, any> {
     );
   }
 }
-
-export default Asset;

@@ -5,7 +5,7 @@ import Preloader from '../Preloader/Preloader';
 
 export default function (ComposedComponent: any) {
     class AssetRedirect extends Component<any, any> {
-        public ambrosus: AssetService;
+        public ambrosus: AssetService = new AssetService();
 
         public static contextTypes = {
             router: PropTypes.object,
@@ -13,10 +13,7 @@ export default function (ComposedComponent: any) {
 
         constructor(props: any) {
             super(props);
-            this.ambrosus = new AssetService();
-            this.state = {
-                data: null,
-            };
+            this.state = {};
         }
 
         public componentWillMount() {
@@ -47,19 +44,20 @@ export default function (ComposedComponent: any) {
 
         public async getAssetAndRedirect(assetId: any) {
             try {
-                const [asset, events] = await Promise.all([this.ambrosus.getAsset(assetId), this.ambrosus.getEvents(assetId)]);
+                const events = await this.ambrosus.getEvents(assetId);
                 const parseEvents = await this.ambrosus.parseEvents(events.data);
                 this.setState({
-                    asset: asset.data,
+                    assetId,
                     assetDetails: parseEvents,
                 });
             } catch (error) {
                 console.log(error);
+                this.context.router.history.push('/');
             }
         }
 
         public render() {
-            if (this.state.asset && this.state.assetDetails) {
+            if (this.state.assetId && this.state.assetDetails) {
                 return <ComposedComponent {...this.state} {...this.props} />;
             }
 
