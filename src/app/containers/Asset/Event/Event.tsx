@@ -100,9 +100,11 @@ export default class Event extends Component<any, any> {
               <p className='item__event__more-details__cell '>{event.author}</p>
             </div>
             <div className='item__event__more-details__row '>
-              <Link className='item__event__more-details__button ' to={`/${assetId}/events/${event.eventId}`}>
-                VIEW EVENT DETAILS...
-              </Link>
+              <Link className='item__event__more-details__button '
+                to={{
+                  pathname: `/${assetId}/events/${event.eventId}`,
+                  state: { assetId, event, eventId: event.eventId },
+              }}>VIEW EVENT DETAILS...</Link>
             </div>
           </div>
         </div>

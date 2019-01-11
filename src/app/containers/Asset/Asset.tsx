@@ -36,16 +36,16 @@ export default class Asset extends Component<any, any> {
 
   public render() {
     const assetId = this.props.assetId;
-    const assetDetails = this.props.assetDetails;
+    const asset = this.props.asset;
     const style = this.getSyle();
 
-    this.saveHistory(assetId, assetDetails);
+    this.saveHistory(assetId, asset);
 
     return (
       <div>
-        <AssetHeader asset={assetDetails} assetId={assetId} />
+        <AssetHeader asset={asset} assetId={assetId} />
         <div className='Asset' style={style}>
-          <Info asset={assetDetails} assetId={assetId} />
+          <Info asset={asset} assetId={assetId} />
         </div>
       </div>
     );

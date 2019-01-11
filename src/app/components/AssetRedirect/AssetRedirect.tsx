@@ -17,19 +17,16 @@ export default function (ComposedComponent: any) {
         }
 
         public componentWillMount() {
-            if (this.props.asset && this.props.assetDetails) {
-                this.setState({
-                    asset: this.props.asset,
-                    assetDetails: this.props.assetDetails,
-                });
-            } else {
-                const assetId = this.props.match.params.assetId;
-                if (!assetId) {
-                    this.context.router.history.push('/');
-                } else {
-                    this.getAssetAndRedirect(assetId);
-                }
+            const asset = this.props.location.state && this.props.location.state.asset ? this.props.location.state.asset : null;
+            const assetId = this.props.match.params.assetId;
+
+            if (asset) {
+                this.setState({ asset, assetId });
+            } else if (!assetId) {
+                this.context.router.history.push('/');
+                return;
             }
+            this.getAssetAndRedirect(assetId);
         }
 
         public componentWillReceiveProps(nextProps: any) {
@@ -45,19 +42,16 @@ export default function (ComposedComponent: any) {
         public async getAssetAndRedirect(assetId: any) {
             try {
                 const events = await this.ambrosus.getEvents(assetId);
-                const parseEvents = await this.ambrosus.parseEvents(events.data);
-                this.setState({
-                    assetId,
-                    assetDetails: parseEvents,
-                });
+                const asset = await this.ambrosus.parseEvents(events.data);
+                this.setState({ assetId, asset });
             } catch (error) {
-                console.log(error);
                 this.context.router.history.push('/');
+                return;
             }
         }
 
         public render() {
-            if (this.state.assetId && this.state.assetDetails) {
+            if (this.state.assetId && this.state.asset) {
                 return <ComposedComponent {...this.state} {...this.props} />;
             }
 

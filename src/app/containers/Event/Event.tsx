@@ -29,15 +29,16 @@ export default class Event extends React.Component<any, any> {
   public componentWillMount() {
     const eventId = this.props.match.params.eventId;
     const assetId = this.props.match.params.assetId;
+    const event = this.props.location.state && this.props.location.state.event ? this.props.location.state.event : null;
 
     if (!assetId || !eventId) {
       this.context.router.history.push('/');
     } else {
-      if (this.props.event) {
+      if (event) {
         this.setState({
           assetId,
           eventId,
-          event: this.props.event,
+          event,
         });
       } else {
         this.loadEvent(eventId, assetId);

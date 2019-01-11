@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
-import {AssetService, StorageService} from '../../services';
+import { AssetService, StorageService } from '../../services';
 import { Header } from '../../components';
 import spinnerLogo from 'assets/icons/spinner.svg';
+import { Redirect } from 'react-router';
 
 import './Home.scss';
 
@@ -15,6 +16,7 @@ export default class Search extends React.Component<any, any> {
     super(props);
     this.state = {
       search: '',
+      foundAsset: false,
       errorNoAsset: false,
       errorSearchEmpty: false,
       spinner: false,
@@ -58,15 +60,21 @@ export default class Search extends React.Component<any, any> {
 
   public async getAssetAndRedirect(assetId: any) {
     try {
-      const asset = await this.ambrosus.getAsset(assetId);
-      if (asset) {
-        this.props.history.push(`/${assetId}`);
-      } else {
+      const events = await this.ambrosus.getEvents(assetId);
+      const asset = await this.ambrosus.parseEvents(events.data);
+      if (events && asset) {
         this.setState({
-          errorNoAsset: true,
-          spinner: false,
+          asset,
+          assetId,
+          foundAsset: true,
         });
+        return;
       }
+
+      this.setState({
+        errorNoAsset: true,
+        spinner: false,
+      });
     } catch (error) {
       this.setState({
         errorNoAsset: true,
@@ -98,6 +106,13 @@ export default class Search extends React.Component<any, any> {
       );
     });
 
+    if (this.state.foundAsset) {
+      return <Redirect to={{
+        pathname: `/${this.state.assetId}`,
+        state: { asset: this.state.asset },
+      }} />;
+    }
+
     return (
       <div>
         <Header />
@@ -109,7 +124,7 @@ export default class Search extends React.Component<any, any> {
                 <input type='text' placeholder='assetId' onChange={(e) => this.updateInputValue(e)} />
                 <button className='btn' onClick={() => this.onSearch()}>Search</button>
               </div>
-              {spinner && <ReactSVG className='spinner' src={spinnerLogo} /> }
+              {spinner && <ReactSVG className='spinner' src={spinnerLogo} />}
 
               <div className='errors'>
                 {errorNoAsset && <p>No asset with that assetId.</p>}
