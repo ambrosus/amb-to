@@ -14,8 +14,20 @@ export default class Info extends Component<any, any> {
   }
 
   public getStyles(key: string) {
+    const fStyles = {};
     try {
-      return this.props.asset.branding[key] || {};
+      let styles = this.props.asset.branding[key] || {};
+      styles = Object.keys(styles).map((item: any) => {
+        let tk = item;
+        if (item.indexOf('-') !== -1) {
+          const firstPart = item.split('-')[0];
+          const lastPart = item.split('-')[1];
+          tk = firstPart + lastPart.charAt(0).toUpperCase() + lastPart.substring(1);
+        }
+        fStyles[tk] = styles[item];
+        return;
+      });
+      return fStyles;
     } catch (error) {
       return {};
     }
@@ -42,7 +54,7 @@ export default class Info extends Component<any, any> {
             <div className='item__container'>
 
               <div className='item__hero'>
-                <div className='item__hero__image-wrapper' style={{ 'backgroundImage': selectedImage ? `url('${selectedImage}')` : `url('${asset.info.images.default.url})` }}>
+                <div className='item__hero__image-wrapper' style={{ 'backgroundImage': selectedImage ? `url(${selectedImage})` : `url(${asset.info.images.default.url})` }}>
                   <h1 className='item__hero__title'>{asset.info.name}</h1>
                 </div>
               </div>
@@ -53,9 +65,9 @@ export default class Info extends Component<any, any> {
                     <div style={{ paddingTop: '30px' }}>
                       <div className='item__photo-title' style={this.getStyles('components_titles')}>Additional Images</div>
                       <div className='item__photo-container'>
-                        {Object.keys(asset.info.images).map((image) => {
+                        {Object.keys(asset.info.images).map((image, index) => {
                           return (
-                            <div onClick={() => { this.switchImage(asset.info.images[image].url); }} className='item__photo' style={{ 'backgroundImage': `url(${asset.info.images[image].url})` }}>
+                            <div key={index} onClick={() => { this.switchImage(asset.info.images[image].url); }} className='item__photo' style={{ 'minHeight': '100px', 'backgroundImage': `url(${asset.info.images[image].url})` }}>
                             </div>
                           );
                         })}

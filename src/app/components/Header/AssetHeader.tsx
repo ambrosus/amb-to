@@ -23,7 +23,7 @@ export default class Header extends Component<any, any> {
 
   public getNavbarStyle() {
     try {
-      return this.state.asset.branding.nav || {};
+      return this.state.asset.branding.nav;
     } catch (error) {
       return {};
     }
@@ -31,15 +31,15 @@ export default class Header extends Component<any, any> {
 
   public getLogoStyle() {
     try {
-      return this.state.asset.branding.logo || {};
+      return this.state.asset.branding.logo;
     } catch (error) {
-      return {};
+      return null;
     }
   }
 
   public getNavbarLogo() {
     try {
-      return this.state.asset.branding.logoUrl || {};
+      return this.state.asset.branding.logoUrl;
     } catch (error) {
       return null;
     }
@@ -49,7 +49,7 @@ export default class Header extends Component<any, any> {
     const asset = this.state.asset;
     const assetId = this.state.assetId;
     const revealMenu = this.state.revealMenu;
-    const logo = this.getNavbarLogo() || iconLogo;
+    const logo = this.getNavbarLogo() ? this.getNavbarLogo() : iconLogo;
     const navColor = asset ? this.state.asset.branding['color-header'] : '#c0cccc';
 
     return (
