@@ -59,7 +59,7 @@ export default class Event extends Component<any, any> {
                 </h4>
               </div>
               <div className='item__event__single__container '>
-                <p className='item__event__single__time '>{ timeSince(event.timestamp * 1000)} ago</p>
+                <p className='item__event__single__time '>{timeSince(event.timestamp * 1000)} ago</p>
 
                 {event.location &&
                   <div className='item__event__single__place-container'>
@@ -85,7 +85,7 @@ export default class Event extends Component<any, any> {
                 mapElement={<div style={{ height: `100%` }} />}
                 lat={event.location.location.geometry.coordinates[0]}
                 lng={event.location.location.geometry.coordinates[1]} />
-              }
+            }
 
             <div className='item__event__more-details__row '>
               <h5 className='item__event__more-details__cell--title '>AMB-id</h5>
@@ -104,7 +104,7 @@ export default class Event extends Component<any, any> {
                 to={{
                   pathname: `/${assetId}/events/${event.eventId}`,
                   state: { assetId, event, eventId: event.eventId },
-              }}>VIEW EVENT DETAILS...</Link>
+                }}>VIEW EVENT DETAILS...</Link>
             </div>
           </div>
         </div>
