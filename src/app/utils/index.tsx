@@ -5,6 +5,7 @@ import images from './assetDetails';
 import lazyLoad from './lazyLoad';
 import { loopExclude, loopInclude } from './loopCheck';
 import generateLink from './generateLink';
+import getStyles from './getStyles';
 
 export {
   toggleMenu,
@@ -16,5 +17,6 @@ export {
   lazyLoad,
   loopExclude,
   loopInclude,
-  generateLink
+  generateLink,
+  getStyles
 };
