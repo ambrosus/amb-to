@@ -2,7 +2,7 @@ import config from '../config';
 
 declare let AmbrosusSDK: any;
 
-export default class AssetService {
+class AssetService {
   public ambrosus: any;
 
   constructor() {
@@ -34,4 +34,17 @@ export default class AssetService {
         });
     });
   }
+
+  public verifyRoute(assetId: string) {
+    return new Promise((resolve, reject) => {
+      this.getAsset(assetId).then((asset: any) => {
+        resolve(asset);
+      }).catch((err: any) => {
+        reject(err);
+      });
+    });
+  }
 }
+
+const assetService = new AssetService();
+export default assetService;

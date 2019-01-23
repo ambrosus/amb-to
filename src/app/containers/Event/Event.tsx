@@ -12,7 +12,6 @@ import './Event.scss';
 const styles: any = assetStyles;
 
 export default class Event extends React.Component<any, any> {
-  public ambrosus: any = new AssetService();
 
   public static contextTypes = {
     router: PropTypes.object,
@@ -60,8 +59,8 @@ export default class Event extends React.Component<any, any> {
 
   public async loadEvent(eventId: string, assetId: string) {
     try {
-      const events = await this.ambrosus.getEvents(assetId);
-      const parseEvents = await this.ambrosus.parseEvents(events.data);
+      const events = await AssetService.getEvents(assetId);
+      const parseEvents = await AssetService.parseEvents(events.data);
       const event = parseEvents.events.filter((e: any) => e && e.eventId === eventId)[0];
 
       if (!event) {

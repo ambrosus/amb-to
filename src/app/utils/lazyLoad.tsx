@@ -1,9 +1,5 @@
 import Loadable from 'react-loadable';
-import React, {
-  ComponentClass,
-  StatelessComponent,
-  ComponentType
-} from 'react';
+import React from 'react';
 
 const loading = () => {
   return <p>Loading</p>;

@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
 import Info from './Info';
-import { StorageService } from '../../services';
-
+import { StorageService, AssetService } from '../../services';
 import './Asset.scss';
+import { History } from 'history';
+import { Preloader } from '../../components';
 
-export default class Asset extends Component<any, any> {
+interface AssetProps {
+  history: History;
+  assetId: string;
+}
 
-  constructor(props: any) {
+interface AssetStates {
+  asset: any;
+}
+
+export default class Asset extends Component<AssetProps, AssetStates> {
+
+  constructor(props: AssetProps) {
     super(props);
+    this.state = {
+      asset: null,
+    };
   }
 
-  public getSyle() {
+  public async componentDidMount() {
+    const { assetId, history } = this.props;
     try {
-      return this.props.data.branding['content'] || {};
+      const events = await AssetService.getEvents(assetId);
+      if (events.data.resultCount) {
+        const asset = await AssetService.parseEvents(events.data);
+        this.saveHistory(assetId, asset);
+        this.setState({ asset });
+        return;
+      }
+      history.push('/');
     } catch (error) {
-      return {};
+      history.push('/');
     }
   }
 
@@ -33,18 +54,17 @@ export default class Asset extends Component<any, any> {
   }
 
   public render() {
-    const assetId = this.props.assetId;
-    const asset = this.props.asset;
-    const style = this.getSyle();
-
-    this.saveHistory(assetId, asset);
-
-    return (
-      <div>
-        <div className='Asset' style={style}>
-          <Info asset={asset} assetId={assetId} />
+    const { assetId } = this.props;
+    const { asset } = this.state;
+    if (asset) {
+      return (
+        <div>
+          <div className='Asset'>
+            <Info asset={asset} assetId={assetId} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <Preloader />;
   }
 }
