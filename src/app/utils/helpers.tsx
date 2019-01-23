@@ -1,22 +1,19 @@
 const toggleMenu = (event: any) => {
-    event.preventDefault();
-    const parent = event.currentTarget.parentElement;
-    parent.classList.toggle('menu--active');
+  event.preventDefault();
+  const parent = event.currentTarget.parentElement;
+  parent.classList.toggle('menu--active');
 };
 
 const valueJSON = (value: any) => {
-    return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
+  return value.replace(/["{}\[\]]/g, '').replace(/^\s+/m, '');
 };
 
 const isObject = (value: any) => {
-    if ((typeof value === 'object') && (value !== null)) {
-        return true;
-    }
-    return false;
+  return value !== null && typeof value === 'object';
 };
 
 export {
-    toggleMenu,
-    valueJSON,
-    isObject
+  toggleMenu,
+  valueJSON,
+  isObject
 };

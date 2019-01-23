@@ -1,8 +1,10 @@
 import { toggleMenu, valueJSON, isObject } from './helpers';
 import timeSince from './timeSince';
 import formatDate from './formatDate';
-import images from './loadImages';
+import images from './assetDetails';
 import lazyLoad from './lazyLoad';
+import { loopExclude, loopInclude } from './loopCheck';
+import generateLink from './generateLink';
 
 export {
   toggleMenu,
@@ -11,5 +13,8 @@ export {
   timeSince,
   formatDate,
   images,
-  lazyLoad
+  lazyLoad,
+  loopExclude,
+  loopInclude,
+  generateLink
 };
