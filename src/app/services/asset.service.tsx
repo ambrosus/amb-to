@@ -7,7 +7,7 @@ export default class AssetService {
 
   constructor() {
     const apiEndpoint = config.API_ENDPOINT;
-    this.ambrosus = new AmbrosusSDK({ apiEndpoint});
+    this.ambrosus = new AmbrosusSDK({ apiEndpoint });
   }
 
   public getAsset(assetId: string) {
@@ -19,11 +19,11 @@ export default class AssetService {
   }
 
   public getEvents(assetId: string) {
-    return this.ambrosus.getEvents({assetId});
+    return this.ambrosus.getEvents({ assetId });
   }
 
   public parseEvents(eventsArray: any) {
-    return new Promise((resolve, reject) => {
+    return new Promise<{ events: any[]; identifiers: any; info: any }>((resolve, reject) => {
       this.ambrosus
         .parseEvents(eventsArray)
         .then((response: any) => {

@@ -5,7 +5,6 @@ import Preloader from '../../components/Preloader/Preloader';
 import Maps from '../../components/Maps';
 import { AssetService } from '../../services';
 import { timeSince, isObject, valueJSON } from '../../utils';
-import { AssetHeader } from '../../components';
 import assetStyles from '../../../assets/data/styles.json';
 
 import './Event.scss';
@@ -112,8 +111,6 @@ export default class Event extends React.Component<any, any> {
 
     return (
       <div>
-        <AssetHeader asset={null} assetId={assetId} />
-
         <div className='event' style={this.getStyles('content')}>
           <div className='wrapper'>
             <Link className='button' to={`/${assetId}`}>Back to Asset</Link>

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import {AssetRedirect, Footer} from './components';
-import Asset from './containers/Asset';
-import Event from './containers/Event';
-import Home from './containers/Home';
-
+import { AssetRedirect, Footer } from './components';
+// import Asset from './containers/Asset';
+// import Event from './containers/Event';
+// import Home from './containers/Home';
+import { lazyLoad } from './utils';
+const Asset = lazyLoad(() => import('./containers/Asset'));
+const Event = lazyLoad(() => import('./containers/Event'));
+const Home: any = lazyLoad(() => import('./containers/Home'));
 import './App.scss';
 
 class App extends React.Component<any, any> {
@@ -26,7 +29,7 @@ class App extends React.Component<any, any> {
             {/* all app routes */}
             <Route exact path='/:assetId/events/:eventId' component={Event} />
             <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
-            <Route path='*' component={Home} />
+            <Route path='*' render={props => (<Home history={props.history} />)} />
           </Switch>
         </main>
 

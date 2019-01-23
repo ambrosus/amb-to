@@ -1,6 +1,6 @@
 import config from '../config';
 
-export default class StorageService {
+class StorageService {
   private namespace = config.NAMESPACE;
   private storage: any = localStorage;
 
@@ -17,7 +17,7 @@ export default class StorageService {
     }
   }
 
-  public get(key: string): string {
+  public get(key: string) {
     try {
       return JSON.parse(this.storage.getItem(`${this.namespace}${key}`));
     } catch (err) {
@@ -33,3 +33,6 @@ export default class StorageService {
     this.storage.clear();
   }
 }
+
+const storageService = new StorageService();
+export default storageService;
