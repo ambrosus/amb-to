@@ -42,7 +42,7 @@ export default class AssetSearch extends Component<AssetProps, AssetStates> {
       const events = await AssetService.getEvents(assetId);
       const asset = await AssetService.parseEvents(events.data);
       if (events.data.resultCount && asset.events.length) {
-        history.push(`/${assetId}`, { asset });
+        history.push(`/${assetId}`);
         return;
       }
       this.setState({ error: 'No asset with that assetId.', spinner: false });

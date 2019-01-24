@@ -1,4 +1,5 @@
 import React, { SFC } from 'react';
+import './AssetImage.scss';
 
 interface AssetProps {
   url: string;
@@ -6,9 +7,9 @@ interface AssetProps {
 }
 const AssetImage: SFC<AssetProps> = ({ url, name }) => {
   return (
-    <div className='item__hero'>
-      <div className='item__hero__image-wrapper' style={{ 'backgroundImage': `url(${url})` }}>
-        <h1 className='item__hero__title'>{name}</h1>
+    <div className='AssetImage'>
+      <div className='image-wrapper' style={{ 'backgroundImage': `url(${url})` }}>
+        <h1 className='image-title'>{name}</h1>
       </div>
     </div>
   );

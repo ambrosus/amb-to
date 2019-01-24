@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
-import { Footer } from './components';
 import { lazyLoad } from './utils';
 const Asset: any = lazyLoad(() => import('./containers/Asset'));
 const Event: any = lazyLoad(() => import('./containers/Event'));
@@ -33,7 +32,6 @@ class App extends React.Component<any, any> {
           </Switch>
         </main>
         {/* render footer */}
-        <Footer />
       </div>
     );
   }

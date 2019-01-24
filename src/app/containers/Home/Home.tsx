@@ -5,6 +5,7 @@ import './Home.scss';
 import AssetSearch from './components/AssetSearch';
 import SearchHistory from './components/SearchHistory';
 import HomeHeader from './components/HomeHeader';
+import { Footer } from '../../components';
 
 interface HomeProps {
   history: History;
@@ -18,6 +19,7 @@ export default class Search extends React.Component<HomeProps, any> {
         <HomeHeader />
         <AssetSearch history={history} />
         <SearchHistory />
+        <Footer />
       </div>
     );
   }

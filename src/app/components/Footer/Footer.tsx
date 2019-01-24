@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 
 import SVG from 'react-svg';
 
@@ -56,7 +56,24 @@ const socialsLinks = [
   },
 ];
 
-const Footer = () => {
+const Footer: SFC<{ asset?: any }> = ({ asset }) => {
+
+  const getFooterStyle = () => {
+    try {
+      const style = asset.branding.footer;
+      if (style) {
+        return {
+          color: style.color,
+          borderTop: style['border-top'],
+          background: style.background,
+        };
+      }
+      return {};
+    } catch (error) {
+      return {};
+    }
+  };
+
   const socials = socialsLinks.map((social, i) => {
     return (
       <li className='socials__list__link' key={i}>
@@ -68,7 +85,7 @@ const Footer = () => {
   });
 
   return (
-    <div className='footer'>
+    <div style={getFooterStyle()} className='footer'>
       <div className='wrapper'>
         <div className='copyright'>
           &copy; {new Date().getFullYear()} Ambrosus Network. All rights

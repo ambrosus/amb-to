@@ -12,6 +12,11 @@ import recall from 'assets/images/recall.svg';
 import processImage from 'assets/images/process.svg';
 
 const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
+  'default': {
+    'iconUrl': pin,
+    'backgroundColor': '#b86c30',
+    'fontColor': '#fff',
+  },
   'harvested': {
     'iconUrl': tractor,
     'backgroundColor': '#b86c30',

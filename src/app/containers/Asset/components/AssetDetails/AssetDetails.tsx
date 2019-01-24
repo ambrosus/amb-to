@@ -13,8 +13,8 @@ interface AssetProps {
 const AssetDetails: SFC<AssetProps> = ({ asset }) => {
   return (
     <div className='item__details' style={getStyles('components', asset)}>
-      <h2 className='item__table__title' style={getStyles('components_titles', asset)}>Asset Details</h2>
-      <div className='item__table'>
+      <h2 className='table-title' style={getStyles('components_titles', asset)}>Asset Details</h2>
+      <div className='table'>
         {loopExclude(asset.info, ['type', 'images', 'action', 'author', 'eventId'])
           .map(([key, value]) => {
             return (

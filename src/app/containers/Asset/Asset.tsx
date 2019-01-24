@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import Info from './Info';
 import { StorageService, AssetService } from '../../services';
 import './Asset.scss';
 import { History } from 'history';
-import { Preloader } from '../../components';
+import { Preloader, Footer, Header } from '../../components';
+import { getStyles } from '../../utils';
+import AssetImage from './components/AssetImage';
+import AdditionalImages from './components/AdditionalImages';
+import AssetIdentifiers from './components/AssetIdentifiers';
+import AssetDetails from './components/AssetDetails';
+import Timeline from './components/Timeline';
 
 interface AssetProps {
   history: History;
@@ -12,6 +17,7 @@ interface AssetProps {
 
 interface AssetStates {
   asset: any;
+  selectedImage: string | null;
 }
 
 export default class Asset extends Component<AssetProps, AssetStates> {
@@ -20,6 +26,7 @@ export default class Asset extends Component<AssetProps, AssetStates> {
     super(props);
     this.state = {
       asset: null,
+      selectedImage: null,
     };
   }
 
@@ -53,16 +60,32 @@ export default class Asset extends Component<AssetProps, AssetStates> {
     }
   }
 
+  public onImageSelect = (selectedImage: string) => {
+    this.setState({ selectedImage });
+  }
+
   public render() {
     const { assetId } = this.props;
-    const { asset } = this.state;
+    const { asset, selectedImage } = this.state;
     if (asset) {
       return (
-        <div>
-          <div className='Asset'>
-            <Info asset={asset} assetId={assetId} />
-          </div>
-        </div>
+        <div className='Info'>
+          <Header asset={asset} assetId={assetId} />
+          <div className='item' style={getStyles('content', asset)}>
+            <div className='wrapper'>
+              <div className='item__container'>
+                <AssetImage url={selectedImage ? selectedImage : asset.info.images.default.url} name={asset.info.name} />
+                <AdditionalImages images={asset.info.images} asset={asset} onSelect={this.onImageSelect} />
+                <AssetIdentifiers asset={asset} />
+                <AssetDetails asset={asset} />
+              </div >
+              <div className='item__container'>
+                <Timeline events={asset.events} assetId={assetId} />
+              </div >
+            </div >
+          </div >
+          <Footer asset={asset} />
+        </div >
       );
     }
     return <Preloader />;

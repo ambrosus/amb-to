@@ -1,7 +1,7 @@
 import { toggleMenu, valueJSON, isObject } from './helpers';
 import timeSince from './timeSince';
 import formatDate from './formatDate';
-import images from './assetDetails';
+import assetData from './assetDetails';
 import lazyLoad from './lazyLoad';
 import { loopExclude, loopInclude } from './loopCheck';
 import generateLink from './generateLink';
@@ -13,7 +13,7 @@ export {
   isObject,
   timeSince,
   formatDate,
-  images,
+  assetData,
   lazyLoad,
   loopExclude,
   loopInclude,
