@@ -13,6 +13,14 @@
     flex: 1 1 auto;
   }
 
+  > .Main {
+    > div {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+    }
+  }
+
   // > .Main {
   //   padding-top: 80px;
   // }
