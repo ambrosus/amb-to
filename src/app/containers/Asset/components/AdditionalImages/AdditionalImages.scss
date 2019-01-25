@@ -1,0 +1,30 @@
+.AdditionalImages {
+  padding-top: 30px;
+
+  &-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: -15px 20px 0;
+    padding: 0 0 5px
+  }
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 8px 0;
+    max-width: 100%;
+  }
+
+  &-photo {
+    height: 100%;
+    margin: 0 3px 30px;
+    max-height: 80px;
+    max-width: 80px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    min-height: 100px;
+  }
+}

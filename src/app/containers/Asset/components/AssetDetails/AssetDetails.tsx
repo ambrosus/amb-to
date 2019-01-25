@@ -16,15 +16,11 @@ const AssetDetails: SFC<AssetProps> = ({ asset }) => {
       <h2 className='table-title' style={getStyles('components_titles', asset)}>Asset Details</h2>
       <div className='table'>
         {loopExclude(asset.info, ['type', 'images', 'action', 'author', 'eventId'])
-          .map(([key, value]) => {
-            return (
-              <React.Fragment key={key}>
-                {!isObject(value) && !Array.isArray(value) && (
-                  <TableRow title={key} value={isObject(value) ? valueJSON(JSON.stringify(value, null, 5)) : value} asset={asset} />
-                )}
-              </React.Fragment>
-            );
-          })}
+          .map(([key, value]) => (
+            !isObject(value) && !Array.isArray(value) && (
+              <TableRow title={key} value={value} asset={asset} />
+            ))
+          )}
       </div>
       <SubDetails asset={asset} />
       <CustomData asset={asset} />

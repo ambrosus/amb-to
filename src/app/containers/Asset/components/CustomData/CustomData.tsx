@@ -9,10 +9,10 @@ interface AssetProps {
 const CustomData: SFC<AssetProps> = ({ asset }) => {
   const assetCustomData = asset.customData ? asset.customData : [];
   return (
-    assetCustomData.map((row: any) => {
+    assetCustomData.map((row: any, index: number) => {
       return (
-        <div>
-          <hr className='item__table__separator ' />
+        <div key={index}>
+          <hr className='table-seperator ' />
           <h3 className='table-subtitle' style={getStyles('components_subtitles', asset)}>{row.title}</h3>
           <div className='table '>
             {row.values.map((custom: any) => {

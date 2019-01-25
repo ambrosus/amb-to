@@ -164,7 +164,7 @@ export default class Event extends React.Component<any, any> {
 
                     <div>
                       <div className='item__table'>
-                        <hr className='item__table__separator' />
+                        <hr className='table-seperator' />
                         {Object.entries(event).map(([key, value]) => {
                           if (['location', 'eventId', 'type', 'documents'].includes(key)) {
                             return;
@@ -196,7 +196,7 @@ export default class Event extends React.Component<any, any> {
                       if (isObject(value)) {
                         return (
                           <div>
-                            <hr className='item__table__separator' />
+                            <hr className='table-seperator' />
                             <h3 className='item__table__subtitle' style={this.getStyles('components_subtitles')}>{key}</h3>
 
                             <div className='item__table'>

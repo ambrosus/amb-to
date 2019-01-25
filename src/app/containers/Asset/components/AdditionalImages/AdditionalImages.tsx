@@ -14,21 +14,18 @@ const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect, asset }) => {
     onSelect(image);
   };
 
-  if (images) {
+  if (images && Object.keys(images).length > 1) {
     return (
-      <div>
-        {Object.keys(images).length > 1 &&
-          <div style={{ paddingTop: '30px' }}>
-            <div className='item__photo-title' style={getStyles('components_titles', asset)}>Additional Images</div>
-            <div className='item__photo-container'>
-              {Object.keys(images).map((image, index) => {
-                return (
-                  <div key={index} onClick={onChange(images[image].url)} className='item__photo' style={{ 'minHeight': '100px', 'backgroundImage': `url(${images[image].url})` }}>
-                  </div>
-                );
-              })}
+      <div className='AdditionalImages'>
+        <div className='AdditionalImages-title'
+          style={getStyles('components_titles', asset)}>Additional Images</div>
+        <div className='AdditionalImages-container'>
+          {Object.keys(images).map((image, index) => (
+            <div key={index} onClick={onChange(images[image].url)} className='AdditionalImages-photo' style={{ 'backgroundImage': `url(${images[image].url})` }}>
             </div>
-          </div>}
+          )
+          )}
+        </div>
       </div>
     );
   }

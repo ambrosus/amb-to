@@ -44,13 +44,10 @@ export default class Event extends Component<any, any> {
 
         <div className={this.state.expandEvent ? 'item__event__button--active' : 'item__event__button'}>
           <div onClick={this.expandEvent} className='item__event__single' style={{ 'backgroundColor': eventAsset.backgroundColor }}>
-            <div className='item__event__single__image'>
-              <img src={eventAsset.iconUrl} />
-            </div>
+            <div className='item__event__single__image'><img src={eventAsset.iconUrl} /></div>
             <div className='item__event__single__copy '>
               <div className='item__event__single__container '>
-                <h4 className='item__event__single__heading '>{event.name}
-                </h4>
+                <h4 className='item__event__single__heading '>{event.name}</h4>
               </div>
               <div className='item__event__single__container '>
                 <p className='item__event__single__time '>{timeSince(event.timestamp * 1000)} ago</p>
@@ -82,14 +79,12 @@ export default class Event extends Component<any, any> {
             <TableRow title='AMB-id' value={event.eventId} rowClass={['item__event__more-details__row']}
               cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 
-            <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)} rowClass={['item__event__more-details__row']}
-              cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
+            <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)} rowClass={['item__event__more-details__row']} cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 
-            <TableRow title='Created by' value={event.author} rowClass={['item__event__more-details__row']}
-              cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
+            <TableRow title='Created by' value={event.author} rowClass={['item__event__more-details__row']} cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 
             <div className='item__event__more-details__row '>
-              <Link className='item__event__more-details__button '
+              <Link className='item__event__more-details__button'
                 to={{
                   pathname: `/${assetId}/events/${event.eventId}`,
                 }}>VIEW EVENT DETAILS...</Link>
