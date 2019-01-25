@@ -62,6 +62,10 @@
     padding: 7px 0px;
     vertical-align: top;
 
+    a {
+      color: #3e55a6;
+    }
+
     &--json {
       white-space: pre-wrap;
       text-indent: 16px;
@@ -80,8 +84,12 @@
       font-weight: 500;
       line-height: 1.4;
       padding: 15px 15px 15px 0;
-      width: 40%;
+      width: 100%;
       text-transform: lowercase;
+
+      @include breakpoint-min(600) {
+        width: 40%;
+      }
 
       &::first-letter {
         text-transform: uppercase;

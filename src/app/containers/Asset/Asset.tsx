@@ -78,14 +78,14 @@ export default class Asset extends Component<AssetProps, AssetStates> {
                 <AdditionalImages images={asset.info.images} asset={asset} onSelect={this.onImageSelect} />
                 <AssetIdentifiers asset={asset} />
                 <AssetDetails asset={asset} />
-              </div >
+              </div>
               <div className='item__container'>
                 <Timeline events={asset.events} assetId={assetId} />
-              </div >
-            </div >
-          </div >
+              </div>
+            </div>
+          </div>
           <Footer asset={asset} />
-        </div >
+        </div>
       );
     }
     return <Preloader />;

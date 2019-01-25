@@ -7,29 +7,9 @@
     padding: 60px 20px 10px;
   }
 
-  &--more-info {
-    padding: 0 20px 10px;
-  }
-
-  &:last-child {
-    padding-bottom: 60px;
-  }
-
-  &__details {
-    background-color: $white;
-    border-radius: 8px;
-    margin-top: 30px;
-    padding: 15px 0 0;
-
-    &--more-info {
-      padding: 0;
-      margin-top: 30px;
-
-      &__map {
-        height: 220px;
-        width: 100%;
-      }
-    }
+  &-map {
+    height: 220px;
+    width: 100%;
   }
 }
 
@@ -346,14 +326,6 @@
 
 @media (min-width: 320px) {
   .item {
-    &__photo {
-      margin: 0 5px 30px;
-
-      &__container {
-        margin: 0 10px;
-      }
-    }
-
     &__event {
       &__button {
         &::after {
@@ -373,13 +345,6 @@
 
 @media (min-width: 440px) {
   .item {
-    &__photo {
-      margin: 0 5px 30px;
-
-      &__container {
-        margin: 0 10px;
-      }
-    }
 
     &__event {
       &__button {
@@ -419,14 +384,6 @@
 
 @media (min-width: 460px) {
   .item {
-    &__photo {
-      margin: 0 10px 30px;
-
-      &__container {
-        margin: 0 10px;
-      }
-    }
-
     &__event__button {
       &::after {
         right: 40px;
@@ -444,18 +401,6 @@
 
 @media (min-width: 600px) {
   .item {
-
-    &__photo {
-      max-height: 125px;
-      max-width: 125px;
-    }
-
-    &__details {
-      &--more-info {
-        margin-top: 40px;
-      }
-    }
-
     &__events &__event {
       &__single {
         padding: 15px 30px 10px;
@@ -480,15 +425,6 @@
       margin: 60px 20px;
       padding: 0;
       width: 50%;
-
-      &--more-info {
-        margin-top: 0;
-      }
-    }
-
-    &__photo {
-      max-height: 90px;
-      max-width: 90px;
     }
 
     &__events {
@@ -506,9 +442,5 @@
         }
       }
     }
-  }
-
-  .button-before {
-    margin: 120px 0 0 60px;
   }
 }
