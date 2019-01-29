@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import iconLogo from 'assets/images/amb-logo.png';
 import './Header.scss';
+import SVG from 'react-svg';
+import hamburger from 'assets/svg/hamburger_menu.svg';
 
 interface HeaderProps {
   asset: any;
@@ -20,15 +22,7 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
   public getNavbarStyle = () => {
     const { asset } = this.props;
     try {
-      const style = asset.branding.nav;
-      if (style) {
-        return {
-          borderBottom: style['border-bottom'],
-          color: style.color,
-          background: style.background,
-        };
-      }
-      return {};
+      return asset.branding.nav || {};
     } catch (error) {
       return {};
     }
@@ -68,9 +62,7 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
             </Link>
             <div className={`navigation--right-side ${revealMenu ? 'active' : ''}`}>
               <button onClick={this.toggleMenu} className='navigation__menu__icon' >
-                <span className='navigation__menu--icon1'></span>
-                <span className='navigation__menu--icon2'></span>
-                <span className='navigation__menu--icon3'></span>
+                <SVG wrapper='span' className='burger' src={hamburger} />
               </button>
             </div>
           </div >
