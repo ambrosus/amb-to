@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import {AssetRedirect, Footer} from './components';
-import Asset from './containers/Asset';
-import Event from './containers/Event';
-import Home from './containers/Home';
-
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { Footer } from './components';
+import { lazyLoad } from './utils';
+const Asset: any = lazyLoad(() => import('./containers/Asset'));
+const Event: any = lazyLoad(() => import('./containers/Event'));
+const Home: any = lazyLoad(() => import('./containers/Home'));
 import './App.scss';
 
 class App extends React.Component<any, any> {
@@ -24,12 +24,14 @@ class App extends React.Component<any, any> {
         <main className='Main'>
           <Switch>
             {/* all app routes */}
-            <Route exact path='/:assetId/events/:eventId' component={Event} />
-            <Route exact path='/:assetId' component={AssetRedirect(Asset)} />
-            <Route path='*' component={Home} />
+            <Route exact path='/:assetId/events/:eventId' render={props => <Event history={props.history}
+              assetId={props.match.params.assetId} eventId={props.match.params.eventId} />} />
+            <Route exact path='/:assetId' render={props => <Asset history={props.history}
+              assetId={props.match.params.assetId} />} />
+            <Route exact path='/' render={props => (<Home history={props.history} />)} />
+            <Redirect from='*' to='/' />
           </Switch>
         </main>
-
         {/* render footer */}
         <Footer />
       </div>

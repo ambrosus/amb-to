@@ -5,7 +5,6 @@ import Preloader from '../../components/Preloader/Preloader';
 import Maps from '../../components/Maps';
 import { AssetService } from '../../services';
 import { timeSince, isObject, valueJSON } from '../../utils';
-import { AssetHeader } from '../../components';
 import assetStyles from '../../../assets/data/styles.json';
 
 import './Event.scss';
@@ -13,7 +12,6 @@ import './Event.scss';
 const styles: any = assetStyles;
 
 export default class Event extends React.Component<any, any> {
-  public ambrosus: any = new AssetService();
 
   public static contextTypes = {
     router: PropTypes.object,
@@ -61,8 +59,8 @@ export default class Event extends React.Component<any, any> {
 
   public async loadEvent(eventId: string, assetId: string) {
     try {
-      const events = await this.ambrosus.getEvents(assetId);
-      const parseEvents = await this.ambrosus.parseEvents(events.data);
+      const events = await AssetService.getEvents(assetId);
+      const parseEvents = await AssetService.parseEvents(events.data);
       const event = parseEvents.events.filter((e: any) => e && e.eventId === eventId)[0];
 
       if (!event) {
@@ -112,8 +110,6 @@ export default class Event extends React.Component<any, any> {
 
     return (
       <div>
-        <AssetHeader asset={null} assetId={assetId} />
-
         <div className='event' style={this.getStyles('content')}>
           <div className='wrapper'>
             <Link className='button' to={`/${assetId}`}>Back to Asset</Link>

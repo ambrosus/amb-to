@@ -2,12 +2,12 @@ import config from '../config';
 
 declare let AmbrosusSDK: any;
 
-export default class AssetService {
+class AssetService {
   public ambrosus: any;
 
   constructor() {
     const apiEndpoint = config.API_ENDPOINT;
-    this.ambrosus = new AmbrosusSDK({ apiEndpoint});
+    this.ambrosus = new AmbrosusSDK({ apiEndpoint });
   }
 
   public getAsset(assetId: string) {
@@ -19,11 +19,11 @@ export default class AssetService {
   }
 
   public getEvents(assetId: string) {
-    return this.ambrosus.getEvents({assetId});
+    return this.ambrosus.getEvents({ assetId });
   }
 
   public parseEvents(eventsArray: any) {
-    return new Promise((resolve, reject) => {
+    return new Promise<{ events: any[]; identifiers: any; info: any }>((resolve, reject) => {
       this.ambrosus
         .parseEvents(eventsArray)
         .then((response: any) => {
@@ -34,4 +34,17 @@ export default class AssetService {
         });
     });
   }
+
+  public verifyRoute(assetId: string) {
+    return new Promise((resolve, reject) => {
+      this.getAsset(assetId).then((asset: any) => {
+        resolve(asset);
+      }).catch((err: any) => {
+        reject(err);
+      });
+    });
+  }
 }
+
+const assetService = new AssetService();
+export default assetService;

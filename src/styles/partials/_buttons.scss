@@ -1,4 +1,4 @@
-
+@import 'styles/utils';
 
 .button {
   background-color: $white;
@@ -18,10 +18,13 @@
     height: 8px;
     line-height: 2;
     padding-right: 10px;
-    width: 14px; }
+    width: 14px;
+  }
 
   &-before {
-    margin: 110px 0 0 20px; }}
+    margin: 110px 0 0 20px;
+  }
+}
 
 .btn {
   display: inline-block;
@@ -33,10 +36,11 @@
   border-radius: 4px;
   background-color: #3e55a6;
   color: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
   transition: box-shadow .3s;
-	white-space: nowrap;
+  white-space: nowrap;
 
-	&:hover {
-    box-shadow: 0 3px 5px rgba(0,0,0,.15); }}
-
+  &:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .15);
+  }
+}
