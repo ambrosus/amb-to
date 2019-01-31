@@ -51,32 +51,17 @@
       }
     }
 
-    &--icon1,
-    &--icon2,
-    &--icon3 {
-      background-color: currentColor;
-      display: block;
-      height: 2px;
-      margin: 6px 0;
-      transition: 0.4s;
-      width: 24px;
+    .burger {
+      svg {
+        fill: currentColor;
+        height: 27px;
+      }
     }
 
     &__links {
       display: none;
     }
 
-    .active &--icon1 {
-      transform: rotate(-45deg) translate(-6px, 5px);
-    }
-
-    .active &--icon2 {
-      opacity: 0;
-    }
-
-    .active &--icon3 {
-      transform: rotate(45deg) translate(-6px, -6px);
-    }
   }
 
   &__container {
@@ -132,6 +117,7 @@
       width: 310px;
     }
   }
+
 }
 
 @media (min-width: 1025px) {

@@ -60,15 +60,7 @@ const Footer: SFC<{ asset?: any }> = ({ asset }) => {
 
   const getFooterStyle = () => {
     try {
-      const style = asset.branding.footer;
-      if (style) {
-        return {
-          color: style.color,
-          borderTop: style['border-top'],
-          background: style.background,
-        };
-      }
-      return {};
+      return asset.branding.footer || {};
     } catch (error) {
       return {};
     }
