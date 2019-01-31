@@ -1,3 +1,5 @@
+@import "styles/utils";
+
 .AdditionalImages {
   padding-top: 30px;
 
@@ -25,6 +27,20 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    min-height: 100px;
+    margin: 0 5px 30px;
+
+    @include breakpoint-min(460) {
+      margin: 0 10px 30px;
+    }
+
+    @include breakpoint-min(600) {
+      max-height: 125px;
+      max-width: 125px;
+    }
+
+    @include breakpoint-min(1024) {
+      max-height: 90px;
+      max-width: 90px;
+    }
   }
 }

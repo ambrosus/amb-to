@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Maps from '../../../../components/Maps';
-import pinLogo from 'assets/images/pin.svg';
+import pinLogo from 'assets/svg/pin.svg';
 import { timeSince, formatDate, assetData } from '../../../../utils';
 
 import './Event.scss';
@@ -68,8 +68,7 @@ export default class Event extends Component<any, any> {
 
             {locationExists(event) &&
               <Maps
-                containerElement={<div className='item__details--more-info__map' />}
-                googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+                containerElement={<div className='item-map' />}
                 loadingElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 lat={event.location.location.geometry.coordinates[0]}
@@ -91,7 +90,7 @@ export default class Event extends Component<any, any> {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 import './AssetIdentifiers.scss';
-import { getStyles } from '../.././../../utils';
 import TableRow from '../../../../components/TableRow';
+import Item from '../../../../components/Item';
 
 interface AssetProps {
   asset: any;
@@ -22,8 +22,7 @@ const AssetIdentifiers: SFC<AssetProps> = ({ asset }) => {
 
   if (asset.identifiers.identifiers) {
     return (
-      <div className='item__details' style={getStyles('components', asset)}>
-        <h2 className='table-title' style={getStyles('components_titles', asset)}>Identifiers</h2>
+      <Item asset={asset} title='Identifiers'>
         <div className='table'>
           {Object.entries(asset.identifiers.identifiers).map(([key, value]) => {
             return (
@@ -31,7 +30,7 @@ const AssetIdentifiers: SFC<AssetProps> = ({ asset }) => {
             );
           })}
         </div>
-      </div>
+      </Item>
     );
   }
   return null;

@@ -1,15 +1,15 @@
-import dollar from 'assets/images/dollar.svg';
-import tractor from 'assets/images/tractor.svg';
-import pin from 'assets/images/pin.svg';
-import thermometer from 'assets/images/thermometer.svg';
-import barn from 'assets/images/barn.svg';
-import importExport from 'assets/images/import-export.svg';
-import drying from 'assets/images/drying.svg';
-import teaBagging from 'assets/images/tea-bagging.svg';
-import steaming from 'assets/images/steaming.svg';
-import withering from 'assets/images/withering.svg';
-import recall from 'assets/images/recall.svg';
-import processImage from 'assets/images/process.svg';
+import dollar from 'assets/svg/dollar.svg';
+import tractor from 'assets/svg/tractor.svg';
+import pin from 'assets/svg/pin.svg';
+import thermometer from 'assets/svg/thermometer.svg';
+import barn from 'assets/svg/barn.svg';
+import importExport from 'assets/svg/import-export.svg';
+import drying from 'assets/svg/drying.svg';
+import teaBagging from 'assets/svg/tea-bagging.svg';
+import steaming from 'assets/svg/steaming.svg';
+import withering from 'assets/svg/withering.svg';
+import recall from 'assets/svg/recall.svg';
+import processImage from 'assets/svg/process.svg';
 
 const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
   'default': {
