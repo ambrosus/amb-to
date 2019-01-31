@@ -1,0 +1,46 @@
+@import 'styles/utils';
+
+.Event {
+  padding-top: 100px;
+
+  .wrapper {
+    > h3 {
+      text-align: center;
+    }
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 60px;
+
+    @include breakpoint-min(1024) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    & .item__container {
+      margin: 0 20px;
+      width: 100%;
+    }
+  }
+}
+
+.event-details-json {
+  padding: 0 30px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: monospace;
+
+  &.table-cell {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: inherit;
+    padding: 0;
+  }
+}

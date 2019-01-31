@@ -1,0 +1,111 @@
+@import "styles/utils";
+
+.table {
+  padding: 15px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &-title {
+    border-bottom: 1px solid #e9eaf4;
+    color: $colorHeading;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    text-align: left;
+    text-transform: lowercase;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &-subtitle {
+    color: #858bb4;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 15px 20px;
+    text-align: left;
+    text-transform: lowercase;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    @include breakpoint-min(600) {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+
+  &-cell {
+    color: $colorSecondary;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+    width: 100%;
+    word-break: break-word;
+    padding: 7px 0px;
+    vertical-align: top;
+
+    a {
+      color: #3e55a6;
+    }
+
+    &--json {
+      white-space: pre-wrap;
+      text-indent: 16px;
+      margin-left: -16px;
+      width: 100%;
+    }
+
+    &--details {
+      font-size: 12px;
+    }
+
+    &--title {
+      color: $colorHeading;
+
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      padding: 15px 15px 15px 0;
+      width: 100%;
+      text-transform: lowercase;
+
+      @include breakpoint-min(600) {
+        width: 40%;
+      }
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &-map {
+    height: 214px;
+    width: 422px;
+  }
+
+  &-seperator {
+    background-color: #e9eaf4;
+    border: 0;
+    height: 1px;
+    width: 100%;
+  }
+}

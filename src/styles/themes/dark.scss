@@ -1,0 +1,140 @@
+@keyframes animateGradient {
+  0% {
+    background-position: 0 100%;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.ui-dark {
+  background: $blue;
+  background-size: 100% 200% !important;
+
+  button,
+  .button {
+    color: $blue;
+    background: $white;
+    border: 1px solid $white;
+
+    &.outline {
+      border: 1px solid $white;
+      color: $white;
+      background: transparent;
+    }
+  }
+
+  &.page-loaded {
+    @include gradient-vertical-three-colors($purple,
+    $blue,
+    50%,
+    darken($blue, 10));
+    animation: animateGradient .9s 1;
+    background-position: 0 100%;
+    animation-fill-mode: forwards;
+  }
+
+  // .logo {
+  //   img {
+  //     padding-left: 66px;
+  //     height: 120px;
+  //   }
+  // }
+
+  p,
+  .lead {
+    color: #fafafa;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+
+  input:not([type='checkbox']),
+  .input,
+  textarea {
+    color: #fff;
+    background: transparent;
+    border-color: #eee;
+
+    &:focus {
+      color: #fff;
+      border-color: #fff;
+    }
+  }
+
+  .custom_checkbox {
+    &__icon {
+      border: 2px solid #fff;
+    }
+  }
+
+  label {
+    span {
+      &:first-child {
+        color: #fff;
+      }
+    }
+
+    .info {
+      .message {
+        background: #fff;
+
+        &:before {
+          border: 7px solid #fff;
+          background: #fff;
+        }
+      }
+    }
+
+    &.error {
+      color: $red;
+
+      input:not([type='checkbox']),
+      .input,
+      textarea {
+        border-color: $red !important;
+      }
+    }
+  }
+
+  .Footer {
+    .copyright {
+      >p {
+        color: #eee;
+      }
+    }
+
+    .contact {
+      a {
+        color: #eee;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .react-tabs {
+    &__tab {
+      color: rgba(#fff, .5);
+      box-shadow: 0 1px rgba(#fff, 0.25);
+
+      &--selected {
+        color: #fff;
+        box-shadow: 0 2px #fff, inset 0px 0px #fff;
+      }
+    }
+
+    &__tab-panel {
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.HistoryItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
+  padding: 7px 15px;
+  font-size: 13px;
+
+  @media (min-width: 320px) {
+    .asset-wrapper {
+      margin-left: 20px;
+    }
+
+    .asset-id {
+      word-break: break-all;
+    }
+  }
+}
