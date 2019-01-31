@@ -8,7 +8,8 @@
     "dev:start": "source ./.env.dev && react-scripts start",
     "dev:lint": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}'",
     "test": "source ./.env.test && react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "npm build"
   },
   "eslintConfig": {
     "extends": "react-app"
