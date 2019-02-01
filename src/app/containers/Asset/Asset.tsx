@@ -1,63 +1,32 @@
 import React, { Component } from 'react';
-import { StorageService, AssetService } from '../../services';
 import './Asset.scss';
-import { History } from 'history';
-import { Preloader, Footer, Header } from '../../components';
 import { getStyles } from '../../utils';
 import AssetImage from './components/AssetImage';
 import AdditionalImages from './components/AdditionalImages';
 import AssetIdentifiers from './components/AssetIdentifiers';
 import AssetDetails from './components/AssetDetails';
 import Timeline from './components/Timeline';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { inject, observer } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
 
-interface AssetProps {
-  history: History;
-  assetId: string;
+interface AssetProps extends RouteComponentProps<{ assetId: string }> {
+  AssetStore: AssetStore;
 }
 
 interface AssetStates {
-  asset: any;
   selectedImage: string | null;
 }
 
-export default class Asset extends Component<AssetProps, AssetStates> {
+@inject('AssetStore')
+@observer
+class Asset extends Component<AssetProps, AssetStates> {
 
   constructor(props: AssetProps) {
     super(props);
     this.state = {
-      asset: null,
       selectedImage: null,
     };
-  }
-
-  public async componentDidMount() {
-    const { assetId, history } = this.props;
-    try {
-      const events = await AssetService.getEvents(assetId);
-      if (events.data.resultCount) {
-        const asset = await AssetService.parseEvents(events.data);
-        this.saveHistory(assetId, asset);
-        this.setState({ asset });
-        return;
-      }
-      history.push('/');
-    } catch (error) {
-      history.push('/');
-    }
-  }
-
-  public saveHistory(assetId: string, asset: any) {
-    const title = asset.info.name;
-    const history = { title, id: assetId };
-    const tempHistory: any = StorageService.get('history');
-    if (tempHistory && tempHistory.length > 0) {
-      if (tempHistory.filter((e: any) => e.id === assetId).length === 0) {
-        tempHistory.push(history);
-        StorageService.set('history', tempHistory);
-      }
-    } else {
-      StorageService.set('history', [history]);
-    }
   }
 
   public onImageSelect = (selectedImage: string) => {
@@ -65,17 +34,17 @@ export default class Asset extends Component<AssetProps, AssetStates> {
   }
 
   public render() {
-    const { assetId } = this.props;
-    const { asset, selectedImage } = this.state;
-    if (asset) {
+    const { assetId } = this.props.match.params;
+    const { asset } = this.props.AssetStore;
+    const { selectedImage } = this.state;
+    if (asset && asset.events.length) {
       return (
         <div className='Info'>
-          <Header asset={asset} assetId={assetId} />
-          <div className='item' style={getStyles('content', asset)}>
+          <div className='item' style={getStyles('content')}>
             <div className='wrapper'>
               <div className='item__container'>
                 <AssetImage url={selectedImage ? selectedImage : asset.info.images.default.url} name={asset.info.name} />
-                <AdditionalImages images={asset.info.images} asset={asset} onSelect={this.onImageSelect} />
+                <AdditionalImages images={asset.info.images} onSelect={this.onImageSelect} />
                 <AssetIdentifiers asset={asset} />
                 <AssetDetails asset={asset} />
               </div>
@@ -84,10 +53,11 @@ export default class Asset extends Component<AssetProps, AssetStates> {
               </div>
             </div>
           </div>
-          <Footer asset={asset} />
         </div>
       );
     }
-    return <Preloader />;
+    return null;
   }
 }
+
+export default withRouter(Asset);

@@ -12,6 +12,9 @@ import twitterIcon from 'assets/svg/twitter-icon.svg';
 import youtubeIcon from 'assets/svg/youtube-icon.svg';
 
 import './Footer.scss';
+import convertStyles from '../../utils/convertStyles';
+import { observer, inject } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
 
 const socialsLinks = [
   {
@@ -56,11 +59,11 @@ const socialsLinks = [
   },
 ];
 
-const Footer: SFC<{ asset?: any }> = ({ asset }) => {
+const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
 
   const getFooterStyle = () => {
     try {
-      return asset.branding.footer || {};
+      return convertStyles(props.AssetStore.asset.branding.footer) || {};
     } catch (error) {
       return {};
     }
@@ -94,6 +97,6 @@ const Footer: SFC<{ asset?: any }> = ({ asset }) => {
       </div>
     </div>
   );
-};
+}));
 
 export default Footer;

@@ -7,15 +7,14 @@ import TableRow from '../../../../components/TableRow';
 
 interface LocationProps {
   event: any;
-  asset: any;
 }
 
-const Location: SFC<LocationProps> = ({ event, asset }) => {
+const Location: SFC<LocationProps> = ({ event }) => {
   return (
     <Fragment>
       {event.location &&
         <div className='item__container'>
-          <Item asset={asset} title='Location'>
+          <Item title='Location'>
             <Fragment>
               {locationExists(event) &&
                 <Maps
@@ -25,9 +24,9 @@ const Location: SFC<LocationProps> = ({ event, asset }) => {
                   lat={event.location.location.geometry.coordinates[0]}
                   lng={event.location.location.geometry.coordinates[1]} />}
               <div className='table'>
-                <TableRow title='Name' value={event.location.name} asset={asset} />
-                <TableRow title='City' value={event.location.city} asset={asset} />
-                <TableRow title='County' value={event.location.country} asset={asset} />
+                <TableRow title='Name' value={event.location.name} />
+                <TableRow title='City' value={event.location.city} />
+                <TableRow title='County' value={event.location.country} />
               </div>
             </Fragment>
           </Item>

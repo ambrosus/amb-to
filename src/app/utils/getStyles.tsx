@@ -1,4 +1,11 @@
-const getStyles = (key: string, asset: any) => {
+import store from '../store';
+import convertStyles from './convertStyles';
+
+const getStyles = (key: string) => {
+  // const asset = store.AssetStore.asset;
+  const asset = {
+    branding: {},
+  };
   const fStyles = {};
   try {
     let styles = asset.branding[key] || {};
@@ -12,7 +19,7 @@ const getStyles = (key: string, asset: any) => {
       fStyles[tk] = styles[item];
       return;
     });
-    return fStyles;
+    return convertStyles(fStyles);
   } catch (error) {
     return {};
   }

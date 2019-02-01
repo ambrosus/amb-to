@@ -3,13 +3,12 @@ import './EventValidator.scss';
 import Item from '../../../../components/Item';
 
 interface EventProps {
-  asset: any;
   eventId: string;
 }
 
-const EventValidator: SFC<EventProps> = ({ asset, eventId }) => {
+const EventValidator: SFC<EventProps> = ({ eventId }) => {
   return (
-    <Item asset={asset}>
+    <Item>
       <div className='table'>
         <div className='table-row'>
           <div className='table-cell--title'>Check Event Validation</div>

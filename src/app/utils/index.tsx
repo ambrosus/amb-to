@@ -6,6 +6,7 @@ import lazyLoad from './lazyLoad';
 import { loopExclude, loopInclude } from './loopCheck';
 import generateLink from './generateLink';
 import getStyles from './getStyles';
+import stringEllipsis from './stringEllipsis';
 
 export {
   toggleMenu,
@@ -18,5 +19,6 @@ export {
   loopExclude,
   loopInclude,
   generateLink,
-  getStyles
+  getStyles,
+  stringEllipsis
 };

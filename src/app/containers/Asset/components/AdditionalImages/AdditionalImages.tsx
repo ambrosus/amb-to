@@ -5,10 +5,9 @@ import { getStyles } from '../../../../utils';
 interface AssetsProps {
   images: any[];
   onSelect(url: string): void;
-  asset: any;
 }
 
-const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect, asset }) => {
+const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect }) => {
 
   const onChange = (image: string) => (event: any) => {
     onSelect(image);
@@ -18,7 +17,7 @@ const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect, asset }) => {
     return (
       <div className='AdditionalImages'>
         <div className='AdditionalImages-title'
-          style={getStyles('components_titles', asset)}>Additional Images</div>
+          style={getStyles('components_titles')}>Additional Images</div>
         <div className='AdditionalImages-container'>
           {Object.keys(images).map((image, index) => (
             <div key={index} onClick={onChange(images[image].url)} className='AdditionalImages-photo' style={{ 'backgroundImage': `url(${images[image].url})` }}>

@@ -22,11 +22,11 @@ const AssetIdentifiers: SFC<AssetProps> = ({ asset }) => {
 
   if (asset.identifiers.identifiers) {
     return (
-      <Item asset={asset} title='Identifiers'>
+      <Item title='Identifiers'>
         <div className='table'>
           {Object.entries(asset.identifiers.identifiers).map(([key, value]) => {
             return (
-              <TableRow key={key} title={key} value={linkIdentifer(key, value)} asset={asset} />
+              <TableRow key={key} title={key} value={linkIdentifer(key, value)} />
             );
           })}
         </div>

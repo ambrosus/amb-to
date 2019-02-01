@@ -18,11 +18,11 @@ const SubDetails: SFC<AssetProps> = ({ asset }) => {
               return (
                 <div key={key}>
                   <hr className='table-seperator ' />
-                  <h3 className='table-subtitle' style={getStyles('components_subtitles', asset)}>{key}</h3>
+                  <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{key}</h3>
                   <div className='table'>
                     {Object.entries(value).map(([k, v]) => (
                       !Array.isArray(value) && (
-                        <TableRow key={k} title={k} asset={asset} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v} />
+                        <TableRow key={k} title={k} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v} />
                       ))
                     )}
                   </div>

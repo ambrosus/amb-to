@@ -6,22 +6,21 @@ import TableRow from '../../../../components/TableRow';
 
 interface DocumentProps {
   event: any;
-  asset: any;
 }
 
-const Document: SFC<DocumentProps> = ({ event, asset }) => {
+const Document: SFC<DocumentProps> = ({ event }) => {
   return (
     <Fragment>
       {event.documents &&
-        <Item style={{ backgroundColor: '#fff' }} asset={asset} title='Event Documents'>
+        <Item style={{ backgroundColor: '#fff' }} title='Event Documents'>
           {Object.entries(event.documents).map(([key, value]) => {
             return (
               <div key={key}>
-                <h3 className='table-subtitle' style={getStyles('components_subtitles', asset)}>{key}</h3>
+                <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{key}</h3>
                 <div className='table'>
                   {
                     Object.entries(value).map(([k, v]) => (
-                      <TableRow asset={asset} title={k} key={k} value={v} />
+                      <TableRow title={k} key={k} value={v} />
                     ))
                   }
                 </div>

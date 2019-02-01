@@ -4,9 +4,12 @@ import iconLogo from 'assets/images/amb-logo.png';
 import './Header.scss';
 import SVG from 'react-svg';
 import hamburger from 'assets/svg/hamburger_menu.svg';
+import convertStyles from '../../utils/convertStyles';
+import { inject, observer } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
 
 interface HeaderProps {
-  asset: any;
+  AssetStore?: AssetStore;
   assetId: string;
 }
 
@@ -14,35 +17,37 @@ interface HeaderStates {
   revealMenu: boolean;
 }
 
+@inject('AssetStore')
+@observer
 export default class Header extends Component<HeaderProps, HeaderStates> {
   public state = {
     revealMenu: false,
   };
 
   public getNavbarStyle = () => {
-    const { asset } = this.props;
+    const { asset } = this.props.AssetStore!;
     try {
-      return asset.branding.nav || {};
+      return convertStyles(asset.branding.nav) || {};
     } catch (error) {
       return {};
     }
   }
 
   public getLogoStyle = () => {
-    const { asset } = this.props;
+    const { asset } = this.props.AssetStore!;
     try {
-      return asset.branding.logo || {};
+      return convertStyles(asset.branding.logo) || {};
     } catch (error) {
       return {};
     }
   }
 
   public getNavbarLogo = () => {
-    const { asset } = this.props;
+    const { asset } = this.props.AssetStore!;
     try {
-      return asset.branding.logo || {};
+      return asset.branding.logo.url || iconLogo;
     } catch (error) {
-      return {};
+      return iconLogo;
     }
   }
 
@@ -58,7 +63,7 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
         <div className='wrapper'>
           <div className='navigation__menu'>
             <Link to={`/${assetId}`} className='navigation__logo--link'>
-              <img style={this.getLogoStyle()} src={this.getNavbarLogo().url || iconLogo} alt='Ambrosus Logo' className='navigation__logo' />
+              <img style={this.getLogoStyle()} src={this.getNavbarLogo()} alt='Ambrosus Logo' className='navigation__logo' />
             </Link>
             <div className={`navigation--right-side ${revealMenu ? 'active' : ''}`}>
               <button onClick={this.toggleMenu} className='navigation__menu__icon' >

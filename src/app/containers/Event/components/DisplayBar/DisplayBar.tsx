@@ -1,7 +1,6 @@
 import React, { SFC } from 'react';
 import './DisplayBar.scss';
 import { assetData, timeSince } from '../../../../utils';
-import keyIcon from 'assets/svg/key.svg';
 import pinIcon from 'assets/svg/pin.svg';
 
 interface DisplayProps {
@@ -11,7 +10,7 @@ const DisplayBar: SFC<DisplayProps> = ({ event }) => {
 
   const eventTypeToStyle = (value: string) => {
     if (assetData[value] === undefined) {
-      return assetData['harvested'];
+      return assetData['default'];
     }
     return assetData[value];
   };
@@ -21,9 +20,7 @@ const DisplayBar: SFC<DisplayProps> = ({ event }) => {
         className='bar__image' />
       <div className='bar__copy'>
         <div className='bar__container'>
-          <h4 className='bar__heading'>{event.name}
-            <img src={keyIcon} alt='' className='bar__heading--icon' />
-          </h4>
+          <h4 className='bar__heading'>{event.name}</h4>
         </div>
         <div className='bar__container'>
           <p className='bar__time'>{timeSince(event.timestamp * 1000)} ago</p>

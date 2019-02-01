@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './AssetSearch.scss';
-import { AssetService } from '../../../../services';
-import { History } from 'history';
 import Spinner from '../../../../components/Spinner';
+import { inject, observer } from 'mobx-react';
+import { AssetStore } from '../../../../store/asset.store';
+import { RouteComponentProps, withRouter } from 'react-router';
 
-interface AssetProps {
-  history: History;
+interface AssetProps extends RouteComponentProps {
+  AssetStore?: AssetStore;
 }
 
 interface AssetStates {
@@ -13,8 +14,9 @@ interface AssetStates {
   searchValue: string;
   error: string | null;
 }
-
-export default class AssetSearch extends Component<AssetProps, AssetStates> {
+@inject('AssetStore')
+@observer
+class AssetSearch extends Component<AssetProps, AssetStates> {
 
   constructor(props: AssetProps) {
     super(props);
@@ -39,10 +41,11 @@ export default class AssetSearch extends Component<AssetProps, AssetStates> {
   public async getAssetAndRedirect(assetId: any) {
     const { history } = this.props;
     try {
-      const events = await AssetService.getEvents(assetId);
-      const asset = await AssetService.parseEvents(events.data);
-      if (events.data.resultCount && asset.events.length) {
-        history.push(`/${assetId}`);
+      await this.props.AssetStore!.setAsset(assetId);
+      if (this.props.AssetStore!.asset.events.length) {
+        setTimeout(() => {
+          history.push(`/${assetId}`);
+        });
         return;
       }
       this.setState({ error: 'No asset with that assetId.', spinner: false });
@@ -56,6 +59,14 @@ export default class AssetSearch extends Component<AssetProps, AssetStates> {
     this.setState({ searchValue: value });
   }
 
+  public onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.searchAsset();
+    }
+  }
+
   public render() {
     const { spinner, searchValue, error } = this.state;
     return (
@@ -64,7 +75,7 @@ export default class AssetSearch extends Component<AssetProps, AssetStates> {
           <div className='page'>
             <h3 className='title'>Search for an asset</h3>
             <div className='form-search'>
-              <input onChange={this.handleChange} value={searchValue} type='text' placeholder='Asset ID' />
+              <input onKeyDown={this.onKeyDown} onChange={this.handleChange} value={searchValue} type='text' placeholder='Asset ID' />
               <button onClick={this.searchAsset} className='btn'>Search</button>
             </div>
             {spinner && <Spinner />}
@@ -77,3 +88,5 @@ export default class AssetSearch extends Component<AssetProps, AssetStates> {
     );
   }
 }
+
+export default withRouter(AssetSearch);

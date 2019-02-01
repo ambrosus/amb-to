@@ -30,7 +30,7 @@ export default class SearchHistory extends Component<{}, HistoryStates> {
     const { history } = this.state;
     if (history) {
       return (
-        <div className='SearchHistory'>
+        <div className='SearchHistory wrapper'>
           <div className='page history_page'>
             <h3 className='title'>Previously viewed</h3>
             <div className='history'>

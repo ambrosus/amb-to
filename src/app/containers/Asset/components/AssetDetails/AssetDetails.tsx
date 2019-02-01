@@ -14,13 +14,13 @@ interface AssetProps {
 const AssetDetails: SFC<AssetProps> = ({ asset }) => {
   return (
     <Fragment>
-      <Item asset={asset} title='Asset Details'>
+      <Item title='Asset Details'>
         <Fragment>
           <div className='table'>
             {loopExclude(asset.info, ['type', 'images', 'action', 'author', 'eventId'])
               .map(([key, value]) => (
                 !isObject(value) && !Array.isArray(value) && (
-                  <TableRow key={key} title={key} value={value} asset={asset} />
+                  <TableRow key={key} title={key} value={value} />
                 ))
               )}
           </div>
