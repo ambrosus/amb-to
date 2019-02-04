@@ -2,8 +2,7 @@ import React, { SFC, Fragment } from 'react';
 import './Details.scss';
 import Item from '../../../../components/Item';
 import TableRow from '../../../../components/TableRow';
-import { loopExclude, getStyles, valueJSON } from '../../../../utils';
-import { isObject } from 'util';
+import { loopExclude, getStyles, valueJSON, formatDate, isObject } from '../../../../utils';
 
 interface DetailsProps {
   event: any;
@@ -15,7 +14,7 @@ const Details: SFC<DetailsProps> = ({ event }) => {
         <div className='table'>
           <TableRow title='Event Id' value={event.eventId} />
           <TableRow title='Created by' value={event.author} />
-          <TableRow title='Timestamp' value={event.timestamp * 1000} />
+          <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)} />
           <TableRow title='Type' value={event.action} />
         </div>
         <div className='table'>

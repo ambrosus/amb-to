@@ -14,7 +14,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 export default function formatDate(timestamp: number, showDate = false, showTime = false) {
   const date = new Date(timestamp);
   const dayName = days[date.getDay()];
-  const day = date.getDate();
+  const day = (`0${date.getDate()}`).slice(-2);
   const month = date.getMonth();
   const year = date.getFullYear();
   const hours = (`0${date.getHours()}`).slice(-2);

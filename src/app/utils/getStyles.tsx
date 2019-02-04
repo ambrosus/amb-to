@@ -2,10 +2,7 @@ import store from '../store';
 import convertStyles from './convertStyles';
 
 const getStyles = (key: string) => {
-  // const asset = store.AssetStore.asset;
-  const asset = {
-    branding: {},
-  };
+  const asset = store.AssetStore.asset;
   const fStyles = {};
   try {
     let styles = asset.branding[key] || {};
