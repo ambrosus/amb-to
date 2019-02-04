@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import Preloader from '../../components/Preloader/Preloader';
-import { AssetService } from '../../services';
-import { getStyles } from '../../utils';
+import { getStyles, getEvent, scrollTop } from '../../utils';
 import './Event.scss';
 import DisplayBar from './components/DisplayBar';
 import EventValidator from './components/EventValidator';
@@ -38,27 +37,18 @@ class Event extends Component<EventProps, EventStates> {
       history.push('/');
       return;
     }
-    let eventState;
     if (!this.props.AssetStore!.asset) {
       await this.props.AssetStore!.setAsset(assetId);
       if (!this.props.AssetStore!.asset) {
         history.push(`/`);
       }
     }
-
-    this.props.AssetStore!.asset.events.map((e: any) => {
-      if (e.eventId === eventId) {
-        eventState = e;
-      }
-    });
+    const eventState = getEvent(this.props.AssetStore!.asset.events, eventId);
     if (!eventState) {
-      setTimeout(() => {
-        history.push(`/${assetId}`);
-      });
+      history.push(`/${assetId}`);
     }
-    this.setState({
-      event: eventState,
-    });
+    scrollTop();
+    this.setState({ event: eventState });
   }
 
   public render() {

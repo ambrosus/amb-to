@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Asset.scss';
-import { getStyles } from '../../utils';
+import { getStyles, scrollTop } from '../../utils';
 import AssetImage from './components/AssetImage';
 import AdditionalImages from './components/AdditionalImages';
 import AssetIdentifiers from './components/AssetIdentifiers';
@@ -27,6 +27,10 @@ class Asset extends Component<AssetProps, AssetStates> {
     this.state = {
       selectedImage: null,
     };
+  }
+
+  public componentDidMount() {
+    scrollTop();
   }
 
   public onImageSelect = (selectedImage: string) => {

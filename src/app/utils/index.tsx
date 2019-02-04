@@ -1,4 +1,3 @@
-import { toggleMenu, valueJSON, isObject } from './helpers';
 import timeSince from './timeSince';
 import formatDate from './formatDate';
 import assetData from './assetDetails';
@@ -7,10 +6,14 @@ import { loopExclude, loopInclude } from './loopCheck';
 import generateLink from './generateLink';
 import getStyles from './getStyles';
 import stringEllipsis from './stringEllipsis';
+import valueJSON from './getJson';
+import { isObject } from 'util';
+import getEvent from './getEvent';
+import scrollTop from './scrollTop';
 
 export {
-  toggleMenu,
   valueJSON,
+  getEvent,
   isObject,
   timeSince,
   formatDate,
@@ -20,5 +23,6 @@ export {
   loopInclude,
   generateLink,
   getStyles,
+  scrollTop,
   stringEllipsis
 };

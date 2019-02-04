@@ -18,10 +18,11 @@ class StorageService {
   }
 
   public get(key: string) {
+    const value = `${this.namespace}${key}`;
     try {
-      return JSON.parse(this.storage.getItem(`${this.namespace}${key}`));
+      return JSON.parse(this.storage.getItem(value));
     } catch (err) {
-      return this.storage.getItem(`${this.namespace}${key}`);
+      return this.storage.getItem(value);
     }
   }
 
@@ -30,7 +31,13 @@ class StorageService {
   }
 
   public clear() {
-    this.storage.clear();
+    const items = { ...localStorage };
+    Object.keys(items).map((value) => {
+      if (value.includes(this.namespace)) {
+        this.delete(value.split(this.namespace)[1]);
+      }
+    });
+    console.log(items);
   }
 }
 

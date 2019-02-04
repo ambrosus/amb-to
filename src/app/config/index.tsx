@@ -8,7 +8,7 @@ This Source Code Form is “Incompatible With Secondary Licenses”, as defined 
 */
 
 export default Object.freeze({
-    MAPS_KEY: process.env.MAPS_KEY || '',
-    API_ENDPOINT: process.env.API_ENDPOINT || 'https://gateway-test.ambrosus.com',
-    NAMESPACE: 'amb.to_',
-  });
+  MAPS_KEY: process.env.MAPS_KEY || '',
+  API_ENDPOINT: process.env.API_ENDPOINT || 'https://gateway-test.ambrosus.com',
+  NAMESPACE: 'ambrosus_',
+});
