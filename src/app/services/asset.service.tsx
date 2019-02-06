@@ -101,7 +101,7 @@ class AssetService {
         const details = {
           pagination: response.data.pagination,
           brandings: result.branding,
-          events: result.events,
+          events: result.events.sort((a: any, b: any) => a.timestamp - b.timestamp).reverse(),
         };
         resolve(details);
       }).catch(err => {
