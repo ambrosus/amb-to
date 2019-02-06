@@ -10,6 +10,9 @@ import valueJSON from './getJson';
 import { isObject } from 'util';
 import getEvent from './getEvent';
 import scrollTop from './scrollTop';
+import api from './api';
+import web3 from './web3';
+import generateToken from './generateToken';
 
 export {
   valueJSON,
@@ -24,5 +27,8 @@ export {
   generateLink,
   getStyles,
   scrollTop,
-  stringEllipsis
+  stringEllipsis,
+  api,
+  web3,
+  generateToken,
 };

@@ -2,10 +2,10 @@ import store from '../store';
 import convertStyles from './convertStyles';
 
 const getStyles = (key: string) => {
-  const asset = store.AssetStore.asset;
+  const { brandings } = store.AssetStore;
   const fStyles = {};
   try {
-    let styles = asset.branding[key] || {};
+    let styles = brandings[key] || {};
     styles = Object.keys(styles).map((item: any) => {
       let tk = item;
       if (item.indexOf('-') !== -1) {

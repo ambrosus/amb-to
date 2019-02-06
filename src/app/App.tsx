@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { lazyLoad } from './utils';
+import { AuthService } from './services';
 
 const Home: any = lazyLoad(() => import('./containers/Home'));
 const AssetWrapper: any = lazyLoad(() => import('./containers/AssetWrapper'));
@@ -13,6 +14,7 @@ class App extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
+    AuthService.getToken();
   }
 
   public render() {

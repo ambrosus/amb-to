@@ -37,25 +37,42 @@ class Asset extends Component<AssetProps, AssetStates> {
     this.setState({ selectedImage });
   }
 
+  public getDefaultImage = () => {
+    try {
+      const { asset } = this.props.AssetStore;
+      return asset.info.images.default.url;
+    } catch (error) {
+      return '';
+    }
+  }
+
   public render() {
-    const { assetId } = this.props.match.params;
-    const { asset } = this.props.AssetStore;
+    const { asset, events } = this.props.AssetStore;
     const { selectedImage } = this.state;
-    if (asset && asset.events.length) {
+    const { assetId } = this.props.match.params;
+    if (asset && asset.info && asset.info.identifiers) {
       return (
         <div className='Info'>
           <div className='item' style={getStyles('content')}>
             <div className='wrapper'>
               <div className='item__container'>
-                <AssetImage url={selectedImage ? selectedImage : asset.info.images.default.url} name={asset.info.name} />
+                <AssetImage url={selectedImage ? selectedImage : this.getDefaultImage()} name={asset.info.name} />
                 <AdditionalImages images={asset.info.images} onSelect={this.onImageSelect} />
-                <AssetIdentifiers asset={asset} />
+                <AssetIdentifiers info={asset.info} />
                 <AssetDetails asset={asset} />
               </div>
-              <div className='item__container'>
-                <Timeline events={asset.events} assetId={assetId} />
-              </div>
+              {events && <div className='item__container'>
+                <Timeline events={events} assetId={assetId} />
+              </div>}
             </div>
+          </div>
+        </div>
+      );
+    } if (asset && asset.info && !asset.info.identifiers) {
+      return (
+        <div>
+          <div className='noContent'>
+            <p>This asset has no data. <br /> Please try another one.</p>
           </div>
         </div>
       );

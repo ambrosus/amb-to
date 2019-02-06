@@ -25,27 +25,27 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
   };
 
   public getNavbarStyle = () => {
-    const { asset } = this.props.AssetStore!;
+    const { brandings } = this.props.AssetStore!;
     try {
-      return convertStyles(asset.branding.nav) || {};
+      return convertStyles(brandings.nav) || {};
     } catch (error) {
       return {};
     }
   }
 
   public getLogoStyle = () => {
-    const { asset } = this.props.AssetStore!;
+    const { brandings } = this.props.AssetStore!;
     try {
-      return convertStyles(asset.branding.logo) || {};
+      return convertStyles(brandings.logo) || {};
     } catch (error) {
       return {};
     }
   }
 
   public getNavbarLogo = () => {
-    const { asset } = this.props.AssetStore!;
+    const { brandings } = this.props.AssetStore!;
     try {
-      return asset.branding.logo.url || iconLogo;
+      return brandings.logo.url || iconLogo;
     } catch (error) {
       return iconLogo;
     }

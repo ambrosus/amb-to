@@ -1,13 +1,113 @@
 import config from '../config';
 import { StorageService } from '.';
-declare let AmbrosusSDK: any;
+import * as AmbrosusSDK from 'ambrosus-javascript-sdk';
+import { api } from '../utils';
 
 class AssetService {
   public ambrosus: any;
+  public json = {
+    asset: {},
+    event: {},
+  };
 
   constructor() {
     const apiEndpoint = config.API_ENDPOINT;
     this.ambrosus = new AmbrosusSDK({ apiEndpoint });
+  }
+
+  public getSingleAsset(assetId: string) {
+    const assetURl = `${config.EXTENDED_API}/asset/query`;
+    const infoURL = `${config.EXTENDED_API}/event/latest/type`;
+    const assetBody = {
+      query: [
+        {
+          field: 'assetId',
+          value: assetId,
+          operator: 'equal',
+        },
+      ],
+    };
+    const infoBody = {
+      type: 'ambrosus.asset.info',
+      assets: [assetId],
+    };
+    return new Promise((resolve, reject) => {
+      api.postRequest(assetURl, assetBody).then(response => {
+        const assets = response.data;
+        if (!assets.data || !Array.isArray(assets.data) || !assets.data.length) {
+          reject('No Asset');
+        }
+
+        api.postRequest(infoURL, infoBody).then(response1 => {
+          const info = this.ambrosus.utils.findEvent('info', response1.data.data);
+          this.json.asset = JSON.parse(JSON.stringify(response1.data.data[0] || {}));
+          assets.data[0]['info'] = info;
+          this.ambrosus.utils.parseAsset(assets.data[0]);
+          this.addHistory(assets.data[0].info.name, assetId);
+          resolve(assets.data[0]);
+        }).catch(err => {
+          reject(err);
+        });
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  public getEvent(eventId: string) {
+    const eventURL = `${config.EXTENDED_API}/event/${eventId}`;
+    return new Promise((resolve, reject) => {
+      api.getRequest(eventURL).then(response => {
+        const events = response.data;
+        if (Object.keys(events.data).length) {
+          const data = {
+            results: [events.data],
+          };
+          const result = this.ambrosus.utils.parseEvents(data);
+          resolve(result.events[0]);
+        }
+        reject('No Data');
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  public getEvents(options: {
+    assetId: string;
+    limit?: number;
+    next?: string;
+  }) {
+    return new Promise((resolve, reject) => {
+      const { assetId, limit = 10, next } = options;
+      const eventURL = `${config.EXTENDED_API}/event/query`;
+      const body: any = {
+        limit,
+        next,
+        query: [
+          {
+            field: 'content.idData.assetId',
+            value: assetId,
+            operator: 'equal',
+          },
+        ],
+      };
+
+      api.postRequest(eventURL, body).then(response => {
+        const data = {
+          results: [...response.data.data],
+        };
+        const result = this.ambrosus.utils.parseEvents(data);
+        const details = {
+          pagination: response.data.pagination,
+          brandings: result.branding,
+          events: result.events,
+        };
+        resolve(details);
+      }).catch(err => {
+        reject(err);
+      });
+    });
   }
 
   public getAsset(assetId: string) {
@@ -74,7 +174,6 @@ class AssetService {
           resolve(response.data);
         })
         .catch((error: any) => {
-          console.log('parseEvents: ', error);
           reject(error);
         });
     });

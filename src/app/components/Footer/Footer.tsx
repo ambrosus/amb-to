@@ -63,7 +63,7 @@ const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((
 
   const getFooterStyle = () => {
     try {
-      return convertStyles(props.AssetStore.asset.branding.footer) || {};
+      return convertStyles(props.AssetStore.brandings.footer) || {};
     } catch (error) {
       return {};
     }

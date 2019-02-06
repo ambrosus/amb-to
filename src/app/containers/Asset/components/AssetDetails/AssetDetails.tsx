@@ -1,7 +1,5 @@
 import React, { SFC, Fragment } from 'react';
 import './AssetDetails.scss';
-import { loopExclude } from '../../../../utils';
-import { isObject } from 'util';
 import TableRow from '../../../../components/TableRow';
 import SubDetails from '../SubDetails';
 import CustomData from '../CustomData';
@@ -17,14 +15,12 @@ const AssetDetails: SFC<AssetProps> = ({ asset }) => {
       <Item title='Asset Details'>
         <Fragment>
           <div className='table'>
-            {loopExclude(asset.info, ['type', 'images', 'action', 'author', 'eventId'])
-              .map(([key, value]) => (
-                !isObject(value) && !Array.isArray(value) && (
-                  <TableRow key={key} title={key} value={value} />
-                ))
-              )}
+            <TableRow title='Name' value={asset.info.name} />
+            {asset.info.properties.map((value: { key: string, value: string }, index: number) => (
+              <TableRow key={index} title={value.key} value={value.value} />
+            ))}
           </div>
-          <SubDetails asset={asset} />
+          <SubDetails asset={asset.info.groups} />
           <CustomData asset={asset} />
         </Fragment>
       </Item>

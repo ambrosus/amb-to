@@ -31,31 +31,29 @@ class Event extends Component<EventProps, EventStates> {
   }
 
   public async componentDidMount() {
-    const { assetId, eventId } = this.props.match.params;
     const { history } = this.props;
-    if (!assetId || !eventId) {
-      history.push('/');
-      return;
-    }
-    if (!this.props.AssetStore!.asset) {
-      await this.props.AssetStore!.setAsset(assetId);
-      if (!this.props.AssetStore!.asset) {
-        history.push(`/`);
+    const { assetId, eventId } = this.props.match.params;
+    try {
+      scrollTop();
+      if (!assetId || !eventId) {
+        history.push('/');
+        return;
       }
+      if (!this.props.AssetStore!.event) {
+        await this.props.AssetStore!.getEvent(eventId);
+        if (!this.props.AssetStore!.event) {
+          history.push('/');
+        }
+      }
+    } catch (error) {
+      history.push('/');
     }
-    const eventState = getEvent(this.props.AssetStore!.asset.events, eventId);
-    if (!eventState) {
-      history.push(`/${assetId}`);
-    }
-    scrollTop();
-    this.setState({ event: eventState });
   }
 
   public render() {
     const { assetId, eventId } = this.props.match.params;
-    const { event } = this.state;
+    const { event } = this.props.AssetStore!;
     if (!event) { return <Preloader />; }
-
     return (
       <div className='Event' style={getStyles('content')}>
         <div className='wrapper'>

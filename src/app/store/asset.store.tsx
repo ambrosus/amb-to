@@ -3,10 +3,58 @@ import { AssetService } from '../services';
 
 export class AssetStore {
   @observable public asset: any = null;
+  @observable public events: any = null;
+  @observable public brandings: any = null;
+  @observable public pagination: any = null;
+  @observable public event: any = null;
 
   @action
-  public async setAsset(assetId: string) {
-    this.asset = await AssetService.getAsset(assetId);
+  public setAsset = (assetId: string) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        this.asset = await AssetService.getSingleAsset(assetId);
+        AssetService.getEvents({ assetId }).then((result: any) => {
+          this.events = result.events;
+          this.brandings = result.brandings;
+          this.pagination = result.pagination;
+        }).catch(err => reject(err));
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  @action
+  public getEvents = (assetId: string) => {
+    return new Promise((resolve, reject) => {
+      const next = this.pagination.next;
+      AssetService.getEvents({ assetId, next }).then((result: any) => {
+        this.events = [...this.events, ...result.events];
+        this.brandings = Object.assign({}, this.brandings, result.brandings);
+        this.pagination = result.pagination;
+        resolve(true);
+      }).catch(error => reject(error));
+    });
+  }
+
+  @action
+  public getEvent = (eventId: string) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        this.event = await AssetService.getEvent(eventId);
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  @action public resetStore = () => {
+    this.asset = null;
+    this.events = null;
+    this.brandings = null;
+    this.pagination = null;
+    this.event = null;
   }
 }
 

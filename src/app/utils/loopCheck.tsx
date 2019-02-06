@@ -4,7 +4,7 @@ export const loopExclude = (items: any[], filter: any[]): any[] => {
   }
   return Object.entries(items).filter(([key, value]) => {
     if (filter.indexOf(key) < 0) {
-      return { key, value };
+      return { key: value };
     }
   });
 };

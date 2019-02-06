@@ -11,4 +11,5 @@ export default Object.freeze({
   MAPS_KEY: process.env.MAPS_KEY || '',
   API_ENDPOINT: process.env.API_ENDPOINT || 'https://gateway-test.ambrosus.com',
   NAMESPACE: 'ambrosus_',
+  EXTENDED_API: process.env.EXTENDED_API || 'https://hermes.ambrosus-test.com/extended',
 });

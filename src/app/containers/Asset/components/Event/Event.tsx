@@ -7,7 +7,10 @@ import { timeSince, formatDate, assetData } from '../../../../utils';
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
 import locationExists from '../../../../utils/checkExists';
+import { inject, observer } from 'mobx-react';
 
+@inject('AssetStore')
+@observer
 export default class Event extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -31,8 +34,7 @@ export default class Event extends Component<any, any> {
   }
 
   public render() {
-    const event = this.props.event;
-    const assetId = this.props.assetId;
+    const { event, assetId } = this.props;
     const eventAsset = this.eventTypeToStyle(event.type);
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -83,7 +85,7 @@ export default class Event extends Component<any, any> {
             <TableRow title='Created by' value={event.author} rowClass={['item__event__more-details__row']} cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 
             <div className='item__event__more-details__row '>
-              <Link className='item__event__more-details__button'
+              <Link onClick={this.setEvent} className='item__event__more-details__button'
                 to={{
                   pathname: `/${assetId}/events/${event.eventId}`,
                 }}>VIEW EVENT DETAILS...</Link>
@@ -92,5 +94,9 @@ export default class Event extends Component<any, any> {
         </div>
       </div>
     );
+  }
+
+  public setEvent = () => {
+    this.props.AssetStore!.event = this.props.event;
   }
 }

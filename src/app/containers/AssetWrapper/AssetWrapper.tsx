@@ -17,11 +17,16 @@ interface AssetProps extends RouteComponentProps<{ assetId: string, eventId: str
 class AssetWrapper extends Component<AssetProps> {
 
   public async componentDidMount() {
-    if (!this.props.AssetStore.asset || !this.props.AssetStore.asset.events.length) {
-      await this.props.AssetStore.setAsset(this.props.match.params.assetId);
-      if (!this.props.AssetStore.asset.events.length) {
-        this.props.history.push('/');
+    const { history } = this.props;
+    try {
+      if (!this.props.AssetStore.asset) {
+        await this.props.AssetStore.setAsset(this.props.match.params.assetId);
+        if (!this.props.AssetStore.asset) {
+          history.push('/');
+        }
       }
+    } catch (error) {
+      history.push('/');
     }
   }
 
