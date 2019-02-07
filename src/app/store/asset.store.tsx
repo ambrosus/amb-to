@@ -24,7 +24,6 @@ export class AssetStore {
           this.brandings = brandings;
         }).catch(err => {
           this.brandings = {};
-          reject(err);
         });
       } catch (error) {
         reject(error);
