@@ -22,7 +22,10 @@ export class AssetStore {
         }).catch(err => reject(err));
         AssetService.getBranding(assetId).then(brandings => {
           this.brandings = brandings;
-        }).catch(err => reject(err));
+        }).catch(err => {
+          this.brandings = {};
+          reject(err);
+        });
       } catch (error) {
         reject(error);
       }
