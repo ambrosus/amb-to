@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { getStyles, isObject, generateLink } from '../../utils';
+import { getStyles, generateLink } from '../../utils';
 
 interface TableRowProps {
   title: any;

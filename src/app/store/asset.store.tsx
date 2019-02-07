@@ -12,11 +12,15 @@ export class AssetStore {
   public setAsset = (assetId: string) => {
     return new Promise(async (resolve, reject) => {
       try {
-        this.asset = await AssetService.getSingleAsset(assetId);
+        AssetService.getAsset(assetId).then(asset => {
+          this.asset = asset;
+        }).catch(error => reject(error));
         AssetService.getEvents({ assetId }).then((result: any) => {
           this.events = result.events;
-          this.brandings = result.brandings;
           this.pagination = result.pagination;
+        }).catch(err => reject(err));
+        AssetService.getBranding(assetId).then(brandings => {
+          this.brandings = brandings;
         }).catch(err => reject(err));
       } catch (error) {
         reject(error);
@@ -30,7 +34,6 @@ export class AssetStore {
       const next = this.pagination.next;
       AssetService.getEvents({ assetId, next }).then((result: any) => {
         this.events = [...this.events, ...result.events];
-        this.brandings = Object.assign({}, this.brandings, result.brandings);
         this.pagination = result.pagination;
         resolve(true);
       }).catch(error => reject(error));

@@ -8,7 +8,6 @@ import getStyles from './getStyles';
 import stringEllipsis from './stringEllipsis';
 import valueJSON from './getJson';
 import { isObject } from 'util';
-import getEvent from './getEvent';
 import scrollTop from './scrollTop';
 import api from './api';
 import web3 from './web3';
@@ -16,7 +15,6 @@ import generateToken from './generateToken';
 
 export {
   valueJSON,
-  getEvent,
   isObject,
   timeSince,
   formatDate,

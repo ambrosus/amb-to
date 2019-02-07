@@ -46,17 +46,34 @@ export default class Timeline extends Component<TimelineProps, TimelineState> {
     return this.props.AssetStore && this.props.AssetStore!.pagination && this.props.AssetStore!.pagination.hasNext;
   }
 
-  public render() {
+  public renderEvents = () => {
     const { events, assetId } = this.props;
     const { btnObj } = this.state;
     return (
-      <div className='item__events Timeline'>
-        <h2 className='table-title '>All Events</h2>
+      <React.Fragment>
         {events.map((event: any, i: number) =>
           <Event event={event} assetId={assetId} index={i} key={i} />)}
         {this.showButton() && <div className='btnWrapper'>
           <Button secondary onClick={this.loadEvent} disabled={btnObj.disabled} loading={btnObj.loading}>Show More</Button>
         </div>}
+      </React.Fragment>
+    );
+  }
+
+  public noEvents = () => {
+    return (
+      <div className='noContent'>
+        <p>No Events Available</p>
+      </div>
+    );
+  }
+
+  public render() {
+    const { events } = this.props;
+    return (
+      <div className='item__events Timeline'>
+        <h2 className='table-title '>All Events</h2>
+        {events.length ? this.renderEvents() : this.noEvents()}
       </div>
     );
   }

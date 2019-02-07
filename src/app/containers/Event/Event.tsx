@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import Preloader from '../../components/Preloader/Preloader';
-import { getStyles, getEvent, scrollTop } from '../../utils';
+import { getStyles, scrollTop } from '../../utils';
 import './Event.scss';
-import DisplayBar from './components/DisplayBar';
-import EventValidator from './components/EventValidator';
-import Location from './components/Location';
-import Document from './components/Document';
-import Details from './components/Details';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
+import { DisplayBar, Details, EventValidator, Document, Location } from './components';
 
 interface EventProps extends RouteComponentProps<{ assetId: string, eventId: string }> {
   AssetStore?: AssetStore;

@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps, Route } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { lazyLoad } from '../../utils';
 import { AssetStore } from '../../store/asset.store';
-import { Header, Footer } from '../../components';
+import { Header } from '../../components';
 
 const Asset: any = lazyLoad(() => import('../Asset'));
 const Event: any = lazyLoad(() => import('../Event'));
@@ -37,7 +37,6 @@ class AssetWrapper extends Component<AssetProps> {
         <Header assetId={assetId} />
         <Route exact path='/:assetId/events/:eventId' component={Event} />
         <Route exact path='/:assetId' component={Asset} />
-        <Footer />
       </React.Fragment>
     );
   }

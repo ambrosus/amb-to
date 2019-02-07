@@ -10,21 +10,6 @@ const api = () => {
     },
   });
 
-  instance.interceptors.request.use((config) => {
-    const token = StorageService.get('token');
-    if (token !== null) {
-      config.headers.Authorization = `AMB_TOKEN ${token}`;
-    }
-    return config;
-  });
-
-  instance.interceptors.response.use(undefined, (err: any) => {
-    if (err.status === 401) {
-      StorageService.delete('token');
-      window.location.replace('/login');
-    }
-  });
-
   const getRequest = (url: string) => {
     return instance.get(url);
   };

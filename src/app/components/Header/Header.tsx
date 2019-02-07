@@ -57,7 +57,6 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
 
   public render() {
     const { assetId } = this.props;
-    const { revealMenu } = this.state;
     return (
       <nav className='navigation' style={this.getNavbarStyle()}>
         <div className='wrapper'>

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import './Asset.scss';
 import { getStyles, scrollTop } from '../../utils';
-import AssetImage from './components/AssetImage';
-import AdditionalImages from './components/AdditionalImages';
-import AssetIdentifiers from './components/AssetIdentifiers';
-import AssetDetails from './components/AssetDetails';
-import Timeline from './components/Timeline';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
+import { AssetImage, AdditionalImages, AssetIdentifiers, AssetDetails, Timeline } from './components';
 
 interface AssetProps extends RouteComponentProps<{ assetId: string }> {
   AssetStore: AssetStore;

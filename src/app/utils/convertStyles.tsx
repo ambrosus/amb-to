@@ -1,3 +1,10 @@
+/**
+ * Converts CSS styles to valid react styles.
+ *
+ * @param {object} styles
+ *
+ * @returns {object}
+ */
 const convertStyles = (styles: object): object => {
   const newStyles = {};
   Object.keys(styles).map((key: string) => {
