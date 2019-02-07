@@ -14,6 +14,7 @@ export class AssetStore {
       try {
         AssetService.getAsset(assetId).then(asset => {
           this.asset = asset;
+          resolve(true);
         }).catch(error => reject(error));
         AssetService.getEvents({ assetId }).then((result: any) => {
           this.events = result.events;

@@ -5,7 +5,6 @@ import { lazyLoad } from './utils';
 const Home: any = lazyLoad(() => import('./containers/Home'));
 const AssetWrapper: any = lazyLoad(() => import('./containers/AssetWrapper'));
 import './App.scss';
-import { Footer } from './components';
 
 class App extends React.Component<any, any> {
   public state = {
@@ -26,7 +25,6 @@ class App extends React.Component<any, any> {
             <Redirect from='*' to='/' />
           </Switch>
         </main>
-        <Footer />
       </div>
     );
   }

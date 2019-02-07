@@ -1,6 +1,12 @@
 
 import React from 'react';
 
+/**
+ * Ellipsis a string
+ *
+ * @param {string} key
+ *
+ */
 const stringEllipsis = (key: string) => {
   return (
     <span className='middleEllipsis'>

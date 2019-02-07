@@ -5,7 +5,7 @@ import './Spinner.scss';
 
 const Spinner = () => {
   return (
-    <SVG className='spinner' src={spinnerLogo} wrapper='span' />
+    <SVG className='Spinner' src={spinnerLogo} wrapper='span' />
   );
 };
 

@@ -1,3 +1,11 @@
+/**
+ * Filter out objects from list
+ *
+ * @param {Array} items
+ * @param {Array} filter
+ *
+ * @returns {Array}
+ */
 export const loopExclude = (items: any[], filter: any[]): any[] => {
   if (!items || !filter) {
     return items;
@@ -9,6 +17,14 @@ export const loopExclude = (items: any[], filter: any[]): any[] => {
   });
 };
 
+/**
+ * Returns filtered list
+ *
+ * @param {Array} items
+ * @param {Array} filter
+ *
+ * @returns {Array}
+ */
 export const loopInclude = (items: any[], filter: any[]): any[] => {
   if (!items || !filter) {
     return items;

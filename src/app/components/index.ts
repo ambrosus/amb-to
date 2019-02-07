@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Item from './Item';
 import Spinner from './Spinner';
 import TableRow from './TableRow';
+import Loader from './Loader';
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   Item,
   Spinner,
   TableRow,
+  Loader,
 };

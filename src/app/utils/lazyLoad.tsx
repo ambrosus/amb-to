@@ -1,14 +1,18 @@
 import Loadable from 'react-loadable';
-import React from 'react';
+import { Loader } from '../components';
 
-const loading = () => {
-  return <p>Loading</p>;
-};
-
-const lazyLoad = (func: any) =>
+/**
+ * Lazy load a component
+ *
+ * @param {any} func
+ *
+ * @returns {any}
+ */
+const lazyLoad = (func: any): any =>
   Loadable({
-    loading,
+    loading: Loader,
     loader: func,
+    delay: 300,
   });
 
 export default lazyLoad;

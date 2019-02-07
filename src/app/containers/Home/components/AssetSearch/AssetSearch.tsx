@@ -42,7 +42,7 @@ class AssetSearch extends Component<AssetProps, AssetStates> {
     const { history } = this.props;
     try {
       await this.props.AssetStore!.setAsset(assetId);
-      if (this.props.AssetStore!.asset.events.length) {
+      if (this.props.AssetStore!.asset) {
         setTimeout(() => {
           history.push(`/${assetId}`);
         });

@@ -3,9 +3,17 @@ const is_url = (str: string) => {
   return !!regexp.test(str);
 };
 
-const generateLink = (url: string) => {
-  if (is_url(url)) {
-    return `<a target="_blank" href="${url}">${url}</a>`;
+/**
+ * Generate anchor tags for URL string
+ *
+ * @param {string} url
+ *
+ * @returns {string}
+ */
+const generateLink = (url: string): string => {
+  const testURL = url.toString().indexOf('url:') > -1 ? url.split('url:')[1] : url;
+  if (is_url(testURL.toString().trim())) {
+    return `<a target="_blank" href="${testURL}">${url}</a>`;
   }
   return url;
 };

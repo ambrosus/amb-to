@@ -4,6 +4,7 @@ import { scrollTop } from '../../utils';
 import { observer, inject } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
 import { HomeHeader, AssetSearch, SearchHistory } from './components';
+import { Footer } from '../../components';
 
 const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
   scrollTop();
@@ -13,6 +14,7 @@ const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((pr
       <HomeHeader />
       <AssetSearch />
       <SearchHistory />
+      <Footer />
     </div>
   );
 }));

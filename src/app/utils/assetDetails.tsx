@@ -11,6 +11,11 @@ import withering from 'assets/svg/withering.svg';
 import recall from 'assets/svg/recall.svg';
 import processImage from 'assets/svg/process.svg';
 
+/**
+ * Event Details
+ *
+ * @type {object}
+ */
 const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
   'default': {
     'iconUrl': pin,

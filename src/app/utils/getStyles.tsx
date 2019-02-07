@@ -1,7 +1,14 @@
 import store from '../store';
 import convertStyles from './convertStyles';
 
-const getStyles = (key: string) => {
+/**
+ * Retruns branding styles
+ *
+ * @param {string} key
+ *
+ * @returns {Object}
+ */
+const getStyles = (key: string): object => {
   const { brandings } = store.AssetStore;
   const fStyles = {};
   try {

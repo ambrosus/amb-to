@@ -1,3 +1,10 @@
+/**
+ * Check of location object exists
+ *
+ * @param {any} event
+ *
+ * @returns {boolean}
+ */
 const locationExists = (event: any): boolean => {
   const flag = checkObjects(event);
   return flag && Array.isArray(event.location.location.geometry.coordinates) && event.location.location.geometry.coordinates.length === 2;

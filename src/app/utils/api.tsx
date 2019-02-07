@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import { StorageService } from '../services';
 
 const api = () => {
   const instance: AxiosInstance = axios.create({

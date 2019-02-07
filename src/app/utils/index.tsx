@@ -10,8 +10,6 @@ import valueJSON from './getJson';
 import { isObject } from 'util';
 import scrollTop from './scrollTop';
 import api from './api';
-import web3 from './web3';
-import generateToken from './generateToken';
 
 export {
   valueJSON,
@@ -27,6 +25,4 @@ export {
   scrollTop,
   stringEllipsis,
   api,
-  web3,
-  generateToken,
 };

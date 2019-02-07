@@ -57,8 +57,11 @@ class AssetService {
       const eventURL = `${config.EXTENDED_API}/event/latest/type`;
 
       api.postRequest(eventURL, brandingBody).then(brandingResponse => {
-        const brandings = this.ambrosus.utils.findEvent('branding', brandingResponse.data.data);
-        resolve(brandings);
+        if (brandingResponse.data.data.length) {
+          const brandings = this.ambrosus.utils.findEvent('branding', brandingResponse.data.data);
+          resolve(brandings);
+        }
+        resolve({});
       }).catch(err => reject(err));
     });
   }
@@ -109,7 +112,7 @@ class AssetService {
         const parsedEvents = this.ambrosus.utils.parseEvents(data);
         const details = {
           pagination: eventsResponse.data.pagination,
-          events: parsedEvents.events.sort((a: any, b: any) => a.timestamp - b.timestamp).reverse(),
+          events: parsedEvents.events,
         };
         resolve(details);
       }).catch(err => {
@@ -122,10 +125,9 @@ class AssetService {
     const history = { title, id: assetId };
     const tempHistory: any = StorageService.get('history');
     if (tempHistory && tempHistory.length > 0) {
-      if (tempHistory.filter((e: any) => e.id === assetId).length === 0) {
-        tempHistory.push(history);
-        StorageService.set('history', tempHistory);
-      }
+      const newHistory = tempHistory.filter((e: any) => e.id !== assetId);
+      newHistory.unshift(history);
+      StorageService.set('history', newHistory);
     } else {
       StorageService.set('history', [history]);
     }

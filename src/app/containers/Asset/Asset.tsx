@@ -73,7 +73,7 @@ class Asset extends Component<AssetProps, AssetStates> {
         </div>
       );
     }
-    return null;
+    return <div />;
   }
 }
 
