@@ -53,7 +53,7 @@ class Event extends Component<EventProps, EventStates> {
     return (
       <div className='Event' style={getStyles('content')}>
         <div className='wrapper'>
-          <Link className='button' to={`/${assetId}`}>Back to Asset</Link>
+          <Link className='back-button' to={`/${assetId}`}>Back to Asset</Link>
           {!event && <h3>No event data</h3>}
           <DisplayBar event={event} />
           <div className='Event-container'>
