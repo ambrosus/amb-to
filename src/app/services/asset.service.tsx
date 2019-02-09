@@ -1,7 +1,7 @@
 import config from '../config';
 import { StorageService } from '.';
 import * as AmbrosusSDK from 'ambrosus-javascript-sdk';
-import { api } from '../utils';
+import { apiInstance } from '../utils';
 
 class AssetService {
   public ambrosus: any;
@@ -27,13 +27,13 @@ class AssetService {
       assets: [assetId],
     };
     return new Promise((resolve, reject) => {
-      api.postRequest(assetURl, assetBody).then(queryResponse => {
+      apiInstance.postRequest(assetURl, assetBody).then(queryResponse => {
         const assets = queryResponse.data;
         if (!assets.data || !Array.isArray(assets.data) || !assets.data.length) {
           reject('No Asset');
         }
 
-        api.postRequest(infoURL, infoBody).then(infoResponse => {
+        apiInstance.postRequest(infoURL, infoBody).then(infoResponse => {
           const info = this.ambrosus.utils.findEvent('info', infoResponse.data.data);
           assets.data[0]['info'] = info;
           this.ambrosus.utils.parseAsset(assets.data[0]);
@@ -56,7 +56,7 @@ class AssetService {
       };
       const eventURL = `${config.EXTENDED_API}/event/latest/type`;
 
-      api.postRequest(eventURL, brandingBody).then(brandingResponse => {
+      apiInstance.postRequest(eventURL, brandingBody).then(brandingResponse => {
         if (brandingResponse.data.data.length) {
           const brandings = this.ambrosus.utils.findEvent('branding', brandingResponse.data.data);
           resolve(brandings);
@@ -69,7 +69,7 @@ class AssetService {
   public getEvent(eventId: string) {
     const eventURL = `${config.EXTENDED_API}/event/${eventId}`;
     return new Promise((resolve, reject) => {
-      api.getRequest(eventURL).then(eventResponse => {
+      apiInstance.getRequest(eventURL).then(eventResponse => {
         const events = eventResponse.data;
         if (Object.keys(events.data).length) {
           const data = {
@@ -105,14 +105,14 @@ class AssetService {
         ],
       };
 
-      api.postRequest(eventURL, body).then(eventsResponse => {
+      apiInstance.postRequest(eventURL, body).then(eventsResponse => {
         const data = {
           results: [...eventsResponse.data.data],
         };
         const parsedEvents = this.ambrosus.utils.parseEvents(data);
         const details = {
           pagination: eventsResponse.data.pagination,
-          events: parsedEvents.events,
+          events: parsedEvents.events.sort(this.ambrosus.utils.sortEventsByTimestamp),
         };
         resolve(details);
       }).catch(err => {

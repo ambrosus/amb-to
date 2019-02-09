@@ -73,7 +73,7 @@ const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((
     return (
       <li className='socials__list__link' key={i}>
         <a href={social.url} target='_blank' rel='noopener noreferrer'>
-          <SVG src={social.icon} />
+          <SVG wrapper='span' src={social.icon} />
         </a>
       </li>
     );

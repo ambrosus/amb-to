@@ -8,11 +8,10 @@ import { Loader } from '../components';
  *
  * @returns {any}
  */
-const lazyLoad = (func: any): any =>
-  Loadable({
-    loading: Loader,
-    loader: func,
-    delay: 300,
-  });
+const lazyLoad = (func: any): any => Loadable({
+  loading: Loader,
+  loader: func,
+  delay: 300,
+});
 
 export default lazyLoad;

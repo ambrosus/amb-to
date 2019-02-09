@@ -16,7 +16,7 @@ import processImage from 'assets/svg/process.svg';
  *
  * @type {object}
  */
-const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
+const assetDetails: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
   'default': {
     'iconUrl': pin,
     'backgroundColor': '#b86c30',
@@ -119,4 +119,4 @@ const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fo
   },
 };
 
-export default assetData;
+export default assetDetails;

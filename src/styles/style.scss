@@ -102,19 +102,6 @@ template {
   margin-top: 15px;
   margin-bottom: 35px;
   align-self: normal;
-
-  & input[type='text'] {
-    height: 40px;
-    border: 1px solid;
-    padding: 12px 12px 11px;
-    font-size: 13px;
-    line-height: 1;
-    font-weight: 500;
-    text-overflow: ellipsis;
-    margin-right: -3px;
-    width: 100%;
-    max-width: 300px;
-  }
 }
 
 .errors {

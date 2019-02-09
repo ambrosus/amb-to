@@ -48,8 +48,8 @@ class Event extends Component<EventProps, EventStates> {
 
   public render() {
     const { assetId, eventId } = this.props.match.params;
-    const { event } = this.props.AssetStore!;
-    if (!event) { return <Preloader />; }
+    const { event, asset } = this.props.AssetStore!;
+    if (!asset || !event) { return <Preloader />; }
     return (
       <div className='Event' style={getStyles('content')}>
         <div className='wrapper'>

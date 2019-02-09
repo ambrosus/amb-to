@@ -1,4 +1,4 @@
-import { Header } from './Header';
+import Header from './Header';
 import Preloader from './Preloader';
 import Maps from './Maps';
 import Footer from './Footer';

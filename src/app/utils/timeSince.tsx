@@ -6,7 +6,7 @@
  * @returns {string}
  */
 
-export default function timeSince(date: number) {
+const timeSince = (date: number): string => {
   const seconds = Math.floor((new Date().getTime() - date) / 1000);
   let interval = Math.floor(seconds / 31536000);
 
@@ -30,4 +30,6 @@ export default function timeSince(date: number) {
     return `${interval} minutes`;
   }
   return `${Math.floor(seconds)} seconds`;
-}
+};
+
+export default timeSince;

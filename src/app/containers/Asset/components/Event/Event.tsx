@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Maps from '../../../../components/Maps';
 import pinLogo from 'assets/svg/pin.svg';
-import { timeSince, formatDate, assetData } from '../../../../utils';
+import { timeSince, formatDate, assetDetails, locationExists } from '../../../../utils';
 
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
-import locationExists from '../../../../utils/checkExists';
 import { inject, observer } from 'mobx-react';
 
 @inject('AssetStore')
@@ -21,10 +20,10 @@ export default class Event extends Component<any, any> {
   }
 
   private eventTypeToStyle(value: string) {
-    if (assetData[value] === undefined) {
-      return assetData['default'];
+    if (assetDetails[value] === undefined) {
+      return assetDetails['default'];
     }
-    return assetData[value];
+    return assetDetails[value];
   }
 
   public expandEvent = () => {

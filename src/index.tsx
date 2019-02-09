@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import 'react-tabs/style/react-tabs.css';
 import './styles/style.scss';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';

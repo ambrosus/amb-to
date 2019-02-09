@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 import './DisplayBar.scss';
-import { assetData, timeSince } from '../../../../utils';
+import { assetDetails, timeSince } from '../../../../utils';
 import pinIcon from 'assets/svg/pin.svg';
 
 interface DisplayProps {
@@ -9,10 +9,10 @@ interface DisplayProps {
 const DisplayBar: SFC<DisplayProps> = ({ event }) => {
 
   const eventTypeToStyle = (value: string) => {
-    if (assetData[value] === undefined) {
-      return assetData['default'];
+    if (assetDetails[value] === undefined) {
+      return assetDetails['default'];
     }
-    return assetData[value];
+    return assetDetails[value];
   };
   return (
     <div className='DisplayBar' style={{ 'backgroundColor': eventTypeToStyle(event.type).backgroundColor }}>

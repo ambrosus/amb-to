@@ -9,7 +9,8 @@ interface TableRowProps {
   rowClass?: string[];
 }
 
-const TableRow: SFC<TableRowProps> = ({ title, value, titleClass = [], cellClass = [], rowClass = [] }) => {
+const TableRow: SFC<TableRowProps> = ({ title, value, titleClass = [],
+  cellClass = [], rowClass = [] }) => {
   const rClass = ['table-row', ...rowClass].join(' ').trim();
   const tClass = ['table-cell--title', ...titleClass].join(' ').trim();
   const cClass = ['table-cell', ...cellClass].join(' ').trim();

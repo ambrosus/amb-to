@@ -1,7 +1,7 @@
 import React, { SFC, Fragment } from 'react';
 import './Location.scss';
 import Item from '../../../../components/Item';
-import locationExists from '../../../../utils/checkExists';
+import { locationExists } from '../../../../utils';
 import { Maps } from '../../../../components';
 import TableRow from '../../../../components/TableRow';
 

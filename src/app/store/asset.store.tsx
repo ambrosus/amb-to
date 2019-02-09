@@ -11,23 +11,19 @@ export class AssetStore {
   @action
   public setAsset = (assetId: string) => {
     return new Promise(async (resolve, reject) => {
-      try {
-        AssetService.getAsset(assetId).then(asset => {
-          this.asset = asset;
-          resolve(true);
-        }).catch(error => reject(error));
-        AssetService.getEvents({ assetId }).then((result: any) => {
-          this.events = result.events;
-          this.pagination = result.pagination;
-        }).catch(err => reject(err));
-        AssetService.getBranding(assetId).then(brandings => {
-          this.brandings = brandings;
-        }).catch(err => {
-          this.brandings = {};
-        });
-      } catch (error) {
-        reject(error);
-      }
+      AssetService.getAsset(assetId).then(asset => {
+        this.asset = asset;
+        resolve(true);
+      }).catch(error => reject(error));
+      AssetService.getEvents({ assetId }).then((result: any) => {
+        this.events = result.events;
+        this.pagination = result.pagination;
+      }).catch(err => reject(err));
+      AssetService.getBranding(assetId).then(brandings => {
+        this.brandings = brandings;
+      }).catch(err => {
+        this.brandings = {};
+      });
     });
   }
 
@@ -56,11 +52,9 @@ export class AssetStore {
   }
 
   @action public resetStore = () => {
-    this.asset = null;
-    this.events = null;
-    this.brandings = null;
-    this.pagination = null;
-    this.event = null;
+    Object.keys(this).map(key => {
+      this[key] = null;
+    });
   }
 }
 

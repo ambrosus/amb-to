@@ -1,22 +1,23 @@
 import timeSince from './timeSince';
 import formatDate from './formatDate';
-import assetData from './assetDetails';
+import assetDetails from './assetDetails';
 import lazyLoad from './lazyLoad';
 import { loopExclude, loopInclude } from './loopCheck';
 import generateLink from './generateLink';
 import getStyles from './getStyles';
 import stringEllipsis from './stringEllipsis';
 import valueJSON from './getJson';
-import { isObject } from 'util';
 import scrollTop from './scrollTop';
-import api from './api';
+import apiInstance from './apiInstance';
+import isObject from './isObject';
+import locationExists from './locationExists';
 
 export {
   valueJSON,
   isObject,
   timeSince,
   formatDate,
-  assetData,
+  assetDetails,
   lazyLoad,
   loopExclude,
   loopInclude,
@@ -24,5 +25,6 @@ export {
   getStyles,
   scrollTop,
   stringEllipsis,
-  api,
+  apiInstance,
+  locationExists
 };

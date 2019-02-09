@@ -4,6 +4,7 @@ import Spinner from '../../../../components/Spinner';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../../../store/asset.store';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { Input, Button } from '@ambrosus/react';
 
 interface AssetProps extends RouteComponentProps {
   AssetStore?: AssetStore;
@@ -56,6 +57,7 @@ class AssetSearch extends Component<AssetProps, AssetStates> {
 
   public handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
+    console.log(value);
     this.setState({ searchValue: value });
   }
 
@@ -75,8 +77,8 @@ class AssetSearch extends Component<AssetProps, AssetStates> {
           <div className='page'>
             <h3 className='title'>Search for an asset</h3>
             <div className='form-search'>
-              <input onKeyDown={this.onKeyDown} onChange={this.handleChange} value={searchValue} type='text' placeholder='Asset ID' />
-              <button onClick={this.searchAsset} className='btn'>Search</button>
+              <Input className='search-input' onKeyDown={this.onKeyDown} changed={this.handleChange} value={searchValue} placeholder='Asset ID' />
+              <Button className='search-button' onClick={this.searchAsset}>Search</Button>
             </div>
             {spinner && <Spinner />}
             <div className='errors'>

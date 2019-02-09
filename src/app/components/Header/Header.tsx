@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import iconLogo from 'assets/images/amb-logo.png';
 import './Header.scss';
-// import SVG from 'react-svg';
-// import hamburger from 'assets/svg/hamburger_menu.svg';
 import convertStyles from '../../utils/convertStyles';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
@@ -49,10 +47,6 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
     } catch (error) {
       return iconLogo;
     }
-  }
-
-  public toggleMenu = () => {
-    this.setState({ revealMenu: !this.state.revealMenu });
   }
 
   public render() {

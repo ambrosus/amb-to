@@ -10,7 +10,7 @@
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export default function formatDate(timestamp: number, showDate = false, showTime = false) {
+const formatDate = (timestamp: number, showDate = false, showTime = false) => {
   const date = new Date(timestamp);
   const dayName = days[date.getDay()];
   const day = (`0${date.getDate()}`).slice(-2);
@@ -24,4 +24,6 @@ export default function formatDate(timestamp: number, showDate = false, showTime
     return `${showDate ? `${dayName}, ${day} ${months[month]} ${year} ` : ''}${hours}:${minutes}:${seconds}`;
   }
   return `${showDate ? `${day} ${months[month]} ${year} ` : ''}`;
-}
+};
+
+export default formatDate;
