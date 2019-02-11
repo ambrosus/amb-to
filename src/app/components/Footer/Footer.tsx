@@ -10,7 +10,6 @@ import redditIcon from 'assets/svg/reddit-icon.svg';
 import telegramIcon from 'assets/svg/telegram-icon.svg';
 import twitterIcon from 'assets/svg/twitter-icon.svg';
 import youtubeIcon from 'assets/svg/youtube-icon.svg';
-
 import './Footer.scss';
 import convertStyles from '../../utils/convertStyles';
 import { observer, inject } from 'mobx-react';

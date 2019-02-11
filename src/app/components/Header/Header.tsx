@@ -23,8 +23,8 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
   };
 
   public getNavbarStyle = () => {
-    const { brandings } = this.props.AssetStore!;
     try {
+      const { brandings } = this.props.AssetStore!;
       return convertStyles(brandings.nav) || {};
     } catch (error) {
       return {};
@@ -32,8 +32,8 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
   }
 
   public getLogoStyle = () => {
-    const { brandings } = this.props.AssetStore!;
     try {
+      const { brandings } = this.props.AssetStore!;
       return convertStyles(brandings.logo) || {};
     } catch (error) {
       return {};
@@ -41,8 +41,8 @@ export default class Header extends Component<HeaderProps, HeaderStates> {
   }
 
   public getNavbarLogo = () => {
-    const { brandings } = this.props.AssetStore!;
     try {
+      const { brandings } = this.props.AssetStore!;
       return brandings.logo.url || iconLogo;
     } catch (error) {
       return iconLogo;

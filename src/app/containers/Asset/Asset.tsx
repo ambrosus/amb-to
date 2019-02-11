@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import './Asset.scss';
 import { getStyles, scrollTop } from '../../utils';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
-import { AssetImage, AdditionalImages, AssetIdentifiers, AssetDetails, Timeline } from './components';
-
+import { AdditionalImages, AssetIdentifiers, AssetDetails, Timeline } from './components';
+import { Loader } from '../../components';
+const AssetImage: any = lazy(() => import('./components/AssetImage'));
 interface AssetProps extends RouteComponentProps<{ assetId: string }> {
   AssetStore: AssetStore;
 }
@@ -52,7 +53,9 @@ class Asset extends Component<AssetProps, AssetStates> {
           <div className='item' style={getStyles('content')}>
             <div className='wrapper'>
               <div className='item__container'>
-                <AssetImage url={selectedImage ? selectedImage : this.getDefaultImage()} name={asset.info.name} />
+                <Suspense fallback={<Loader />}>
+                  <AssetImage url={selectedImage ? selectedImage : this.getDefaultImage()} name={asset.info.name} />
+                </Suspense>
                 <AdditionalImages images={asset.info.images} onSelect={this.onImageSelect} />
                 <AssetIdentifiers info={asset.info} />
                 <AssetDetails asset={asset} />
@@ -62,7 +65,7 @@ class Asset extends Component<AssetProps, AssetStates> {
               </div>}
             </div>
           </div>
-        </div>
+        </div >
       );
     } if (asset && asset.info && !asset.info.identifiers) {
       return (

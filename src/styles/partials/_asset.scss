@@ -221,9 +221,12 @@
         }
 
         &--icon {
-          height: 14px;
           opacity: 0.4;
-          width: 12px;
+
+          svg {
+            width: 12px;
+            height: 14px;
+          }
         }
       }
     }

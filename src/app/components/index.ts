@@ -6,6 +6,7 @@ import Item from './Item';
 import Spinner from './Spinner';
 import TableRow from './TableRow';
 import Loader from './Loader';
+import BackgroundImage from './BackgroundImage';
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   Spinner,
   TableRow,
   Loader,
+  BackgroundImage
 };

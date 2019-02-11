@@ -1,17 +1,9 @@
-import Loadable from 'react-loadable';
+import React, { Suspense } from 'react';
+
 import { Loader } from '../components';
 
-/**
- * Lazy load a component
- *
- * @param {any} func
- *
- * @returns {any}
- */
-const lazyLoad = (func: any): any => Loadable({
-  loading: Loader,
-  loader: func,
-  delay: 300,
-});
+const lazyLoad = (Component: any) => {
+  return (props: any) => <Suspense fallback={<Loader />}><Component {...props} /></Suspense>;
+};
 
 export default lazyLoad;

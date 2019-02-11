@@ -3,12 +3,11 @@
 
   .search-button {
     border-radius: inherit;
-    height: 100%;
     line-height: initial;
     min-width: 80px;
     margin-left: -5px;
     font-size: 13px;
-    padding: 10px 35px;
+    border: none !important;
   }
 
   .search-input {

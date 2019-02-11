@@ -7,6 +7,7 @@ import { timeSince, formatDate, assetDetails, locationExists } from '../../../..
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
 import { inject, observer } from 'mobx-react';
+import SVG from 'react-svg';
 
 @inject('AssetStore')
 @observer
@@ -54,7 +55,7 @@ export default class Event extends Component<any, any> {
                 <p className='item__event__single__time '>{timeSince(event.timestamp * 1000)} ago</p>
                 {event.location &&
                   <div className='item__event__single__place-container'>
-                    <img src={pinLogo} className='item__event__single__place--icon ' />
+                    <SVG src={pinLogo} className='item__event__single__place--icon ' />
                     {event.location.city || event.location.country ?
                       <p className='item__event__single__place'>
                         {event.location.city && event.location.city}

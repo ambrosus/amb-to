@@ -1,6 +1,8 @@
-import React, { SFC } from 'react';
+import React, { SFC, lazy, Suspense } from 'react';
 import './AdditionalImages.scss';
 import { getStyles } from '../../../../utils';
+import { Loader } from '../../../../components';
+const BackgroundImage = lazy(() => import('../../../../components/BackgroundImage'));
 
 interface AssetsProps {
   images: any[];
@@ -12,7 +14,6 @@ const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect }) => {
   const onChange = (image: string) => (event: any) => {
     onSelect(image);
   };
-
   if (images && Object.keys(images).length > 1) {
     return (
       <div className='AdditionalImages'>
@@ -20,10 +21,10 @@ const AdditionalImages: SFC<AssetsProps> = ({ images, onSelect }) => {
           style={getStyles('components_titles')}>Additional Images</div>
         <div className='AdditionalImages-container'>
           {Object.keys(images).map((image, index) => (
-            <div key={index} onClick={onChange(images[image].url)} className='AdditionalImages-photo' style={{ 'backgroundImage': `url(${images[image].url})` }}>
-            </div>
-          )
-          )}
+            <Suspense key={index} fallback={<Loader />}>
+              <BackgroundImage onChange={onChange(images[image].url)} url={images[image].url} />
+            </Suspense>
+          ))}
         </div>
       </div>
     );

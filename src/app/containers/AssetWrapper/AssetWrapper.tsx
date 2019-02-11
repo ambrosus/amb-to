@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { withRouter, RouteComponentProps, Route } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
 import { Header, Footer } from '../../components';
-import Asset from '../Asset';
-import Event from '../Event';
+import { lazyLoad } from '../../utils';
+
+const Asset: any = lazy(() => import('../Asset'));
+const Event: any = lazy(() => import('../Event'));
 
 interface AssetProps extends RouteComponentProps<{ assetId: string, eventId: string }> {
   AssetStore: AssetStore;
@@ -35,8 +37,8 @@ class AssetWrapper extends Component<AssetProps> {
       return (
         <React.Fragment>
           <Header assetId={assetId} />
-          <Route exact path='/:assetId/events/:eventId' component={Event} />
-          <Route exact path='/:assetId' component={Asset} />
+          <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)} />
+          <Route exact path='/:assetId' render={lazyLoad(Asset)} />
           <Footer />
         </React.Fragment>
       );
