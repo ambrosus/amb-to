@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import iconLogo from 'assets/images/amb-logo.png';
+import iconLogo from 'assets/images/logo.png';
 import './Header.scss';
 import convertStyles from '../../utils/convertStyles';
 import { inject, observer } from 'mobx-react';

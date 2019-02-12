@@ -2,8 +2,9 @@ import React, { Component, lazy } from 'react';
 import { withRouter, RouteComponentProps, Route } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
-import { Header, Footer } from '../../components';
+import Header from '../../components/Header';
 import { lazyLoad } from '../../utils';
+import Footer from '../../components/Footer';
 
 const Asset: any = lazy(() => import('../Asset'));
 const Event: any = lazy(() => import('../Event'));

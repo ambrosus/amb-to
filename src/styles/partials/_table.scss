@@ -33,6 +33,10 @@
     text-align: left;
     text-transform: lowercase;
 
+    & + .table {
+      padding: 0 20px 15px;
+    }
+
     &::first-letter {
       text-transform: uppercase;
     }

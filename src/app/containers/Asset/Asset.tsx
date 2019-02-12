@@ -5,7 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
 import { AdditionalImages, AssetIdentifiers, AssetDetails, Timeline } from './components';
-import { Loader } from '../../components';
+import Loader from '../../components/Loader';
 const AssetImage: any = lazy(() => import('./components/AssetImage'));
 interface AssetProps extends RouteComponentProps<{ assetId: string }> {
   AssetStore: AssetStore;

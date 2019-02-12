@@ -4,18 +4,23 @@ import { scrollTop } from '../../utils';
 import { observer, inject } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
 import { HomeHeader, AssetSearch, SearchHistory } from './components';
-import { Footer } from '../../components';
+import Footer from '../../components/Footer';
 
 const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
   scrollTop();
-  props.AssetStore.resetStore();
+  console.log(process.env.NODE_ENV);
+  setTimeout(() => {
+    props.AssetStore.resetStore();
+  });
   return (
-    <div className='Home'>
-      <HomeHeader />
-      <AssetSearch />
-      <SearchHistory />
+    <React.Fragment>
+      <div className='Home'>
+        <HomeHeader />
+        <AssetSearch />
+        <SearchHistory />
+      </div>
       <Footer />
-    </div>
+    </React.Fragment>
   );
 }));
 

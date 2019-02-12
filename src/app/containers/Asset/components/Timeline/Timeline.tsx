@@ -54,7 +54,7 @@ export default class Timeline extends Component<TimelineProps, TimelineState> {
         {events.map((event: any, i: number) =>
           <Event event={event} assetId={assetId} index={i} key={i} />)}
         {this.showButton() && <div className='btnWrapper'>
-          <Button secondary onClick={this.loadEvent} disabled={btnObj.disabled} loading={btnObj.loading}>Show More</Button>
+          <Button light onClick={this.loadEvent} disabled={btnObj.disabled} loading={btnObj.loading}>Show More</Button>
         </div>}
       </React.Fragment>
     );

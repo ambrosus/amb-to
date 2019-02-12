@@ -1,7 +1,7 @@
 import React, { SFC, lazy, Suspense } from 'react';
 import './AdditionalImages.scss';
 import { getStyles } from '../../../../utils';
-import { Loader } from '../../../../components';
+import Loader from '../../../../components/Loader';
 const BackgroundImage = lazy(() => import('../../../../components/BackgroundImage'));
 
 interface AssetsProps {
