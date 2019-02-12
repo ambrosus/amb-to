@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "npm run dev:start",
-    "build": "source ./.env && react-scripts build",
-    "dev:start": "source ./.env.dev && react-scripts start",
+    "build": "react-scripts build",
+    "dev:start": "react-scripts start",
     "dev:lint": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}'",
-    "test": "source ./.env.test && react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "postinstall": "npm build"
   },
   "eslintConfig": {

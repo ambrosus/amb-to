@@ -57,7 +57,6 @@ class AssetSearch extends Component<AssetProps, AssetStates> {
 
   public handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    console.log(value);
     this.setState({ searchValue: value });
   }
 

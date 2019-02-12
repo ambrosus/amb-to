@@ -70,6 +70,7 @@ export default class Event extends Component<any, any> {
 
             {locationExists(event) &&
               <Maps
+                googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
                 containerElement={<div className='item-map' />}
                 loadingElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}

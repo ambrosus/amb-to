@@ -8,10 +8,10 @@ This Source Code Form is “Incompatible With Secondary Licenses”, as defined 
 */
 
 const config = Object.freeze({
-  MAPS_KEY: process.env.MAPS_KEY || '',
-  API_ENDPOINT: process.env.API_ENDPOINT || 'https://gateway-test.ambrosus.com',
+  MAPS_KEY: process.env.REACT_APP_MAPS_KEY || '',
+  API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT || 'https://gateway-test.ambrosus.com',
   NAMESPACE: 'amb_to_',
-  EXTENDED_API: process.env.EXTENDED_API || 'https://hermes.ambrosus-test.com/extended',
+  EXTENDED_API: process.env.REACT_APP_EXTENDED_API || 'https://hermes.ambrosus-test.com/extended',
 });
 
 export default config;

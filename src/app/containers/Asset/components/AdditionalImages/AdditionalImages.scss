@@ -1,4 +1,4 @@
-@import "styles/utils";
+@import "~styles/utils";
 
 .AdditionalImages {
   padding-top: 30px;
@@ -22,7 +22,7 @@
     margin: 0 3px 30px;
     height: 84px;
     width: 84px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     margin: 0 5px 30px;

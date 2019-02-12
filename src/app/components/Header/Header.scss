@@ -1,11 +1,7 @@
-@import 'styles/utils';
+@import '~styles/utils';
 
 .navigation {
-  position: fixed;
-  top: 0;
-  width: 100%;
   height: 70px;
-  z-index: 300;
   background-color: #c1cdcd;
 
   .wrapper {
