@@ -4,10 +4,10 @@ import TableRow from '../../../../components/TableRow';
 import Item from '../../../../components/Item';
 
 interface AssetProps {
-  asset: any;
+  info: any;
 }
 
-const AssetIdentifiers: SFC<AssetProps> = ({ asset }) => {
+const AssetIdentifiers: SFC<AssetProps> = ({ info }) => {
   const linkIdentifer = (key: any, value: any) => {
     const newKey = key.toLowerCase();
     try {
@@ -20,13 +20,13 @@ const AssetIdentifiers: SFC<AssetProps> = ({ asset }) => {
     }
   };
 
-  if (asset.identifiers.identifiers) {
+  if (info.identifiers.identifiers) {
     return (
-      <Item asset={asset} title='Identifiers'>
+      <Item title='Identifiers'>
         <div className='table'>
-          {Object.entries(asset.identifiers.identifiers).map(([key, value]) => {
+          {Object.entries(info.identifiers.identifiers).map(([key, value]) => {
             return (
-              <TableRow key={key} title={key} value={linkIdentifer(key, value)} asset={asset} />
+              <TableRow key={key} title={key} value={linkIdentifer(key, value)} />
             );
           })}
         </div>

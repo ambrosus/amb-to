@@ -1,3 +1,20 @@
 .AssetSearch {
-  flex: 1;
+  .search-button {
+    border-radius: inherit;
+    line-height: initial;
+    min-width: 80px;
+    margin-left: -5px;
+    font-size: 13px;
+    border: none !important;
+  }
+
+  .search-input {
+    > div {
+      margin-top: 0px;
+
+    }
+
+    max-width: 300px;
+    margin-top: 0px;
+  }
 }

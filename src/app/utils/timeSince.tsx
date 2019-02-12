@@ -6,32 +6,30 @@
  * @returns {string}
  */
 
-export default function timeSince(date: number) {
-
-  let seconds = Math.floor((+new Date() - date) / 1000);
+const timeSince = (date: number): string => {
+  const seconds = Math.floor((new Date().getTime() - date) / 1000);
   let interval = Math.floor(seconds / 31536000);
 
-  if (interval >= 1) {
-    return `${interval} year${(interval > 1 ? 's' : '')}`;
+  if (interval > 1) {
+    return `${interval} years`;
   }
   interval = Math.floor(seconds / 2592000);
-  if (interval >= 1) {
-    return `${interval} month${(interval > 1 ? 's' : '')}`;
+  if (interval > 1) {
+    return `${interval} months`;
   }
   interval = Math.floor(seconds / 86400);
-  if (interval >= 1) {
-    return `${interval} day${(interval > 1 ? 's' : '')}`;
+  if (interval > 1) {
+    return `${interval} days`;
   }
   interval = Math.floor(seconds / 3600);
-  if (interval >= 1) {
-    return `${interval} hour${(interval > 1 ? 's' : '')}`;
+  if (interval > 1) {
+    return `${interval} hours`;
   }
   interval = Math.floor(seconds / 60);
-  if (interval >= 1) {
-    return `${interval} minute${(interval > 1 ? 's' : '')}`;
+  if (interval > 1) {
+    return `${interval} minutes`;
   }
+  return `${Math.floor(seconds)} seconds`;
+};
 
-  seconds = seconds < 1 ? 1 : seconds;
-
-  return `${Math.floor(seconds)} second${(seconds !== 1 ? 's' : '')}`;
-}
+export default timeSince;

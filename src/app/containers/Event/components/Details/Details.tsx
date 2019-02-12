@@ -2,29 +2,27 @@ import React, { SFC, Fragment } from 'react';
 import './Details.scss';
 import Item from '../../../../components/Item';
 import TableRow from '../../../../components/TableRow';
-import { loopExclude, getStyles, valueJSON } from '../../../../utils';
-import { isObject } from 'util';
+import { loopExclude, getStyles, valueJSON, formatDate, isObject } from '../../../../utils';
 
 interface DetailsProps {
-  asset: any;
   event: any;
 }
-const Details: SFC<DetailsProps> = ({ asset, event }) => {
+const Details: SFC<DetailsProps> = ({ event }) => {
   return (
-    <Item title='Event Details' asset={asset}>
+    <Item title='Event Details'>
       <Fragment>
         <div className='table'>
-          <TableRow asset={asset} title='Event Id' value={event.eventId} />
-          <TableRow asset={asset} title='Created by' value={event.author} />
-          <TableRow asset={asset} title='Timestamp' value={event.timestamp * 1000} />
-          <TableRow asset={asset} title='Type' value={event.action} />
+          <TableRow title='Event Id' value={event.eventId} />
+          <TableRow title='Created by' value={event.author} />
+          <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)} />
+          <TableRow title='Type' value={event.action} />
         </div>
         <div className='table'>
           <hr className='table-seperator ' />
           {loopExclude(event, ['location', 'eventId', 'type', 'documents']).map(([key, value]) => {
             return (
               !isObject(value) && !Array.isArray(value) && (
-                <TableRow key={key} title={key} value={value} asset={asset} />
+                <TableRow key={key} title={key} value={value} />
               ));
           })}
         </div>
@@ -35,11 +33,11 @@ const Details: SFC<DetailsProps> = ({ asset, event }) => {
                 return (
                   <div key={key}>
                     <hr className='table-seperator ' />
-                    <h3 className='table-subtitle' style={getStyles('components_subtitles', asset)}>{key}</h3>
+                    <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{key}</h3>
                     <div className='table'>
                       {Object.entries(value).map(([k, v]) => (
                         !Array.isArray(value) && (
-                          <TableRow key={k} title={k} asset={asset} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v} />
+                          <TableRow key={k} title={k} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v} />
                         ))
                       )}
                     </div>

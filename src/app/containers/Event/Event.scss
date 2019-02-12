@@ -1,11 +1,35 @@
-@import 'styles/utils';
+@import '~styles/utils';
 
 .Event {
-  padding-top: 100px;
+  padding-top: 60px;
 
   .wrapper {
+    width: 95%;
+
     > h3 {
       text-align: center;
+    }
+  }
+
+  .back-button {
+    background-color: #fff;
+    border-radius: 8px;
+    color: #3e55a6;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2;
+    padding: 10px 20px 10px 15px;
+    text-align: center;
+    text-decoration: none;
+
+    &:before {
+      color: #3e55a6;
+      content: '<';
+      font-size: 15px;
+      height: 8px;
+      line-height: 2;
+      padding-right: 10px;
+      width: 14px;
     }
   }
 

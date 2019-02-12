@@ -4,7 +4,6 @@ class StorageService {
   private namespace = config.NAMESPACE;
   private storage: any = localStorage;
 
-  // localStorage wrapper
   public set(key: string, value: any) {
     this.storage.setItem(`${this.namespace}${key}`, JSON.stringify(value));
   }
@@ -18,10 +17,11 @@ class StorageService {
   }
 
   public get(key: string) {
+    const value = this.storage.getItem(`${this.namespace}${key}`);
     try {
-      return JSON.parse(this.storage.getItem(`${this.namespace}${key}`));
+      return JSON.parse(value);
     } catch (err) {
-      return this.storage.getItem(`${this.namespace}${key}`);
+      return value;
     }
   }
 
@@ -30,7 +30,12 @@ class StorageService {
   }
 
   public clear() {
-    this.storage.clear();
+    const items = { ...this.storage };
+    Object.keys(items).map((value) => {
+      if (value.indexOf(this.namespace) > -1) {
+        this.delete(value.split(this.namespace)[1]);
+      }
+    });
   }
 }
 

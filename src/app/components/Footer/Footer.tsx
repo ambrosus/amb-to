@@ -10,8 +10,10 @@ import redditIcon from 'assets/svg/reddit-icon.svg';
 import telegramIcon from 'assets/svg/telegram-icon.svg';
 import twitterIcon from 'assets/svg/twitter-icon.svg';
 import youtubeIcon from 'assets/svg/youtube-icon.svg';
-
 import './Footer.scss';
+import convertStyles from '../../utils/convertStyles';
+import { observer, inject } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
 
 const socialsLinks = [
   {
@@ -56,11 +58,11 @@ const socialsLinks = [
   },
 ];
 
-const Footer: SFC<{ asset?: any }> = ({ asset }) => {
+const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
 
   const getFooterStyle = () => {
     try {
-      return asset.branding.footer || {};
+      return convertStyles(props.AssetStore.brandings.footer) || {};
     } catch (error) {
       return {};
     }
@@ -70,7 +72,7 @@ const Footer: SFC<{ asset?: any }> = ({ asset }) => {
     return (
       <li className='socials__list__link' key={i}>
         <a href={social.url} target='_blank' rel='noopener noreferrer'>
-          <SVG src={social.icon} />
+          <SVG wrapper='span' src={social.icon} />
         </a>
       </li>
     );
@@ -94,6 +96,6 @@ const Footer: SFC<{ asset?: any }> = ({ asset }) => {
       </div>
     </div>
   );
-};
+}));
 
 export default Footer;

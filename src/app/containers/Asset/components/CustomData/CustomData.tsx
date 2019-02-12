@@ -13,11 +13,11 @@ const CustomData: SFC<AssetProps> = ({ asset }) => {
       return (
         <div key={index}>
           <hr className='table-seperator ' />
-          <h3 className='table-subtitle' style={getStyles('components_subtitles', asset)}>{row.title}</h3>
+          <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{row.title}</h3>
           <div className='table '>
             {row.values.map((custom: any) => {
               return (
-                <TableRow title={custom.title} value={isObject(custom.value) ? valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value} key={custom.title} asset={asset} />
+                <TableRow title={custom.title} value={isObject(custom.value) ? valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value} key={custom.title} />
               );
             })}
           </div>

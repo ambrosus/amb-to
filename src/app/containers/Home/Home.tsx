@@ -1,26 +1,27 @@
-import React from 'react';
-import { History } from 'history';
-
+import React, { SFC } from 'react';
 import './Home.scss';
-import AssetSearch from './components/AssetSearch';
-import SearchHistory from './components/SearchHistory';
-import HomeHeader from './components/HomeHeader';
-import { Footer } from '../../components';
+import { scrollTop } from '../../utils';
+import { observer, inject } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
+import { HomeHeader, AssetSearch, SearchHistory } from './components';
+import Footer from '../../components/Footer';
 
-interface HomeProps {
-  history: History;
-}
-
-export default class Search extends React.Component<HomeProps, any> {
-  public render() {
-    const { history } = this.props;
-    return (
+const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
+  scrollTop();
+  console.log(process.env.NODE_ENV);
+  setTimeout(() => {
+    props.AssetStore.resetStore();
+  });
+  return (
+    <React.Fragment>
       <div className='Home'>
         <HomeHeader />
-        <AssetSearch history={history} />
+        <AssetSearch />
         <SearchHistory />
-        <Footer />
       </div>
-    );
-  }
-}
+      <Footer />
+    </React.Fragment>
+  );
+}));
+
+export default Home;

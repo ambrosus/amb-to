@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { SFC } from 'react';
 import './HistoryItems.scss';
 import { Link } from 'react-router-dom';
+import { stringEllipsis } from '../../../../utils';
 
 interface HistoryProps {
-  history: any;
+  history: { id: string, title: string };
 }
 
-export default class extends Component<HistoryProps> {
-  public render() {
-    const { history } = this.props;
-    return (
-      <Link className='HistoryItems' to={`/${history.id}`}>
-        <div>{history.title}</div>
-        <div className='asset-wrapper'>
-          <small className='asset-id'>{history.id}</small>
-        </div>
-      </Link>
-    );
-  }
-}
+const HistoryItems: SFC<HistoryProps> = ({ history }) => {
+  return (
+    <Link className='HistoryItems' to={`/${history.id}`}>
+      <div className='asset-title'>{history.title}</div>
+      <div className='asset-wrapper'>
+        <small className='asset-id'>{stringEllipsis(history.id)}</small>
+      </div>
+    </Link>
+  );
+};
+
+export default HistoryItems;

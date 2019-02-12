@@ -114,3 +114,34 @@
     padding: 35px 25px;
   }
 }
+
+.middleEllipsis {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  font-weight: inherit;
+  font-size: inherit;
+  max-width: 100%;
+  line-height: 1;
+  user-select: all;
+  color: inherit;
+
+  > .start {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 1;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: 1;
+  }
+
+  > .end {
+    white-space: nowrap;
+    flex: 0 0 0;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: 1;
+  }
+}

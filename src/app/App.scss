@@ -1,4 +1,4 @@
-@import 'styles/utils';
+@import '~styles/utils';
 
 .App {
   display: flex;
@@ -20,8 +20,4 @@
       flex: 1 1 auto;
     }
   }
-
-  // > .Main {
-  //   padding-top: 80px;
-  // }
 }

@@ -11,7 +11,12 @@ import withering from 'assets/svg/withering.svg';
 import recall from 'assets/svg/recall.svg';
 import processImage from 'assets/svg/process.svg';
 
-const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
+/**
+ * Event Details
+ *
+ * @type {object}
+ */
+const assetDetails: { [key: string]: { iconUrl: string; backgroundColor: string; fontColor: string } } = {
   'default': {
     'iconUrl': pin,
     'backgroundColor': '#b86c30',
@@ -114,4 +119,4 @@ const assetData: { [key: string]: { iconUrl: string; backgroundColor: string; fo
   },
 };
 
-export default assetData;
+export default assetDetails;

@@ -1,4 +1,4 @@
-@import "styles/utils";
+@import "~styles/utils";
 
 .DisplayBar {
   align-items: center;
@@ -13,9 +13,12 @@
 
   .bar {
     &__image {
-      height: 33px;
+      svg {
+        height: 33px;
+        width: 37px;
+      }
+
       margin: 0 15px;
-      width: 37px;
 
       @include breakpoint-min(600) {
         margin: 0 15px 10px 60px;
@@ -70,10 +73,13 @@
       position: relative;
 
       &--icon {
-        height: 14px;
         margin: 8px 0 0 15px;
         opacity: 0.4;
-        width: 12px;
+
+        svg {
+          width: 12px;
+          height: 14px;
+        }
       }
     }
   }

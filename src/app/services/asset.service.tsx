@@ -1,48 +1,136 @@
 import config from '../config';
-
-declare let AmbrosusSDK: any;
+import { StorageService } from '.';
+import * as AmbrosusSDK from 'ambrosus-javascript-sdk';
+import { apiInstance } from '../utils';
 
 class AssetService {
   public ambrosus: any;
 
   constructor() {
-    const apiEndpoint = config.API_ENDPOINT;
-    this.ambrosus = new AmbrosusSDK({ apiEndpoint });
+    this.ambrosus = new AmbrosusSDK();
   }
 
   public getAsset(assetId: string) {
-    return this.ambrosus.getAssetById(assetId);
-  }
-
-  public getEvent(eventId: string) {
-    return this.ambrosus.getEventById(eventId);
-  }
-
-  public getEvents(assetId: string) {
-    return this.ambrosus.getEvents({ assetId });
-  }
-
-  public parseEvents(eventsArray: any) {
-    return new Promise<{ events: any[]; identifiers: any; info: any }>((resolve, reject) => {
-      this.ambrosus
-        .parseEvents(eventsArray)
-        .then((response: any) => {
-          resolve(response.data);
-        })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
-  }
-
-  public verifyRoute(assetId: string) {
+    const assetURl = `${config.EXTENDED_API}/asset/query`;
+    const infoURL = `${config.EXTENDED_API}/event/latest/type`;
+    const assetBody = {
+      query: [
+        {
+          field: 'assetId',
+          value: assetId,
+          operator: 'equal',
+        },
+      ],
+    };
+    const infoBody = {
+      type: 'ambrosus.asset.info',
+      assets: [assetId],
+    };
     return new Promise((resolve, reject) => {
-      this.getAsset(assetId).then((asset: any) => {
-        resolve(asset);
-      }).catch((err: any) => {
+      apiInstance.postRequest(assetURl, assetBody).then(queryResponse => {
+        const assets = queryResponse.data;
+        if (!assets.data || !Array.isArray(assets.data) || !assets.data.length) {
+          reject('No Asset');
+        }
+
+        apiInstance.postRequest(infoURL, infoBody).then(infoResponse => {
+          const info = this.ambrosus.utils.findEvent('info', infoResponse.data.data);
+          assets.data[0]['info'] = info;
+          this.ambrosus.utils.parseAsset(assets.data[0]);
+          this.addHistory(assets.data[0].info.name, assetId);
+          resolve(assets.data[0]);
+        }).catch(err => {
+          reject(err);
+        });
+      }).catch(err => {
         reject(err);
       });
     });
+  }
+
+  public getBranding(assetId: string) {
+    return new Promise((resolve, reject) => {
+      const brandingBody = {
+        type: 'ambrosus.asset.branding',
+        assets: [assetId],
+      };
+      const eventURL = `${config.EXTENDED_API}/event/latest/type`;
+
+      apiInstance.postRequest(eventURL, brandingBody).then(brandingResponse => {
+        if (brandingResponse.data.data.length) {
+          const brandings = this.ambrosus.utils.findEvent('branding', brandingResponse.data.data);
+          resolve(brandings);
+        }
+        resolve({});
+      }).catch(err => reject(err));
+    });
+  }
+
+  public getEvent(eventId: string) {
+    const eventURL = `${config.EXTENDED_API}/event/${eventId}`;
+    return new Promise((resolve, reject) => {
+      apiInstance.getRequest(eventURL).then(eventResponse => {
+        const events = eventResponse.data;
+        if (Object.keys(events.data).length) {
+          const data = {
+            results: [events.data],
+          };
+          const parsedEvents = this.ambrosus.utils.parseEvents(data);
+          resolve(parsedEvents.events[0]);
+        }
+        reject('No Data');
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  public getEvents(options: {
+    assetId: string;
+    limit?: number;
+    next?: string;
+  }) {
+    return new Promise((resolve, reject) => {
+      const { assetId, limit = 10, next } = options;
+      const eventURL = `${config.EXTENDED_API}/event/query`;
+      const body: any = {
+        limit,
+        next,
+        query: [
+          {
+            field: 'content.idData.assetId',
+            value: assetId,
+            operator: 'equal',
+          },
+        ],
+      };
+
+      apiInstance.postRequest(eventURL, body).then(eventsResponse => {
+        const data = {
+          results: [...eventsResponse.data.data],
+        };
+        const parsedEvents = this.ambrosus.utils.parseEvents(data);
+        const details = {
+          pagination: eventsResponse.data.pagination,
+          events: parsedEvents.events.sort(this.ambrosus.utils.sortEventsByTimestamp),
+        };
+        resolve(details);
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  public addHistory(title: string, assetId: string) {
+    const history = { title, id: assetId };
+    const tempHistory: any = StorageService.get('history');
+    if (tempHistory && tempHistory.length > 0) {
+      const newHistory = tempHistory.filter((e: any) => e.id !== assetId);
+      newHistory.unshift(history);
+      StorageService.set('history', newHistory);
+    } else {
+      StorageService.set('history', [history]);
+    }
   }
 }
 

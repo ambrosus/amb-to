@@ -1,4 +1,4 @@
-@import "styles/utils";
+@import "~styles/utils";
 
 .AdditionalImages {
   padding-top: 30px;
@@ -19,28 +19,18 @@
   }
 
   &-photo {
-    height: 100%;
     margin: 0 3px 30px;
-    max-height: 80px;
-    max-width: 80px;
-    width: 100%;
-    background-size: contain;
+    height: 84px;
+    width: 84px;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     margin: 0 5px 30px;
+    background-color: #eee;
+    cursor: pointer;
 
     @include breakpoint-min(460) {
       margin: 0 10px 30px;
-    }
-
-    @include breakpoint-min(600) {
-      max-height: 125px;
-      max-width: 125px;
-    }
-
-    @include breakpoint-min(1024) {
-      max-height: 90px;
-      max-width: 90px;
     }
   }
 }

@@ -1,4 +1,4 @@
-@import "styles/utils";
+@import "~styles/utils";
 
 .table {
   padding: 15px 20px;
@@ -32,6 +32,10 @@
     padding: 15px 20px;
     text-align: left;
     text-transform: lowercase;
+
+    & + .table {
+      padding: 0 20px 15px;
+    }
 
     &::first-letter {
       text-transform: uppercase;

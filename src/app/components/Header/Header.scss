@@ -1,17 +1,11 @@
-@import 'styles/utils';
+@import '~styles/utils';
 
 .navigation {
-  position: fixed;
-  top: 0;
-  width: 100%;
   height: 70px;
-  z-index: 300;
   background-color: #c1cdcd;
 
   .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 100%;
   }
 
   &--right-side {
@@ -23,9 +17,6 @@
   &__logo {
     height: 30px;
     padding-left: 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 350;
   }
 
@@ -34,34 +25,14 @@
     background-color: transparent;
     display: flex;
     justify-content: space-between;
-    position: absolute;
     width: 100%;
+    height: 100%;
     z-index: 10;
     color: currentColor;
-
-    &__icon {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      display: inline-block;
-      padding: 20px;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .burger {
-      svg {
-        fill: currentColor;
-        height: 27px;
-      }
-    }
 
     &__links {
       display: none;
     }
-
   }
 
   &__container {

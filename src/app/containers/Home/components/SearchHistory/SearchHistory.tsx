@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SearchHistory.scss';
 import { StorageService } from '../../../../services';
 import HistoryItems from '../HistoryItems';
-
+import { Button } from '@ambrosus/react';
 interface HistoryStates {
   history: [{ id: string, title: string }] | null;
 }
@@ -30,7 +30,7 @@ export default class SearchHistory extends Component<{}, HistoryStates> {
     const { history } = this.state;
     if (history) {
       return (
-        <div className='SearchHistory'>
+        <div className='SearchHistory wrapper'>
           <div className='page history_page'>
             <h3 className='title'>Previously viewed</h3>
             <div className='history'>
@@ -41,7 +41,7 @@ export default class SearchHistory extends Component<{}, HistoryStates> {
               }
             </div>
             <div className='clear__history'>
-              <button className='btn' onClick={this.clearHistory}>Clear Search History</button>
+              <Button onClick={this.clearHistory}>Clear Search History</Button>
             </div>
           </div>
         </div>

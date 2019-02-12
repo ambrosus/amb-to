@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Maps from '../../../../components/Maps';
 import pinLogo from 'assets/svg/pin.svg';
-import { timeSince, formatDate, assetData } from '../../../../utils';
+import { timeSince, formatDate, assetDetails, locationExists } from '../../../../utils';
 
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
-import locationExists from '../../../../utils/checkExists';
+import { inject, observer } from 'mobx-react';
+import SVG from 'react-svg';
 
+@inject('AssetStore')
+@observer
 export default class Event extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -18,10 +21,10 @@ export default class Event extends Component<any, any> {
   }
 
   private eventTypeToStyle(value: string) {
-    if (assetData[value] === undefined) {
-      return assetData['default'];
+    if (assetDetails[value] === undefined) {
+      return assetDetails['default'];
     }
-    return assetData[value];
+    return assetDetails[value];
   }
 
   public expandEvent = () => {
@@ -31,8 +34,7 @@ export default class Event extends Component<any, any> {
   }
 
   public render() {
-    const event = this.props.event;
-    const assetId = this.props.assetId;
+    const { event, assetId } = this.props;
     const eventAsset = this.eventTypeToStyle(event.type);
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -53,7 +55,7 @@ export default class Event extends Component<any, any> {
                 <p className='item__event__single__time '>{timeSince(event.timestamp * 1000)} ago</p>
                 {event.location &&
                   <div className='item__event__single__place-container'>
-                    <img src={pinLogo} className='item__event__single__place--icon ' />
+                    <SVG src={pinLogo} className='item__event__single__place--icon ' />
                     {event.location.city || event.location.country ?
                       <p className='item__event__single__place'>
                         {event.location.city && event.location.city}
@@ -68,6 +70,7 @@ export default class Event extends Component<any, any> {
 
             {locationExists(event) &&
               <Maps
+                googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
                 containerElement={<div className='item-map' />}
                 loadingElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
@@ -83,7 +86,7 @@ export default class Event extends Component<any, any> {
             <TableRow title='Created by' value={event.author} rowClass={['item__event__more-details__row']} cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 
             <div className='item__event__more-details__row '>
-              <Link className='item__event__more-details__button'
+              <Link onClick={this.setEvent} className='item__event__more-details__button'
                 to={{
                   pathname: `/${assetId}/events/${event.eventId}`,
                 }}>VIEW EVENT DETAILS...</Link>
@@ -92,5 +95,9 @@ export default class Event extends Component<any, any> {
         </div>
       </div>
     );
+  }
+
+  public setEvent = () => {
+    this.props.AssetStore!.event = this.props.event;
   }
 }

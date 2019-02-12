@@ -1,93 +1,83 @@
-import React, { Component } from 'react';
-import { StorageService, AssetService } from '../../services';
+import React, { Component, lazy, Suspense } from 'react';
 import './Asset.scss';
-import { History } from 'history';
-import { Preloader, Footer, Header } from '../../components';
-import { getStyles } from '../../utils';
-import AssetImage from './components/AssetImage';
-import AdditionalImages from './components/AdditionalImages';
-import AssetIdentifiers from './components/AssetIdentifiers';
-import AssetDetails from './components/AssetDetails';
-import Timeline from './components/Timeline';
-
-interface AssetProps {
-  history: History;
-  assetId: string;
+import { getStyles, scrollTop } from '../../utils';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { inject, observer } from 'mobx-react';
+import { AssetStore } from '../../store/asset.store';
+import { AdditionalImages, AssetIdentifiers, AssetDetails, Timeline } from './components';
+import Loader from '../../components/Loader';
+const AssetImage: any = lazy(() => import('./components/AssetImage'));
+interface AssetProps extends RouteComponentProps<{ assetId: string }> {
+  AssetStore: AssetStore;
 }
 
 interface AssetStates {
-  asset: any;
   selectedImage: string | null;
 }
 
-export default class Asset extends Component<AssetProps, AssetStates> {
+@inject('AssetStore')
+@observer
+class Asset extends Component<AssetProps, AssetStates> {
 
   constructor(props: AssetProps) {
     super(props);
     this.state = {
-      asset: null,
       selectedImage: null,
     };
   }
 
-  public async componentDidMount() {
-    const { assetId, history } = this.props;
-    try {
-      const events = await AssetService.getEvents(assetId);
-      if (events.data.resultCount) {
-        const asset = await AssetService.parseEvents(events.data);
-        this.saveHistory(assetId, asset);
-        this.setState({ asset });
-        return;
-      }
-      history.push('/');
-    } catch (error) {
-      history.push('/');
-    }
-  }
-
-  public saveHistory(assetId: string, asset: any) {
-    const title = asset.info.name;
-    const history = { title, id: assetId };
-    const tempHistory: any = StorageService.get('history');
-    if (tempHistory && tempHistory.length > 0) {
-      if (tempHistory.filter((e: any) => e.id === assetId).length === 0) {
-        tempHistory.push(history);
-        StorageService.set('history', tempHistory);
-      }
-    } else {
-      StorageService.set('history', [history]);
-    }
+  public componentDidMount() {
+    scrollTop();
   }
 
   public onImageSelect = (selectedImage: string) => {
     this.setState({ selectedImage });
   }
 
+  public getDefaultImage = () => {
+    try {
+      const { asset } = this.props.AssetStore;
+      return asset.info.images.default.url;
+    } catch (error) {
+      return '';
+    }
+  }
+
   public render() {
-    const { assetId } = this.props;
-    const { asset, selectedImage } = this.state;
-    if (asset) {
+    const { asset, events } = this.props.AssetStore;
+    const { selectedImage } = this.state;
+    const { assetId } = this.props.match.params;
+    if (asset && asset.info && asset.info.identifiers) {
       return (
         <div className='Info'>
-          <Header asset={asset} assetId={assetId} />
-          <div className='item' style={getStyles('content', asset)}>
+          <div className='item' style={getStyles('content')}>
             <div className='wrapper'>
               <div className='item__container'>
-                <AssetImage url={selectedImage ? selectedImage : asset.info.images.default.url} name={asset.info.name} />
-                <AdditionalImages images={asset.info.images} asset={asset} onSelect={this.onImageSelect} />
-                <AssetIdentifiers asset={asset} />
+                <Suspense fallback={<Loader />}>
+                  <AssetImage url={selectedImage ? selectedImage : this.getDefaultImage()} name={asset.info.name} />
+                </Suspense>
+                <AdditionalImages images={asset.info.images} onSelect={this.onImageSelect} />
+                <AssetIdentifiers info={asset.info} />
                 <AssetDetails asset={asset} />
               </div>
-              <div className='item__container'>
-                <Timeline events={asset.events} assetId={assetId} />
-              </div>
+              {events && <div className='item__container'>
+                <Timeline events={events} assetId={assetId} />
+              </div>}
             </div>
           </div>
-          <Footer asset={asset} />
+        </div >
+      );
+    } if (asset && asset.info && !asset.info.identifiers) {
+      return (
+        <div>
+          <div className='noContent'>
+            <p>This asset has no data. <br /> Please try another one.</p>
+          </div>
         </div>
       );
     }
-    return <Preloader />;
+    return <div />;
   }
 }
+
+export default withRouter(Asset);
