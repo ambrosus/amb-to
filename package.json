@@ -20,7 +20,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@ambrosus/react": "^0.7.0",
+    "@ambrosus/react": "^0.8.0",
     "@types/google-map-react": "^0.23.10",
     "@types/node": "10.12.18",
     "@types/react": "^16.8.2",
@@ -32,6 +32,7 @@
     "google-map-react": "^1.1.2",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
+    "node-sass": "^4.11.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -40,8 +41,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.3",
     "react-svg": "^7.2.6",
-    "typescript": "3.2.2",
-    "node-sass": "^4.11.0"
+    "typescript": "3.2.2"
   },
   "devDependencies": {
     "@types/jest": "23.3.10",
