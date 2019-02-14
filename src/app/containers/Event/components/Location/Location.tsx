@@ -4,6 +4,7 @@ import Item from '../../../../components/Item';
 import { locationExists } from '../../../../utils';
 import Maps from '../../../../components/Maps';
 import TableRow from '../../../../components/TableRow';
+import config from '../../../../config';
 
 interface LocationProps {
   event: any;
@@ -18,7 +19,7 @@ const Location: SFC<LocationProps> = ({ event }) => {
             <Fragment>
               {locationExists(event) &&
                 <Maps
-                  googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+                  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${config.API_ENDPOINT}&v=3.exp&libraries=geometry,drawing,places`}
                   containerElement={<div className='item-map' />}
                   loadingElement={<div style={{ height: `100%` }} />}
                   mapElement={<div style={{ height: `100%` }} />}
