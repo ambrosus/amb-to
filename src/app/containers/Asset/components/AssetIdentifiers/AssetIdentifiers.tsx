@@ -20,7 +20,7 @@ const AssetIdentifiers: SFC<AssetProps> = ({ info }) => {
     }
   };
 
-  if (info.identifiers.identifiers) {
+  if (info.identifiers && info.identifiers.identifiers) {
     return (
       <Item title='Identifiers'>
         <div className='table'>
