@@ -47,7 +47,7 @@ class Asset extends Component<AssetProps, AssetStates> {
     const { asset, events } = this.props.AssetStore;
     const { selectedImage } = this.state;
     const { assetId } = this.props.match.params;
-    if (asset && asset.info && asset.info.identifiers) {
+    if (asset && asset.info) {
       return (
         <div className='Info'>
           <div className='item' style={getStyles('content')}>
@@ -67,7 +67,7 @@ class Asset extends Component<AssetProps, AssetStates> {
           </div>
         </div >
       );
-    } if (asset && asset.info && !asset.info.identifiers) {
+    } if (asset && !asset.info) {
       return (
         <div>
           <div className='noContent'>
