@@ -1,0 +1,118 @@
+@import 'partials/index';
+@import 'modules/index';
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 100%;
+  background: transparent;
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+html {
+  font-size: 1em;
+}
+
+body {
+  background-color: $colorBg;
+  font-family: $fontFamily;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-style: normal;
+  position: relative;
+  cursor: auto;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 10px;
+  position: relative;
+}
+
+.main {
+  min-height: 99vh;
+}
+
+a {
+  color: $darkGray;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.page {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 50px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.centered {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.rotating {
+  animation: rotating 1s linear infinite;
+}
+
+template {
+  display: block;
+}
+
+// Search form
+
+.form-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  align-self: normal;
+}
+
+.errors {
+  text-align: center;
+  color: indianred;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+agm-map {
+  height: 220px;
+}

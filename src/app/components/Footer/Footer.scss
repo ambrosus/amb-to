@@ -1,0 +1,89 @@
+@import '~styles/utils';
+
+.footer {
+  width: 100%;
+  padding: 30px 0;
+  color: #9198bb;
+  font-size: 12px;
+  justify-content: center;
+  flex: 0 0 !important;
+
+  a {
+    color: currentColor;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  > .wrapper {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    @include breakpoint(900) {
+      padding: 0 15px;
+    }
+  }
+
+  > .wrapper {
+    @include breakpoint(1024) {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .copyright {
+    flex-basis: 300px;
+
+    @include breakpoint(1024) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .contact {
+    text-align: right;
+    flex-basis: 300px;
+
+    @include breakpoint(1024) {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .socials {
+    flex-grow: 1;
+    text-align: center;
+
+    &__list {
+      &__link {
+        display: inline-block;
+        margin: 0 10px;
+
+        a {
+          svg {
+            width: 20px;
+            height: 20px;
+
+            path {
+              fill: currentColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
