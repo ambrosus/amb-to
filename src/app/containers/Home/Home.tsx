@@ -8,7 +8,6 @@ import Footer from '../../components/Footer';
 
 const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
   scrollTop();
-  console.log(process.env.NODE_ENV);
   setTimeout(() => {
     props.AssetStore.resetStore();
   });
