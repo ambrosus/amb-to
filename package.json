@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "start": "npm run dev:start",
-    "build": "react-scripts build",
+    "build": "CI=true npm run test && react-scripts build",
     "dev:start": "react-scripts start",
     "dev:lint": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}'",
     "test": "react-scripts test",
-    "postinstall": "CI=true npm run test && npm run build"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
