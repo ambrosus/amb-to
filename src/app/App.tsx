@@ -8,7 +8,9 @@ import './App.scss';
 import * as Sentry from '@sentry/browser';
 import config from './config';
 
-Sentry.init({ dsn: config.SENTRY_DSN, environment: config.SENTRY_ENV });
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({ dsn: config.SENTRY_DSN, environment: config.SENTRY_ENV });
+}
 
 class App extends React.Component<any, any> {
 
