@@ -26,5 +26,5 @@ export {
   scrollTop,
   stringEllipsis,
   apiInstance,
-  locationExists
+  locationExists,
 };
