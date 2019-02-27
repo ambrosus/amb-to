@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run dev:start",
+    "start": "node server.js",
     "build": "CI=true npm run test && react-scripts build",
     "dev:start": "react-scripts start",
     "dev:lint": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}'",
-    "test": "react-scripts test",
-    "postinstall": "npm run build"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,5 +48,6 @@
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0"
-  }
+  },
+  "heroku-run-build-script": true
 }
