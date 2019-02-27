@@ -10,8 +10,8 @@ test('REACT_APP_EXTENDED_API environment variable is required', () => {
   expect(urlRegExp.test(config.EXTENDED_API)).toBe(true);
 });
 
-test('REACT_APP_SENTRY_DSN environment variable is required', () => {
-  expect(urlRegExp.test(config.SENTRY_DSN)).toBe(true);
+test('SENTRY_DSN variable is required', () => {
+  expect(config.SENTRY_DSN).toBeTruthy();
 });
 
 test('REACT_APP_SENTRY_ENV environment variable is required', () => {
@@ -21,7 +21,3 @@ test('REACT_APP_SENTRY_ENV environment variable is required', () => {
 // test('Explorer URL is required', () => {
 //   expect(regexp.test(config.EXPLORER_URL)).toBe(true);
 // });
-
-test('NODE_ENV should be production', () => {
-  expect(process.env.NODE_ENV).toBe('production');
-});

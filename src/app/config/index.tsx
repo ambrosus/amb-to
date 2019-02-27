@@ -12,7 +12,7 @@ const config = Object.freeze({
   API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT || 'https://gateway-test.ambrosus.com',
   NAMESPACE: 'amb_to_',
   EXTENDED_API: process.env.REACT_APP_EXTENDED_API || 'https://hermes.ambrosus-test.com/extended',
-  SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN || '',
+  SENTRY_DSN: 'https://ea4cfe5fc9484509bb36c4b85e310db8@sentry.io/1402694',
   SENTRY_ENV: process.env.REACT_APP_SENTRY_ENV || 'dev',
   EXPLORER_URL: process.env.REACT_APP_EXPLORER_URL || '',
 });

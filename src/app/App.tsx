@@ -8,6 +8,7 @@ import './App.scss';
 import * as Sentry from '@sentry/browser';
 import config from './config';
 
+console.log(`MY NODE ENV IS ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({ dsn: config.SENTRY_DSN, environment: config.SENTRY_ENV });
 }

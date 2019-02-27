@@ -21,6 +21,7 @@ const generateLink = (url: string) => {
     return url;
   } catch (error) {
     Sentry.captureException(error);
+    return '';
   }
 };
 
