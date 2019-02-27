@@ -1,6 +1,6 @@
 {
   "name": "react-amb-to",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "npm run dev:start",
