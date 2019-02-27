@@ -14,6 +14,7 @@ const config = Object.freeze({
   EXTENDED_API: process.env.REACT_APP_EXTENDED_API || 'https://hermes.ambrosus-test.com/extended',
   SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN || '',
   SENTRY_ENV: process.env.REACT_APP_SENTRY_ENV || 'dev',
+  EXPLORER_URL: process.env.REACT_APP_EXPLORER_URL || '',
 });
 
 export default config;

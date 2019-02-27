@@ -10,12 +10,15 @@ const is_url = (str: string) => {
  *
  * @returns {string}
  */
-const generateLink = (url: string): string => {
-  const testURL = url.toString().indexOf('url:') > -1 ? url.split('url:')[1] : url;
-  if (is_url(testURL.toString().trim())) {
-    return `<a target="_blank" href="${testURL}">${url}</a>`;
+const generateLink = (url: string) => {
+  if (url) {
+    const testURL = url.toString().indexOf('url:') > -1 ? url.split('url:')[1] : url;
+    if (is_url(testURL.toString().trim())) {
+      return `<a target="_blank" href="${testURL}">${url}</a>`;
+    }
+    return url;
   }
-  return url;
+  return '';
 };
 
 export default generateLink;
