@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 import { AssetService } from '../services';
 
 export class AssetStore {
+  @observable public hermesURL: any = null;
   @observable public asset: any = null;
   @observable public events: any = null;
   @observable public brandings: any = null;
@@ -11,19 +12,22 @@ export class AssetStore {
   @action
   public setAsset = (assetId: string) => {
     return new Promise(async (resolve, reject) => {
-      AssetService.getAsset(assetId).then(asset => {
-        this.asset = asset;
-        resolve(true);
-      }).catch(error => reject(error));
-      AssetService.getEvents({ assetId }).then((result: any) => {
-        this.events = result.events;
-        this.pagination = result.pagination;
+      AssetService.getHermes(assetId).then(hermes => {
+        this.hermesURL = `${hermes[0].url.split('bundle')[0]}/extended`;
+        AssetService.getAsset(assetId).then(asset => {
+          this.asset = asset;
+          resolve(true);
+        }).catch(error => reject(error));
+        AssetService.getEvents({ assetId }).then((result: any) => {
+          this.events = result.events;
+          this.pagination = result.pagination;
+        }).catch(err => reject(err));
+        AssetService.getBranding(assetId).then(brandings => {
+          this.brandings = brandings;
+        }).catch(err => {
+          this.brandings = {};
+        });
       }).catch(err => reject(err));
-      AssetService.getBranding(assetId).then(brandings => {
-        this.brandings = brandings;
-      }).catch(err => {
-        this.brandings = {};
-      });
     });
   }
 

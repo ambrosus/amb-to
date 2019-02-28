@@ -2,6 +2,7 @@ import config from '../config';
 import { StorageService } from '.';
 import * as AmbrosusSDK from 'ambrosus-javascript-sdk';
 import { apiInstance } from '../utils';
+import store from '../store';
 
 class AssetService {
   public ambrosus: any;
@@ -10,9 +11,21 @@ class AssetService {
     this.ambrosus = new AmbrosusSDK();
   }
 
+  public getHermes(assetId: string) {
+    const url = `${config.EXPLORER_URL}/assets/${assetId}/hermes`;
+    return new Promise((resolve, reject) => {
+      apiInstance.getRequest(url).then(hermesResponse => {
+        if (hermesResponse.data.data.length) {
+          resolve(hermesResponse.data.data);
+        }
+        reject('No Asset');
+      }).catch(err => reject(err));
+    });
+  }
+
   public getAsset(assetId: string) {
-    const assetURl = `${config.EXTENDED_API}/asset/query`;
-    const infoURL = `${config.EXTENDED_API}/event/latest/type`;
+    const assetURl = `${store.AssetStore.hermesURL}/asset/query`;
+    const infoURL = `${store.AssetStore.hermesURL}/event/latest/type`;
     const assetBody = {
       query: [
         {
@@ -54,7 +67,7 @@ class AssetService {
         type: 'ambrosus.asset.branding',
         assets: [assetId],
       };
-      const eventURL = `${config.EXTENDED_API}/event/latest/type`;
+      const eventURL = `${store.AssetStore.hermesURL}/event/latest/type`;
 
       apiInstance.postRequest(eventURL, brandingBody).then(brandingResponse => {
         if (brandingResponse.data.data.length) {
@@ -67,7 +80,7 @@ class AssetService {
   }
 
   public getEvent(eventId: string) {
-    const eventURL = `${config.EXTENDED_API}/event/${eventId}`;
+    const eventURL = `${store.AssetStore.hermesURL}/event/${eventId}`;
     return new Promise((resolve, reject) => {
       apiInstance.getRequest(eventURL).then(eventResponse => {
         const events = eventResponse.data;
@@ -92,7 +105,7 @@ class AssetService {
   }) {
     return new Promise((resolve, reject) => {
       const { assetId, limit = 10, next } = options;
-      const eventURL = `${config.EXTENDED_API}/event/query`;
+      const eventURL = `${store.AssetStore.hermesURL}/event/query`;
       const body: any = {
         limit,
         next,
