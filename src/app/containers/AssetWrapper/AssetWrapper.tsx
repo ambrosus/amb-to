@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { Component, lazy } from 'react';
 import { withRouter, RouteComponentProps, Route } from 'react-router';
 import { inject, observer } from 'mobx-react';

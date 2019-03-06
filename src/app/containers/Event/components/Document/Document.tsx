@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC, Fragment } from 'react';
 import './Document.scss';
 import Item from '../../../../components/Item';

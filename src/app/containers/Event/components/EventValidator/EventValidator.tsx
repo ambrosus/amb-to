@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC } from 'react';
 import './EventValidator.scss';
 import Item from '../../../../components/Item';

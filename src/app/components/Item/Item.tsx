@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC, ReactNode } from 'react';
 import './Item.scss';
 import { getStyles } from '../../utils';

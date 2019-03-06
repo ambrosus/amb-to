@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React from 'react';
 import { withGoogleMap, GoogleMap, Marker, withScriptjs } from 'react-google-maps';
 import './Maps.scss';

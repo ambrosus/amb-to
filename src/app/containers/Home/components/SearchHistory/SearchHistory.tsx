@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { Component } from 'react';
 import './SearchHistory.scss';
 import { StorageService } from '../../../../services';

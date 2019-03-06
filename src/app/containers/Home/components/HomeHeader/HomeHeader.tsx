@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React from 'react';
 import './HomeHeader.scss';
 import iconLogo from 'assets/images/amb-logo.png';

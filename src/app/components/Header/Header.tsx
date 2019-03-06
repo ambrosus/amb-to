@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import iconLogo from 'assets/images/logo.png';

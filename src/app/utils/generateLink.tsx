@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import * as Sentry from '@sentry/browser';
 
 const is_url = (str: string) => {

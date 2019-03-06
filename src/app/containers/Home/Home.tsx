@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC } from 'react';
 import './Home.scss';
 import { scrollTop } from '../../utils';

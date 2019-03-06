@@ -1,4 +1,8 @@
 /**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+/**
  * Check of location object exists
  *
  * @param {any} event

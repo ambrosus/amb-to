@@ -1,4 +1,8 @@
 /**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+/**
  * Convert unix timestamp into "time ago" format.
  *
  * @param {number} date - Unix timestamp

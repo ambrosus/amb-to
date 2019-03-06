@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC } from 'react';
 import TableRow from '../../../../components/TableRow';
 import { getStyles, isObject, valueJSON } from '../../../../utils';

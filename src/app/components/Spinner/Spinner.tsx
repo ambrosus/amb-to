@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React from 'react';
 import SVG from 'react-svg';
 import spinnerLogo from 'assets/svg/spinner.svg';

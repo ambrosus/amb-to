@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import dollar from 'assets/svg/dollar.svg';
 import tractor from 'assets/svg/tractor.svg';
 import pin from 'assets/svg/pin.svg';

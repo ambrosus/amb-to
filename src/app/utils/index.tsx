@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import timeSince from './timeSince';
 import formatDate from './formatDate';
 import assetDetails from './assetDetails';

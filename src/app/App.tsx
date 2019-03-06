@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { lazy } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { lazyLoad } from './utils';
