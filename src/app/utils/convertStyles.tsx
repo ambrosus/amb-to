@@ -1,4 +1,8 @@
 /**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+/**
  * Converts CSS styles to valid react styles.
  *
  * @param {object} styles

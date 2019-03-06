@@ -1,4 +1,8 @@
 /**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+/**
  * Filter out objects from list
  *
  * @param {Array} items

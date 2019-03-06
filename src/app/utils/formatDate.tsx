@@ -1,4 +1,8 @@
 /**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+/**
  * Function to format timestamp into a time/datetime
  *
  * @param {number} timetamp - Timestamp to format

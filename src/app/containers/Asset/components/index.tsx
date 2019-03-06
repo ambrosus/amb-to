@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import AdditionalImages from './AdditionalImages';
 import AssetDetails from './AssetDetails';
 import AssetIdentifiers from './AssetIdentifiers';

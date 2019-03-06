@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { Component, lazy, Suspense } from 'react';
 import './Asset.scss';
 import { getStyles, scrollTop } from '../../utils';

@@ -1,3 +1,7 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
 import React, { SFC } from 'react';
 import './AssetIdentifiers.scss';
 import TableRow from '../../../../components/TableRow';
