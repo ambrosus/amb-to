@@ -127,7 +127,6 @@ class AssetService {
           results: [...eventsResponse.data.data],
         };
         const parsedEvents = this.ambrosus.utils.parseEvents(data);
-        console.log(parsedEvents);
         const details = {
           pagination: eventsResponse.data.pagination,
           events: parsedEvents.events.sort(this.ambrosus.utils.sortEventsByTimestamp),

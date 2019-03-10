@@ -11,20 +11,20 @@ import { HomeHeader, AssetSearch, SearchHistory } from './components';
 import Footer from '../../components/Footer';
 
 const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
-  scrollTop();
-  setTimeout(() => {
-    props.AssetStore.resetStore();
-  });
-  return (
-    <React.Fragment>
-      <div className='Home'>
-        <HomeHeader />
-        <AssetSearch />
-        <SearchHistory />
-      </div>
-      <Footer />
-    </React.Fragment>
-  );
+    setTimeout(() => {
+        scrollTop();
+        props.AssetStore.resetStore();
+    });
+    return (
+        <React.Fragment>
+            <div className='Home'>
+                <HomeHeader />
+                <AssetSearch />
+                <SearchHistory />
+            </div>
+            <Footer />
+        </React.Fragment>
+    );
 }));
 
 export default Home;
