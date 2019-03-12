@@ -44,7 +44,6 @@ class Asset extends Component<AssetProps, AssetStates> {
             const { asset } = this.props.AssetStore;
             return asset.info.images.default.url;
         } catch (error) {
-            Sentry.captureMessage('No default image for the asset');
             return '';
         }
     }
