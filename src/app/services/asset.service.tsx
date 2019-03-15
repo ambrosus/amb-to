@@ -47,7 +47,6 @@ class AssetService {
 
                 apiInstance.postRequest(infoURL, infoBody).then(infoResponse => {
                     const info = ambrosusSdk.utils.findEvent('info', infoResponse.data.data);
-                    console.log(info);
                     assets.data[0]['info'] = info;
                     ambrosusSdk.utils.parseAsset(assets.data[0]);
                     this.addHistory(assets.data[0].info.name, assetId);
