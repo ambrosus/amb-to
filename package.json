@@ -29,7 +29,7 @@
     "@types/react-dom": "^16.8.0",
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
-    "ambrosus-javascript-sdk": "^0.12.0",
+    "ambrosus-javascript-sdk": "^2.0.0",
     "axios": "^0.18.0",
     "google-map-react": "^1.1.2",
     "mobx": "^5.9.0",
