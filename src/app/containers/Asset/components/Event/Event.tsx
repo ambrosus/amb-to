@@ -82,7 +82,6 @@ export default class Event extends Component<any, any> {
                 lat={event.location.location.geometry.coordinates[0]}
                 lng={event.location.location.geometry.coordinates[1]} />
             }
-
             <TableRow title='AMB-id' value={event.eventId} rowClass={['item__event__more-details__row']}
               cellClass={['item__event__more-details__cell']} titleClass={['item__event__more-details__cell--title']} />
 

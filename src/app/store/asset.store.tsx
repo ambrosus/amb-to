@@ -4,9 +4,8 @@
  */
 import { observable, action } from 'mobx';
 import { AssetService } from '../services';
-
+import config from '../config';
 export class AssetStore {
-  @observable public hermesURL: any = null;
   @observable public asset: any = null;
   @observable public events: any = null;
   @observable public brandings: any = null;
@@ -16,8 +15,6 @@ export class AssetStore {
   @action
   public setAsset = (assetId: string) => {
     return new Promise(async (resolve, reject) => {
-      // AssetService.getHermes(assetId).then(hermes => {
-      this.hermesURL = `https://hermes.ambrosus-test.com/extended`;
       AssetService.getAsset(assetId).then(asset => {
         this.asset = asset;
         resolve(true);
@@ -31,7 +28,6 @@ export class AssetStore {
       }).catch(err => {
         this.brandings = {};
       });
-      // }).catch(err => reject(err));
     });
   }
 
