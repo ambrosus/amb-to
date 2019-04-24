@@ -17,18 +17,19 @@ interface LocationProps {
 const Location: SFC<LocationProps> = ({ event }) => {
   return (
     <Fragment>
-      {event.location &&
+      {event.location && (
         <div className='item__container'>
           <Item title='Location'>
             <Fragment>
-              {locationExists(event) &&
+              {locationExists(event) && (
                 <Maps
-                  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${config.MAPS_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                   containerElement={<div className='item-map' />}
                   loadingElement={<div style={{ height: `100%` }} />}
                   mapElement={<div style={{ height: `100%` }} />}
                   lat={event.location.location.geometry.coordinates[0]}
-                  lng={event.location.location.geometry.coordinates[1]} />}
+                  lng={event.location.location.geometry.coordinates[1]}
+                />
+              )}
               <div className='table'>
                 <TableRow title='Name' value={event.location.name} />
                 <TableRow title='City' value={event.location.city} />
@@ -36,7 +37,8 @@ const Location: SFC<LocationProps> = ({ event }) => {
               </div>
             </Fragment>
           </Item>
-        </div>}
+        </div>
+      )}
     </Fragment>
   );
 };
