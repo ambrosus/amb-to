@@ -13,7 +13,7 @@ Tool to view Assets and Events.
 
 ## Introduction
 
-Amb.to refers to the Ambrosus designed Asset Scanner used to search for and identify objects tracked and managed within the Ambrosus Ecosystem. As a preliminary design for telling the story of each Asset, Amb.to provides a foundation from which every Asset and its accompanying Events can be visualized according to location and date as well as many other additional features. As an open-source tool built by Ambrosus for use within the Ambrosus Ecosystem, entrepreneurs, enterprises, and developers are invited to utilize it for their own projects, or alternatively build on top of it so as to create even more sophisticated solutions for visualizing and managing objects on AMB-NET. (edited)
+Amb.to refers to the Ambrosus designed Asset Scanner used to search for and identify objects tracked and managed within the Ambrosus Ecosystem. As a preliminary design for telling the story of each Asset, Amb.to provides a foundation from which every Asset and its accompanying Events can be visualized according to location and date as well as many other additional features. As an open-source tool built by Ambrosus for use within the Ambrosus Ecosystem, entrepreneurs, enterprises, and developers are invited to utilize it for their own projects, or alternatively build on top of it so as to create even more sophisticated solutions for visualizing and managing objects on AMB-NET.
 
 ## Prerequisite
 
