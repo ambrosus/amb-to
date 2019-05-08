@@ -1,0 +1,54 @@
+{
+  "name": "react-amb-to",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npm run dev:start",
+    "build": "CI=true npm run test && react-scripts build",
+    "dev:start": "react-scripts start",
+    "dev:lint": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}'",
+    "test": "react-scripts test",
+    "postinstall": "npm run build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "@ambrosus/react": "^0.8.0",
+    "@sentry/browser": "^4.6.3",
+    "@types/google-map-react": "^0.23.10",
+    "@types/node": "10.12.18",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
+    "ambrosus-javascript-sdk": "^2.0.0",
+    "axios": "^0.18.0",
+    "google-map-react": "^1.1.2",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "node-sass": "^4.11.0",
+    "normalize.css": "^8.0.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-google-maps": "^9.4.5",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.3",
+    "react-svg": "^7.2.6",
+    "typescript": "3.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "23.3.10",
+    "tslint": "^5.12.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.17.0"
+  }
+}

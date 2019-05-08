@@ -1,0 +1,26 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+@import "~styles/utils";
+
+.Item {
+  background-color: $white;
+  border-radius: 8px;
+  margin-top: 30px;
+
+  &-title {
+    border-bottom: 1px solid #e9eaf4;
+    color: $colorHeading;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 15px 20px;
+    text-align: left;
+    text-transform: lowercase;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}

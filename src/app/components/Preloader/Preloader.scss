@@ -1,0 +1,50 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+$bg: #e6e7ea;
+
+.asset-preloader {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 100px auto;
+  flex-wrap: nowrap;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  & div {
+    border-radius: 5px;
+  }
+
+  & > div {
+    width: 100%;
+    max-width: 550px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.asset-preloader__image {
+  width: 100%;
+  height: 250px;
+  background: $bg;
+  margin-bottom: 15px;
+}
+
+.asset-preloader__details {
+  width: 100%;
+
+  & > div {
+    background: $bg;
+    width: 100%;
+    height: 75px;
+    margin-bottom: 15px;
+  }
+}

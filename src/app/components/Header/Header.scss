@@ -1,0 +1,124 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+@import '~styles/utils';
+
+.navigation {
+  height: 70px;
+  background-color: #c1cdcd;
+
+  .wrapper {
+    height: 100%;
+  }
+
+  &--right-side {
+    align-items: center;
+    display: flex;
+    margin-right: 15px;
+  }
+
+  &__logo {
+    height: 30px;
+    padding-left: 25px;
+    z-index: 350;
+  }
+
+  &__menu {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    color: currentColor;
+
+    &__links {
+      display: none;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.4s ease-in;
+    width: 75%;
+    z-index: 2;
+    background-color: #c1cdcd;
+    color: $white;
+
+    &__link {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      color: currentColor;
+      font-family: $fontFamily;
+      font-size: 16px;
+      padding: 15px 25px;
+      opacity: 0;
+      text-decoration: none;
+      visibility: hidden;
+
+      &:hover,
+      &:active,
+      &--active {
+        text-decoration: none;
+      }
+
+      &:last-child {
+        border-bottom: none;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        padding-bottom: 17px;
+      }
+    }
+
+    &--active {
+      opacity: 1;
+      top: 70px;
+      visibility: visible;
+    }
+
+    &--active > &__link {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (min-width: 500px) {
+      width: 310px;
+    }
+  }
+
+}
+
+@media (min-width: 1025px) {
+  .navigation {
+    flex-direction: row;
+
+    &__logo {
+      padding-left: 55px;
+    }
+
+    &__container {
+      &__link {
+        padding: 15px 65px;
+      }
+    }
+
+    &--right-side {
+      margin-right: 40px;
+    }
+
+    &__profile__name {
+      color: $white;
+      display: block;
+      margin: 0 15px;
+      position: relative;
+      text-decoration: none;
+    }
+  }
+}

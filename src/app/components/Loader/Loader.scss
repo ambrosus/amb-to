@@ -1,0 +1,15 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+.Loader {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+
+  > .Spinner {
+    width: 75px;
+    height: 75px;
+  }
+}

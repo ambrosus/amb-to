@@ -1,0 +1,20 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+@import "~styles/utils";
+
+.HistoryItems {
+  min-height: 60px;
+  padding: 7px 5px;
+  font-size: 13px;
+
+  @include breakpoint-min(599) {
+    padding: 7px 15px;
+  }
+
+  > .asset-title {
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+}

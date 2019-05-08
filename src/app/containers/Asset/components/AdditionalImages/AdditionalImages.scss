@@ -1,0 +1,40 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+@import "~styles/utils";
+
+.AdditionalImages {
+  padding-top: 30px;
+
+  &-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: -15px 20px 0;
+    padding: 0 0 5px
+  }
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 8px 0;
+    max-width: 100%;
+  }
+
+  &-photo {
+    margin: 0 3px 30px;
+    height: 84px;
+    width: 84px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin: 0 5px 30px;
+    background-color: #eee;
+    cursor: pointer;
+
+    @include breakpoint-min(460) {
+      margin: 0 10px 30px;
+    }
+  }
+}

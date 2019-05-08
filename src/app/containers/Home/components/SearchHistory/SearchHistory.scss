@@ -1,0 +1,19 @@
+/**
+ * Copyright 2018 Ambrosus Inc.
+ * Email: tech@ambrosus.com
+ */
+.SearchHistory {
+  .history_page {
+    margin: 30px auto 75px auto;
+  }
+
+  .clear__history {
+    padding: 15px 0px 10px 0px;
+  }
+
+  .history {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
