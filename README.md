@@ -23,7 +23,7 @@ Following are the environment variables.
 | Name                 | Example                                                   |
 | -------------------- | --------------------------------------------------------- |
 | REACT_APP_MAPS_KEY   | ...sdxs3ff                                                |
-| REACT_APP_SENTRY_DSN | https://ea4cfe5fc9484509bb36c4b85e310db8@sentry.io/3423   |
+| REACT_APP_SENTRY_DSN | https://ea4cfe5fc9484509bb3sdfsd4b85e310db8@sentry.io/3423   |
 | REACT_APP_HERMES_URL | https://hermes.ambrosus-dev.com/extended                  |
 | REACT_APP_SENTRY_ENV | dev                                                       |
 
