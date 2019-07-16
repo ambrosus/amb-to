@@ -46,7 +46,9 @@
     "typescript": "3.2.2"
   },
   "devDependencies": {
+    "@types/axios-mock-adapter": "^1.10.0",
     "@types/jest": "23.3.10",
+    "axios-mock-adapter": "^1.17.0",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0"

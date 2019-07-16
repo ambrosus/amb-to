@@ -23,142 +23,81 @@ class AssetService {
     });
   }
 
-  public getAsset(assetId: string) {
-    const assetURl = `${config.HERMES_URL}/asset/query`;
-    const infoURL = `${config.HERMES_URL}/event/latest/type`;
-    const assetBody = {
-      query: [
-        {
-          field: 'assetId',
-          value: assetId,
-          operator: 'equal',
-        },
-      ],
+  private async findAssetOnAllHermeses(assetId: string): Promise<{
+    url: string;
+    asset: any;
+  }> {
+    for (const hermesUrl of config.HERMES_URLS) {
+      const getAssetUrl = `${hermesUrl}/assets/${assetId}`;
+      try {
+        const response = await apiInstance.getRequest(getAssetUrl);
+        if (response.status === 200) {
+          return { url: hermesUrl, asset: response.data };
+        }
+      // tslint:disable-next-line:no-empty
+      } catch {}
+    }
+    throw new Error('No Asset');
+  }
+
+  private async findEventOnAllHermeses(eventId: string): Promise<{
+    url: string;
+    event: any;
+  }> {
+    for (const hermesUrl of config.HERMES_URLS) {
+      const getEventUrl = `${hermesUrl}/events/${eventId}`;
+      try {
+        const response = await apiInstance.getRequest(getEventUrl);
+        if (response.status === 200) {
+          return {url: hermesUrl, event: response.data};
+        }
+      // tslint:disable-next-line:no-empty
+      } catch {}
+    }
+    throw new Error('No Event');
+  }
+
+  private async addInfoToAsset(asset: any, url: string) {
+    const infoEvent = (await this.getEvents(asset.assetId, url)).info;
+    return {
+      ...asset,
+      info: infoEvent || {name: 'Unknown asset'},
     };
-    const infoBody = {
-      type: 'ambrosus.asset.info',
-      assets: [assetId],
+  }
+
+  public async getAsset(assetId: string) {
+    const {url, asset} = await this.findAssetOnAllHermeses(assetId);
+    const assetWithInfo = await this.addInfoToAsset(asset, url);
+    this.addHistory(assetWithInfo.info.name || '', assetId);
+    ambrosusSdk.utils.parseAsset(assetWithInfo);
+    return assetWithInfo;
+  }
+
+  public async getBranding(assetId: string) {
+    const {url} = await this.findAssetOnAllHermeses(assetId);
+    const events = await this.getEvents(assetId, url);
+    return events.branding || {};
+  }
+
+  public async getEvent(eventId: string) {
+    const {event} = await this.findEventOnAllHermeses(eventId);
+    return event;
+  }
+
+  public async getEvents(assetId: string, hermesUrl?: string) {
+    const url = hermesUrl || (await this.findAssetOnAllHermeses(assetId)).url;
+    const eventsResponse = await apiInstance.getRequest(`${url}/assets/${assetId}/events`);
+    if (eventsResponse.status !== 200 || !eventsResponse.data || !eventsResponse.data.results) {
+      throw new Error('Wrong events request');
+    }
+    const data = {
+      results: [...eventsResponse.data.results],
     };
-    return new Promise((resolve, reject) => {
-      apiInstance
-        .postRequest(assetURl, assetBody)
-        .then(queryResponse => {
-          const assets = queryResponse.data;
-          if (
-            !assets.data ||
-            !Array.isArray(assets.data) ||
-            !assets.data.length
-          ) {
-            reject('No Asset');
-          }
-
-          apiInstance
-            .postRequest(infoURL, infoBody)
-            .then(infoResponse => {
-              const info = ambrosusSdk.utils.findEvent(
-                'info',
-                infoResponse.data.data,
-              );
-              assets.data[0]['info'] = info;
-              ambrosusSdk.utils.parseAsset(assets.data[0]);
-              this.addHistory(assets.data[0].info.name, assetId);
-              resolve(assets.data[0]);
-            })
-            .catch(err => {
-              reject(err);
-            });
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
-
-  public getBranding(assetId: string) {
-    return new Promise((resolve, reject) => {
-      const brandingBody = {
-        type: 'ambrosus.asset.branding',
-        assets: [assetId],
-      };
-      const eventURL = `${config.HERMES_URL}/event/latest/type`;
-
-      apiInstance
-        .postRequest(eventURL, brandingBody)
-        .then(brandingResponse => {
-          if (brandingResponse.data.data.length) {
-            const brandings = ambrosusSdk.utils.findEvent(
-              'branding',
-              brandingResponse.data.data,
-            );
-            resolve(brandings);
-          }
-          resolve({});
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-  public getEvent(eventId: string) {
-    const eventURL = `${config.HERMES_URL}/event/${eventId}`;
-    return new Promise((resolve, reject) => {
-      apiInstance
-        .getRequest(eventURL)
-        .then(eventResponse => {
-          const events = eventResponse.data;
-          if (Object.keys(events.data).length) {
-            const data = {
-              results: [events.data],
-            };
-            const parsedEvents = ambrosusSdk.utils.parseEvents(data);
-            resolve(parsedEvents.events[0]);
-          }
-          reject('No Data');
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
-
-  public getEvents(options: {
-    assetId: string;
-    limit?: number;
-    next?: string;
-  }) {
-    return new Promise((resolve, reject) => {
-      const { assetId, limit = 10, next } = options;
-      const eventURL = `${config.HERMES_URL}/event/query`;
-      const body: any = {
-        limit,
-        next,
-        query: [
-          {
-            field: 'content.idData.assetId',
-            value: assetId,
-            operator: 'equal',
-          },
-        ],
-      };
-
-      apiInstance
-        .postRequest(eventURL, body)
-        .then(eventsResponse => {
-          const data = {
-            results: [...eventsResponse.data.data],
-          };
-          const parsedEvents = ambrosusSdk.utils.parseEvents(data);
-          const details = {
-            pagination: eventsResponse.data.pagination,
-            events: parsedEvents.events.sort(
-              ambrosusSdk.utils.sortEventsByTimestamp,
-            ),
-          };
-          resolve(details);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
+    const parsedEvents = ambrosusSdk.utils.parseEvents(data);
+    parsedEvents.events.sort(
+      ambrosusSdk.utils.sortEventsByTimestamp
+    );
+    return parsedEvents;
   }
 
   public addHistory(title: string, assetId: string) {
