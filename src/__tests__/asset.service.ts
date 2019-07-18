@@ -6,7 +6,7 @@ import {AssetService} from '../app/services/asset.service';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import {exampleAsset, exampleInfoEvent, exampleMultipleEvents} from './helpers/fixtures';
-import {expectedMultipleEvents} from './helpers/expectedFixtures';
+import {expectedMultipleEventsResponse} from './helpers/expectedAssetServiceResponses';
 
 describe('Asset service', () => {
   let assetService: AssetService;
@@ -115,14 +115,14 @@ describe('Asset service', () => {
     test('find events of asset', async () => {
       mockAxios.onGet(`${hermesUrls[0]}/assets/${exampleAssetId}`).reply(200, exampleAsset);
       mockAxios.onGet(`${hermesUrls[0]}/assets/${exampleAssetId}/events`).reply(200, exampleMultipleEvents);
-      expect(await assetService.getEvents(exampleAssetId)).toEqual(expectedMultipleEvents);
+      expect(await assetService.getEvents(exampleAssetId)).toEqual(expectedMultipleEventsResponse);
     });
 
     test('find events of asset on second hermes when first hermes returns 404', async () => {
       mockAxios.onGet(`${hermesUrls[0]}/assets/${exampleAssetId}`).reply(404);
       mockAxios.onGet(`${hermesUrls[1]}/assets/${exampleAssetId}`).reply(200, exampleAsset);
       mockAxios.onGet(`${hermesUrls[1]}/assets/${exampleAssetId}/events`).reply(200, exampleMultipleEvents);
-      expect(await assetService.getEvents(exampleAssetId)).toEqual(expectedMultipleEvents);
+      expect(await assetService.getEvents(exampleAssetId)).toEqual(expectedMultipleEventsResponse);
     });
   });
 
