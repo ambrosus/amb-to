@@ -2,32 +2,23 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import config from '../config';
 import { StorageService } from '.';
 import ambrosusSdk from 'ambrosus-javascript-sdk';
 import { apiInstance } from '../utils';
+import * as defaultConfig from '../config';
 
-class AssetService {
-  public getHermes(assetId: string) {
-    const url = `${config.EXPLORER_URL}/assets/${assetId}/hermes`;
-    return new Promise((resolve, reject) => {
-      apiInstance
-        .getRequest(url)
-        .then(hermesResponse => {
-          if (hermesResponse.data.data.length) {
-            resolve(hermesResponse.data.data);
-          }
-          reject('No Asset');
-        })
-        .catch(err => reject(err));
-    });
+export class AssetService {
+  private config;
+
+  constructor(config) {
+    this.config = config;
   }
 
   private async findAssetOnAllHermeses(assetId: string): Promise<{
     url: string;
     asset: any;
   }> {
-    for (const hermesUrl of config.HERMES_URLS) {
+    for (const hermesUrl of this.config.HERMES_URLS) {
       const getAssetUrl = `${hermesUrl}/assets/${assetId}`;
       try {
         const response = await apiInstance.getRequest(getAssetUrl);
@@ -44,7 +35,7 @@ class AssetService {
     url: string;
     event: any;
   }> {
-    for (const hermesUrl of config.HERMES_URLS) {
+    for (const hermesUrl of this.config.HERMES_URLS) {
       const getEventUrl = `${hermesUrl}/events/${eventId}`;
       try {
         const response = await apiInstance.getRequest(getEventUrl);
@@ -58,11 +49,18 @@ class AssetService {
   }
 
   private async addInfoToAsset(asset: any, url: string) {
-    const infoEvent = (await this.getEvents(asset.assetId, url)).info;
-    return {
-      ...asset,
-      info: infoEvent || {name: 'Unknown asset'},
-    };
+    try {
+      const infoEvent = (await this.getEvents(asset.assetId, url)).info;
+      return {
+        ...asset,
+        info: infoEvent || {name: 'Unknown asset'},
+      };
+    } catch {
+      return {
+        ...asset,
+        info: {name: 'Unknown asset'},
+      };
+    }
   }
 
   public async getAsset(assetId: string) {
@@ -113,5 +111,5 @@ class AssetService {
   }
 }
 
-const assetService = new AssetService();
+const assetService = new AssetService(defaultConfig.default);
 export default assetService;
