@@ -4,7 +4,6 @@
  */
 import { observable, action } from 'mobx';
 import { AssetService } from '../services';
-import config from '../config';
 export class AssetStore {
   @observable public asset: any = null;
   @observable public events: any = null;
@@ -19,7 +18,7 @@ export class AssetStore {
         this.asset = asset;
         resolve(true);
       }).catch(error => reject(error));
-      AssetService.getEvents({ assetId }).then((result: any) => {
+      AssetService.getEvents(assetId).then((result: any) => {
         this.events = result.events;
         this.pagination = result.pagination;
       }).catch(err => reject(err));
@@ -34,8 +33,7 @@ export class AssetStore {
   @action
   public getEvents = (assetId: string) => {
     return new Promise((resolve, reject) => {
-      const next = this.pagination.next;
-      AssetService.getEvents({ assetId, next }).then((result: any) => {
+      AssetService.getEvents(assetId).then((result: any) => {
         this.events = [...this.events, ...result.events];
         this.pagination = result.pagination;
         resolve(true);

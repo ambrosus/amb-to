@@ -42,8 +42,8 @@ class AssetWrapper extends Component<AssetProps> {
       return (
         <React.Fragment>
           <Header assetId={assetId} />
-          <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)} />
           <Route exact path='/:assetId' render={lazyLoad(Asset)} />
+          <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)} />
           <Footer />
         </React.Fragment>
       );
