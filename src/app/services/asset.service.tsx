@@ -14,11 +14,32 @@ export class AssetService {
     this.config = config;
   }
 
+  private async getAllHermeses() {
+    const explorerUrl = this.config.EXPLORER_URL;
+    try {
+      const response = await apiInstance.getRequest(`${explorerUrl}/hermeses`);
+      if (response.status === 200) {
+        return response.data;
+      }
+    // tslint:disable-next-line:no-empty
+    } catch {}
+  }
+
+  public async getHermesesUrls() {
+    const hermeses = await this.getAllHermeses();
+    const hermesUrls: string[] = [];
+    for (const hermes of hermeses.data) {
+      hermesUrls.push(hermes['url']);
+    }
+    return hermesUrls;
+  }
+
   private async findAssetOnAllHermeses(assetId: string): Promise<{
     url: string;
     asset: any;
   }> {
-    for (const hermesUrl of this.config.HERMES_URLS) {
+    const urls = await this.getHermesesUrls();
+    for (const hermesUrl of urls) {
       const getAssetUrl = `${hermesUrl}/assets/${assetId}`;
       try {
         const response = await apiInstance.getRequest(getAssetUrl);
@@ -35,7 +56,8 @@ export class AssetService {
     url: string;
     event: any;
   }> {
-    for (const hermesUrl of this.config.HERMES_URLS) {
+    const urls = await this.getHermesesUrls();
+    for (const hermesUrl of urls) {
       const getEventUrl = `${hermesUrl}/events/${eventId}`;
       try {
         const response = await apiInstance.getRequest(getEventUrl);
