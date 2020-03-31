@@ -9,7 +9,7 @@ import { getStyles, scrollTop } from '../../utils';
 import './Event.scss';
 import { inject, observer } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
-import { DisplayBar, Details, EventValidator, Document, Location } from './components';
+import { DisplayBar, Details, Document, Location } from './components';
 
 interface EventProps extends RouteComponentProps<{ assetId: string, eventId: string }> {
   AssetStore?: AssetStore;
@@ -64,7 +64,6 @@ class Event extends Component<EventProps, EventStates> {
             <div className='item__container'>
               <Details event={event} />
               <Document event={event} />
-              <EventValidator eventId={eventId} />
             </div>
             <Location event={event} />
           </div>
