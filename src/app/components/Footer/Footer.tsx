@@ -6,25 +6,22 @@ import React, { SFC } from 'react';
 
 import SVG from 'react-svg';
 
-import bitcoinTalkIcon from 'assets/svg/bitcointalk-icon.svg';
 import facebookIcon from 'assets/svg/fb-icon.svg';
 import githubIcon from 'assets/svg/github-icon.svg';
 import mediumIcon from 'assets/svg/medium-icon.svg';
 import redditIcon from 'assets/svg/reddit-icon.svg';
 import telegramIcon from 'assets/svg/telegram-icon.svg';
 import twitterIcon from 'assets/svg/twitter-icon.svg';
-import youtubeIcon from 'assets/svg/youtube-icon.svg';
+import linkedinIcon from 'assets/svg/linkedin-icon.svg';
 import './Footer.scss';
 import convertStyles from '../../utils/convertStyles';
 import { observer, inject } from 'mobx-react';
 import { AssetStore } from '../../store/asset.store';
 
+// import bitcoinTalkIcon from 'assets/svg/bitcointalk-icon.svg';
+// import youtubeIcon from 'assets/svg/youtube-icon.svg';
+
 const socialsLinks = [
-  {
-    url: 'https://bitcointalk.org/index.php?topic=2034826.0',
-    title: 'Ambrosus at Bitcoin Talk',
-    icon: bitcoinTalkIcon,
-  },
   {
     url: 'https://www.facebook.com/ambrosusAMB',
     title: 'Ambrosus Facebook Group',
@@ -36,30 +33,45 @@ const socialsLinks = [
     icon: githubIcon,
   },
   {
-    url: 'https://www.reddit.com/r/ambrosus',
+    url: 'linkedin.com/company/ambrosus-ecosystem/',
+    title: 'Ambrosus LinkedIn',
+    icon: linkedinIcon,
+  },
+  {
+    url: 'https://www.reddit.com/r/AmbrosusEcosystem',
     title: 'Ambrosus Reddit',
     icon: redditIcon,
   },
   {
-    url: 'https://blog.ambrosus.com',
+    url: 'https://blog.ambrosus.io',
     title: 'Ambrosus Medium',
     icon: mediumIcon,
   },
   {
-    url: 'https://t.me/ambrosuschat',
+    url: 'https://t.me/Ambrosus',
     title: 'Ambrosus Telegram',
     icon: telegramIcon,
   },
   {
-    url: 'https://twitter.com/AmbrosusAMB',
+    url: 'https://t.me/AmbrosusEcosystem',
+    title: 'Ambrosus Ecosystem Telegram',
+    icon: telegramIcon,
+  },
+  {
+    url: 'https://twitter.com/AMB_Ecosystem',
     title: 'Ambrosus Twitter',
     icon: twitterIcon,
   },
-  {
-    url: 'https://www.youtube.com/channel/UC27wKQU7KBgvtuTAOKD0BJg',
-    title: 'Ambrosus Youtube',
-    icon: youtubeIcon,
-  },
+  // {
+  //   url: 'https://www.youtube.com/channel/UC27wKQU7KBgvtuTAOKD0BJg',
+  //   title: 'Ambrosus Youtube',
+  //   icon: youtubeIcon,
+  // },
+  // {
+  //   url: 'https://bitcointalk.org/index.php?topic=2034826.0',
+  //   title: 'Ambrosus at Bitcoin Talk',
+  //   icon: bitcoinTalkIcon,
+  // },
 ];
 
 const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
