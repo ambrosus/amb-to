@@ -4,7 +4,6 @@
  */
 import React, { SFC } from 'react';
 import { getStyles, generateLink } from '../../utils';
-
 interface TableRowProps {
   title: any;
   value: any;
@@ -18,6 +17,7 @@ const TableRow: SFC<TableRowProps> = ({ title, value, titleClass = [],
   const rClass = ['table-row', ...rowClass].join(' ').trim();
   const tClass = ['table-cell--title', ...titleClass].join(' ').trim();
   const cClass = ['table-cell', ...cellClass].join(' ').trim();
+  console.log(value,'value');
   return (
     <div className={rClass}>
       <div className={tClass} style={getStyles('components_keys')}>{title}</div>

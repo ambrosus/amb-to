@@ -11,9 +11,9 @@ import Footer from '../../components/Footer';
 
 const Home: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((props) => {
 
-    setTimeout(() => {
-        props.AssetStore.resetStore();
-    });
+    // setTimeout(() => {
+    //     props.AssetStore.resetStore();
+    // });
 
     return (
         <React.Fragment>

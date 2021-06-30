@@ -8,12 +8,14 @@ import TableRow from '../../../../components/TableRow';
 import SubDetails from '../SubDetails';
 import CustomData from '../CustomData';
 import Item from '../../../../components/Item';
+import { toJS } from 'mobx'
 
 interface AssetProps {
   asset: any;
 }
 
 const AssetDetails: SFC<AssetProps> = ({ asset }) => {
+  console.log(toJS(asset),'asset')
   return (
     <Fragment>
       <Item title='Asset Details'>

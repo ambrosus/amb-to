@@ -7,11 +7,13 @@ import './Details.scss';
 import Item from '../../../../components/Item';
 import TableRow from '../../../../components/TableRow';
 import { loopExclude, getStyles, valueJSON, formatDate, isObject } from '../../../../utils';
+import { toJS } from 'mobx'
 
 interface DetailsProps {
   event: any;
 }
 const Details: SFC<DetailsProps> = ({ event }) => {
+  console.log(toJS(event),'event')
   return (
     <Item title='Event Details'>
       <Fragment>

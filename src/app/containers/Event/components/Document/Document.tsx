@@ -13,6 +13,7 @@ interface DocumentProps {
 }
 
 const Document: SFC<DocumentProps> = ({ event }) => {
+  console.log(event.documents)
   return (
     <Fragment>
       {event.documents &&
@@ -21,13 +22,13 @@ const Document: SFC<DocumentProps> = ({ event }) => {
             return (
               <div key={key}>
                 <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{key}</h3>
-                <div className='table'>
-                  {
-                    Object.entries(value).map(([k, v]) => (
-                      <TableRow title={k} key={k} value={v} />
-                    ))
-                  }
-                </div>
+                {/*<div className='table'>*/}
+                {/*  {*/}
+                {/*    Object.entries(value).map(([k, v]) => (*/}
+                {/*      <TableRow title={k} key={k} value={v} />*/}
+                {/*    ))*/}
+                {/*  }*/}
+                {/*</div>*/}
               </div>
             );
           })}
