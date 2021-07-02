@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Maps from '../../../../components/Maps';
 import pinLogo from 'assets/svg/pin.svg';
-import {assetDetails, formatDate, locationExists, timeSince,} from '../../../../utils';
+import {assetDetails, formatDate, locationExists, timeSince} from '../../../../utils';
 
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
@@ -35,17 +35,17 @@ export default class Event extends Component<any, any> {
     this.setState({
       expandEvent: !this.state.expandEvent,
     });
-  };
+  }
 
   public render() {
     const {event, assetId} = this.props;
     const eventAsset = this.eventTypeToStyle(event.type);
     return (
-      <div id={event.eventId} className="item__event__container">
-        <div className="item__event__timeline ">
-          <h5 className="item__event__timeline__heading ">{event.type}</h5>
-          <div className="item__event__timeline__dot"/>
-          <p className="item__event__timeline__date ">
+      <div id={event.eventId} className='item__event__container'>
+        <div className='item__event__timeline '>
+          <h5 className='item__event__timeline__heading '>{event.type}</h5>
+          <div className='item__event__timeline__dot'/>
+          <p className='item__event__timeline__date '>
             {formatDate(event.timestamp * 1000, true)}
           </p>
         </div>
@@ -59,28 +59,28 @@ export default class Event extends Component<any, any> {
         >
           <div
             onClick={this.expandEvent}
-            className="item__event__single"
+            className='item__event__single'
             style={{backgroundColor: eventAsset.backgroundColor}}
           >
-            <div className="item__event__single__image">
+            <div className='item__event__single__image'>
               <img src={eventAsset.iconUrl}/>
             </div>
-            <div className="item__event__single__copy ">
-              <div className="item__event__single__container ">
-                <h4 className="item__event__single__heading ">{event.name}</h4>
+            <div className='item__event__single__copy '>
+              <div className='item__event__single__container '>
+                <h4 className='item__event__single__heading '>{event.name}</h4>
               </div>
-              <div className="item__event__single__container ">
-                <p className="item__event__single__time ">
+              <div className='item__event__single__container '>
+                <p className='item__event__single__time '>
                   {timeSince(event.timestamp * 1000)} ago
                 </p>
                 {event.location && (
-                  <div className="item__event__single__place-container">
+                  <div className='item__event__single__place-container'>
                     <SVG
                       src={pinLogo}
-                      className="item__event__single__place--icon "
+                      className='item__event__single__place--icon '
                     />
                     {event.location.city || event.location.country ? (
-                      <p className="item__event__single__place">
+                      <p className='item__event__single__place'>
                         {event.location.city && event.location.city}
                         {event.location.country &&
                         `, ${event.location.country}`}
@@ -103,7 +103,7 @@ export default class Event extends Component<any, any> {
           >
             {locationExists(event) && (
               <Maps
-                containerElement={<div className="item-map"/>}
+                containerElement={<div className='item-map'/>}
                 loadingElement={<div style={{height: `100%`}}/>}
                 mapElement={<div style={{height: `100%`}}/>}
                 lat={event.location.location.geometry.coordinates[0]}
@@ -111,7 +111,7 @@ export default class Event extends Component<any, any> {
               />
             )}
             <TableRow
-              title="AMB-id"
+              title='AMB-id'
               value={event.eventId}
               rowClass={['item__event__more-details__row']}
               cellClass={['item__event__more-details__cell']}
@@ -119,7 +119,7 @@ export default class Event extends Component<any, any> {
             />
 
             <TableRow
-              title="Timestamp"
+              title='Timestamp'
               value={formatDate(event.timestamp * 1000, true)}
               rowClass={['item__event__more-details__row']}
               cellClass={['item__event__more-details__cell']}
@@ -127,30 +127,30 @@ export default class Event extends Component<any, any> {
             />
 
             <TableRow
-              title="Created by"
+              title='Created by'
               value={event.author}
               rowClass={['item__event__more-details__row']}
               cellClass={['item__event__more-details__cell']}
               titleClass={['item__event__more-details__cell--title']}
             />
             {
-              event.raws.length &&
-              <TableRow
-                title="Files"
-                value={event.raws}
-                smallImages={true}
-                rowClass={['item__event__more-details__row']}
-                cellClass={['item__event__more-details__cell']}
-                titleClass={['item__event__more-details__cell--title']}
-              />
+              event && event.raws.length ?
+                <TableRow
+                  title='Files'
+                  value={event.raws}
+                  smallImages={true}
+                  rowClass={['item__event__more-details__row']}
+                  cellClass={['item__event__more-details__cell']}
+                  titleClass={['item__event__more-details__cell--title']}
+                />
+                : null
 
             }
 
-
-            <div className="item__event__more-details__row ">
+            <div className='item__event__more-details__row '>
               <Link
                 onClick={this.setEvent}
-                className="item__event__more-details__button"
+                className='item__event__more-details__button'
                 to={{
                   pathname: `/${assetId}/events/${event.eventId}`,
                 }}
@@ -166,5 +166,5 @@ export default class Event extends Component<any, any> {
 
   public setEvent = () => {
     this.props.AssetStore!.event = this.props.event;
-  };
+  }
 }
