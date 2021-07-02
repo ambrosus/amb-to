@@ -139,6 +139,14 @@ export default class Event extends Component<any, any> {
               cellClass={['item__event__more-details__cell']}
               titleClass={['item__event__more-details__cell--title']}
             />
+            <TableRow
+              title='Files'
+              value={event.raws}
+              smallImages={true}
+              rowClass={['item__event__more-details__row']}
+              cellClass={['item__event__more-details__cell']}
+              titleClass={['item__event__more-details__cell--title']}
+            />
 
             <div className='item__event__more-details__row '>
               <Link

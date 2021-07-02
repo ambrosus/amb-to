@@ -105,9 +105,17 @@
         padding: 13px 30px;
         word-break: break-word;
         width: 70%;
+        display: flex;
+        flex-wrap: wrap;
 
         &--details {
           font-size: 12px;
+        }
+
+        &--file-small {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction:row;
         }
 
         &--title {
