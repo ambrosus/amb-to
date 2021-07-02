@@ -144,7 +144,6 @@ export default class Event extends Component<any, any> {
                   titleClass={['item__event__more-details__cell--title']}
                 />
                 : null
-
             }
 
             <div className='item__event__more-details__row '>
