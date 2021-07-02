@@ -2,22 +2,16 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Maps from '../../../../components/Maps';
 import pinLogo from 'assets/svg/pin.svg';
-import {
-  timeSince,
-  formatDate,
-  assetDetails,
-  locationExists,
-} from '../../../../utils';
+import {assetDetails, formatDate, locationExists, timeSince} from '../../../../utils';
 
 import './Event.scss';
 import TableRow from '../../../../components/TableRow';
-import { inject, observer } from 'mobx-react';
+import {inject, observer} from 'mobx-react';
 import SVG from 'react-svg';
-import config from '../../../../config';
 
 @inject('AssetStore')
 @observer
@@ -41,16 +35,16 @@ export default class Event extends Component<any, any> {
     this.setState({
       expandEvent: !this.state.expandEvent,
     });
-  };
+  }
 
   public render() {
-    const { event, assetId } = this.props;
+    const {event, assetId} = this.props;
     const eventAsset = this.eventTypeToStyle(event.type);
     return (
       <div id={event.eventId} className='item__event__container'>
         <div className='item__event__timeline '>
           <h5 className='item__event__timeline__heading '>{event.type}</h5>
-          <div className='item__event__timeline__dot' />
+          <div className='item__event__timeline__dot'/>
           <p className='item__event__timeline__date '>
             {formatDate(event.timestamp * 1000, true)}
           </p>
@@ -66,10 +60,10 @@ export default class Event extends Component<any, any> {
           <div
             onClick={this.expandEvent}
             className='item__event__single'
-            style={{ backgroundColor: eventAsset.backgroundColor }}
+            style={{backgroundColor: eventAsset.backgroundColor}}
           >
             <div className='item__event__single__image'>
-              <img src={eventAsset.iconUrl} />
+              <img src={eventAsset.iconUrl}/>
             </div>
             <div className='item__event__single__copy '>
               <div className='item__event__single__container '>
@@ -89,7 +83,7 @@ export default class Event extends Component<any, any> {
                       <p className='item__event__single__place'>
                         {event.location.city && event.location.city}
                         {event.location.country &&
-                          `, ${event.location.country}`}
+                        `, ${event.location.country}`}
                       </p>
                     ) : (
                       ''
@@ -109,9 +103,9 @@ export default class Event extends Component<any, any> {
           >
             {locationExists(event) && (
               <Maps
-                containerElement={<div className='item-map' />}
-                loadingElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
+                containerElement={<div className='item-map'/>}
+                loadingElement={<div style={{height: `100%`}}/>}
+                mapElement={<div style={{height: `100%`}}/>}
                 lat={event.location.location.geometry.coordinates[0]}
                 lng={event.location.location.geometry.coordinates[1]}
               />
@@ -139,14 +133,18 @@ export default class Event extends Component<any, any> {
               cellClass={['item__event__more-details__cell']}
               titleClass={['item__event__more-details__cell--title']}
             />
-            <TableRow
-              title='Files'
-              value={event.raws}
-              smallImages={true}
-              rowClass={['item__event__more-details__row']}
-              cellClass={['item__event__more-details__cell']}
-              titleClass={['item__event__more-details__cell--title']}
-            />
+            {
+              event && event.raws && event.raws.length ?
+                <TableRow
+                  title='Files'
+                  value={event.raws}
+                  smallImages={true}
+                  rowClass={['item__event__more-details__row']}
+                  cellClass={['item__event__more-details__cell']}
+                  titleClass={['item__event__more-details__cell--title']}
+                />
+                : null
+            }
 
             <div className='item__event__more-details__row '>
               <Link
@@ -167,5 +165,5 @@ export default class Event extends Component<any, any> {
 
   public setEvent = () => {
     this.props.AssetStore!.event = this.props.event;
-  };
+  }
 }
