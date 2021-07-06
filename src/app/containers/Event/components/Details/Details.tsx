@@ -94,12 +94,12 @@ const Details: SFC<DetailsProps> = ({ event }) => {
           <hr className='table-seperator ' />
           {loopExclude(event, ['location', 'eventId', 'type', 'documents']).map(([key, value]) => {
             return (
-              !isObject(value) && !Array.isArray(value) && (
+              !Array.isArray(value) && (
                 <TableRow key={key} title={key} value={value} />
               ));
           })}
         </div>
-        {event.raws.length>0 &&
+        {event.raws &&
           <Item title='Files Details'>
           {/*  <div className=' table table__gallery'>*/}
           {/*{arrImg.map(el=> <div>*/}
