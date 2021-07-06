@@ -8,14 +8,17 @@ import 'normalize.css';
 import './styles/style.scss';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'mobx-react';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'mobx-react';
 import stores from './app/store';
+import { ModalProvider } from './app/utils/modalContext';
 
 ReactDOM.render(
   <Provider {...stores}>
     <BrowserRouter>
-      <App />
+      <ModalProvider>
+        <App/>
+      </ModalProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
