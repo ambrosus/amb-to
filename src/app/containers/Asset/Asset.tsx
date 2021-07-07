@@ -2,20 +2,17 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import React, { Component, lazy, Suspense } from 'react';
+import React, {Component, lazy, Suspense} from 'react';
 import './Asset.scss';
-import { getStyles, scrollTop } from '../../utils';
-import { withRouter, RouteComponentProps } from 'react-router';
-import { inject, observer } from 'mobx-react';
-import { AssetStore } from '../../store/asset.store';
-import {
-  AdditionalImages,
-  AssetIdentifiers,
-  AssetDetails,
-  Timeline,
-} from './components';
+import {getStyles, scrollTop} from '../../utils';
+import {RouteComponentProps, withRouter} from 'react-router';
+import {inject, observer} from 'mobx-react';
+import {AssetStore} from '../../store/asset.store';
+import {AdditionalImages, AssetDetails, AssetIdentifiers, Timeline,} from './components';
 import Loader from '../../components/Loader';
+
 const AssetImage: any = lazy(() => import('./components/AssetImage'));
+
 interface AssetProps extends RouteComponentProps<{ assetId: string }> {
   AssetStore: AssetStore;
 }
@@ -39,12 +36,12 @@ class Asset extends Component<AssetProps, AssetStates> {
   }
 
   public onImageSelect = (selectedImage: string) => {
-    this.setState({ selectedImage });
+    this.setState({selectedImage});
   };
 
   public getDefaultImage = () => {
     try {
-      const { asset } = this.props.AssetStore;
+      const {asset} = this.props.AssetStore;
       return asset.info.images.default.url;
     } catch (error) {
       return '';
@@ -52,16 +49,16 @@ class Asset extends Component<AssetProps, AssetStates> {
   };
 
   public render() {
-    const { asset, events } = this.props.AssetStore;
-    const { selectedImage } = this.state;
-    const { assetId } = this.props.match.params;
+    const {asset, events} = this.props.AssetStore;
+    const {selectedImage} = this.state;
+    const {assetId} = this.props.match.params;
     if (asset && asset.info) {
       return (
         <div className='Info'>
           <div className='item' style={getStyles('content')}>
             <div className='wrapper'>
               <div className='item__container'>
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<Loader/>}>
                   <AssetImage
                     url={selectedImage ? selectedImage : this.getDefaultImage()}
                     name={asset.info.name}
@@ -71,13 +68,15 @@ class Asset extends Component<AssetProps, AssetStates> {
                   images={asset.info.images}
                   onSelect={this.onImageSelect}
                 />
-                <AssetIdentifiers info={asset.info} />
-                <AssetDetails asset={asset} />
+                <AssetIdentifiers info={asset.info}/>
+                <AssetDetails asset={asset}/>
               </div>
               {events && (
-                <div className='item__container'>
-                  <Timeline events={events} assetId={assetId} />
-                </div>
+                <Suspense fallback={<Loader/>}>
+                  <div className='item__container'>
+                    <Timeline events={events} assetId={assetId}/>
+                  </div>
+                </Suspense>
               )}
             </div>
           </div>
@@ -89,13 +88,13 @@ class Asset extends Component<AssetProps, AssetStates> {
         <div>
           <div className='noContent'>
             <p>
-              This asset has no data. <br /> Please try another one.
+              This asset has no data. <br/> Please try another one.
             </p>
           </div>
         </div>
       );
     }
-    return <div />;
+    return <div/>;
   }
 }
 
