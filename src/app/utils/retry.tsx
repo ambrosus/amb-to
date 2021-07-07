@@ -2,7 +2,7 @@ import { ComponentType } from 'react';
 
 type LazyImport = () => Promise<{ default: ComponentType<any> }>;
 
-const retry = (fn: LazyImport, retriesLeft = 3, interval = 100):
+const retry = (fn: LazyImport, retriesLeft = 3, interval = 500):
     Promise<{ default: ComponentType<any> }> => new Promise((resolve, reject) => {
         fn()
             .then(resolve)
