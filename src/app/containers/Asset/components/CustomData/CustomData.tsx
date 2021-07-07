@@ -19,9 +19,9 @@ const CustomData: SFC<AssetProps> = ({ asset }) => {
           <hr className='table-seperator ' />
           <h3 className='table-subtitle' style={getStyles('components_subtitles')}>{row.title}</h3>
           <div className='table '>
-            {row.values.map((custom: any) => {
+            {row.values.map((custom: any,index: number) => {
               return (
-                <TableRow title={custom.title} value={isObject(custom.value) ? valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value} key={custom.title} />
+                <TableRow title={custom.title} value={isObject(custom.value) ? valueJSON(JSON.stringify(custom.value, null, 5)) : custom.value} key={index} />
               );
             })}
           </div>
