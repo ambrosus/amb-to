@@ -2,10 +2,8 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import React, { lazy } from 'react';
+import React from 'react';
 
-const Home: any = lazy(() => import('./containers/Home'));
-const AssetWrapper: any = lazy(() => import('./containers/AssetWrapper'));
 import './App.scss';
 import * as Sentry from '@sentry/browser';
 import config from './config';

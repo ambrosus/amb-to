@@ -2,7 +2,7 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import './styles/style.scss';
@@ -11,15 +11,18 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'mobx-react';
 import stores from './app/store';
-import { ModalProvider } from './app/utils/modalContext';
+import {ModalProvider} from './app/utils/modalContext';
+import Loader from "./app/components/Loader";
 
 ReactDOM.render(
   <Provider {...stores}>
-    <BrowserRouter>
-      <ModalProvider>
-        <App/>
-      </ModalProvider>
-    </BrowserRouter>
+    <Suspense fallback={<Loader/>}>
+      <BrowserRouter>
+        <ModalProvider>
+          <App/>
+        </ModalProvider>
+      </BrowserRouter>
+    </Suspense>
   </Provider>,
   document.getElementById('root')
 );
