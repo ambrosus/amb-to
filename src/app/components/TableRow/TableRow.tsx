@@ -44,29 +44,34 @@ const TableRow: SFC<TableRowProps> = ({
           alignItems: 'center',
           flexWrap: 'wrap',
           justifyContent: 'flex-start',
-        }}>{newValue.map((el, i) => {
-          const fileBase64 = el.data;
-          const body = fileBase64.split(',')[1];
-          // Get content type from base64 string
-          const contentType = fileBase64.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-          if (contentType === 'application/pdf') {
-            return <a
-              key={i}
-              target='_blank'
-              href='#'
-              style={{marginRight: 10, minWidth: 65}}
-              onClick={(e) => handleClick(e, body, contentType)}>{el.name}</a>;
+        }}>{newValue && newValue.map((el, i) => {
+          if (el.data){
+            const fileBase64 = el.data;
+            const body = fileBase64 && fileBase64.split(',')[1];
+            // Get content type from base64 string
+            const contentType = fileBase64 && fileBase64.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+            if (contentType === 'application/pdf') {
+              return <a
+                key={i}
+                target='_blank'
+                href='#'
+                style={{marginRight: 10, minWidth: 65}}
+                onClick={(e) => handleClick(e, body, contentType)}>{el.name}</a>;
+            }
+
+            return <div key={i}>
+              <img className={smallImages ? 'small-image' : 'table__gallery-main'}
+                   style={{cursor: 'pointer'}}
+                   onClick={() => {
+                     setCurrentImg(fileBase64);
+                   }}
+                   src={fileBase64} alt='img'/>
+
+            </div>;
+          }else {
+            return null
           }
 
-          return <div key={i}>
-            <img className={smallImages ? 'small-image' : 'table__gallery-main'}
-                 style={{cursor: 'pointer'}}
-                 onClick={() => {
-                   setCurrentImg(fileBase64);
-                 }}
-                 src={fileBase64} alt='img'/>
-
-          </div>;
         })}
         </div>
       );
@@ -103,7 +108,7 @@ const TableRow: SFC<TableRowProps> = ({
   const val = checkTypeData(value);
   return (
     <div className={rClass}>
-      <div className={tClass} style={getStyles('components_keys')}>{title}</div>
+      <div className={tClass} style={getStyles('components_keys')}>{title && title}</div>
       <div className={cClass} style={getStyles('components_values')}
       >
         {val}
