@@ -34,20 +34,45 @@ export class AssetService {
     return hermesUrls;
   }
 
+  public async fetchAll(hermeses: string[], Id: string, type: string) {
+    const promises: any = [];
+    for (const hermes of hermeses) {
+      const getUrl = `${hermes}/${type}/${Id}`;
+      promises.push(
+        new Promise(async (resolve) => {
+          try {
+            const response = await apiInstance.getRequest(getUrl);
+            if (response.status === 200) {
+              if (type === 'events') {
+                resolve({ url: hermes, event: response.data } );
+              }
+              resolve({ url: hermes, asset: response.data } );
+            }
+            // tslint:disable-next-line:no-empty
+          } catch {}
+          resolve(false);
+        })
+      );
+    }
+    let ret_val;
+    await Promise.all(promises).then((responses) => {
+      for (const response of responses) {
+        if (response !== false) {
+          ret_val = response;
+        }
+      }
+    });
+    return ret_val;
+  }
+
   private async findAssetOnAllHermeses(assetId: string): Promise<{
     url: string;
     asset: any;
   }> {
-    const urls = await this.getHermesesUrls();
-    for (const hermesUrl of urls) {
-      const getAssetUrl = `${hermesUrl}/assets/${assetId}`;
-      try {
-        const response = await apiInstance.getRequest(getAssetUrl);
-        if (response.status === 200) {
-          return { url: hermesUrl, asset: response.data };
-        }
-      // tslint:disable-next-line:no-empty
-      } catch {}
+    const hermeses = await this.getHermesesUrls();
+    const res = await this.fetchAll(hermeses, assetId, 'assets');
+    if (res) {
+      return res;
     }
     throw new Error('No Asset');
   }
@@ -56,16 +81,10 @@ export class AssetService {
     url: string;
     event: any;
   }> {
-    const urls = await this.getHermesesUrls();
-    for (const hermesUrl of urls) {
-      const getEventUrl = `${hermesUrl}/events/${eventId}`;
-      try {
-        const response = await apiInstance.getRequest(getEventUrl);
-        if (response.status === 200) {
-          return {url: hermesUrl, event: response.data};
-        }
-      // tslint:disable-next-line:no-empty
-      } catch {}
+    const hermeses = await this.getHermesesUrls();
+    const res = await this.fetchAll(hermeses, eventId, 'events');
+    if (res) {
+      return res;
     }
     throw new Error('No Event');
   }
