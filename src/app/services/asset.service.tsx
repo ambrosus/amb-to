@@ -35,11 +35,11 @@ export class AssetService {
   }
 
   public async fetchAll(hermeses: string[], Id: string, type: string) {
-    const promises: any = [];
+    const promises: Promise<any>[] = [];
     for (const hermes of hermeses) {
       const getUrl = `${hermes}/${type}/${Id}`;
       promises.push(
-        new Promise(async (resolve) => {
+        new Promise(async (resolve, reject) => {
           try {
             const response = await apiInstance.getRequest(getUrl);
             if (response.status === 200) {
@@ -50,18 +50,12 @@ export class AssetService {
             }
             // tslint:disable-next-line:no-empty
           } catch {}
-          resolve(false);
+          reject();
         })
       );
     }
     let ret_val;
-    await Promise.all(promises).then((responses) => {
-      for (const response of responses) {
-        if (response !== false) {
-          ret_val = response;
-        }
-      }
-    });
+    await Promise.any(promises).then(async (fulfilled) => ret_val = fulfilled);
     return ret_val;
   }
 
