@@ -41,8 +41,11 @@ class Event extends Component<EventProps, EventStates> {
         history.push('/');
         return;
       }
-      if (!this.props.AssetStore!.event) {
-        await this.props.AssetStore!.getEvent(eventId).then(console.log)
+
+      if (this.props.AssetStore!.asset) {
+        return
+      } else if (!this.props.AssetStore!.event) {
+        await this.props.AssetStore!.getEvent(eventId)
       }
     } catch (error) {
       history.push('/');
