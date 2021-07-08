@@ -8,13 +8,14 @@ import {lazyLoad, retry} from './utils';
 
 const Home: any = lazy(() => retry(() => import('./containers/Home')));
 const AssetWrapper: any = lazy(() => retry(() => import('./containers/AssetWrapper')));
+const Event: any = lazy(() => import('./containers/Event'));
 
 const Routes = () => {
   return (
     <Switch>
       <Route path='/:assetId' component={lazyLoad(AssetWrapper)}/>
       <Route exact path='/' component={lazyLoad(Home)}/>
-      <Redirect from='*' to='/'/>
+      <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
     </Switch>
   );
 };

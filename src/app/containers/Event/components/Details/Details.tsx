@@ -90,10 +90,10 @@ const Details: SFC<DetailsProps> = ({event}) => {
     <Item title='Event Details'>
       <Fragment>
         <div className='table'>
-          <TableRow title='Event Id' value={event.eventId}/>
-          <TableRow title='Created by' value={event.author}/>
-          <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)}/>
-          <TableRow title='Type' value={event.action}/>
+          {event.eventId  &&  <TableRow title='Event Id' value={event.eventId}/>}
+          {event.author && <TableRow title='Created by' value={event.author}/>}
+          {event.timestamp  &&  <TableRow title='Timestamp' value={formatDate(event.timestamp * 1000, true)}/>}
+          {event.action &&  <TableRow title='Type' value={event.action}/>}
         </div>
         <div className='table'>
           <hr className='table-seperator '/>
@@ -132,7 +132,7 @@ const Details: SFC<DetailsProps> = ({event}) => {
                     <div className='table'>
                       {Object.entries(value).map(([k, v]) => (
                         !Array.isArray(value) && (
-                          <TableRow key={k} title={k} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v}/>
+                          k && <TableRow key={k} title={k} value={isObject(v) ? valueJSON(JSON.stringify(v, null, 5)) : v}/>
                         ))
                       )}
                     </div>

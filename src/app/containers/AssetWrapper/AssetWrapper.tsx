@@ -2,7 +2,7 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import React, {Component, lazy, Suspense} from 'react';
+import React, {Component, lazy} from 'react';
 import {Route, RouteComponentProps, withRouter} from 'react-router';
 import {inject, observer} from 'mobx-react';
 import {AssetStore} from '../../store/asset.store';
@@ -45,12 +45,10 @@ class AssetWrapper extends Component<AssetProps> {
           brandings && assetId &&
           (
             <>
-                <Header assetId={assetId}/>
-                <>
-                  <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
-                  <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
-                </>
-                <Footer/>
+              <Header assetId={assetId}/>
+                <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
+                <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
+              <Footer/>
             </>
           )
         }
