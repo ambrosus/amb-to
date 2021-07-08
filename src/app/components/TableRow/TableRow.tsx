@@ -36,7 +36,7 @@ const TableRow: SFC<TableRowProps> = ({
     if (typeof data === 'string') {
       return generateLink(data);
     }
-    if (data.length > 0) {
+    if (data && data.length > 0) {
       const newValue = toJS(data);
       return (
         <div style={{

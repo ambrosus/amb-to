@@ -39,17 +39,27 @@ class AssetWrapper extends Component<AssetProps> {
   public render() {
     const {assetId} = this.props.match.params;
     const {brandings} = this.props.AssetStore;
-    if (brandings) {
-      return (
-        <Suspense fallback={<Loader/>}>
-          <Header assetId={assetId}/>
-          <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
-          <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
-          <Footer/>
-        </Suspense>
-      );
-    }
-    return <Loader/>;
+    return (
+      <>
+        {
+          brandings && assetId &&
+          (
+            <>
+              <Suspense fallback={<Loader/>}>
+                <Header assetId={assetId}/>
+                <>
+                  <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
+                  <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
+                </>
+                <Footer/>
+              </Suspense>
+            </>
+          )
+        }
+        {!brandings && (<Loader/>)}
+      </>
+
+    )
   }
 }
 

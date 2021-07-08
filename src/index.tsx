@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'mobx-react';
 import stores from './app/store';
-import { ModalProvider } from './app/utils/modalContext';
+import {ModalProvider} from './app/utils/modalContext';
 
 ReactDOM.render(
   <Provider {...stores}>

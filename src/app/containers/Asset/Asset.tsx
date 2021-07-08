@@ -72,11 +72,9 @@ class Asset extends Component<AssetProps, AssetStates> {
                 <AssetDetails asset={asset}/>
               </div>
               {events && (
-                <Suspense fallback={<Loader/>}>
-                  <div className='item__container'>
-                    <Timeline events={events} assetId={assetId}/>
-                  </div>
-                </Suspense>
+                <div className='item__container'>
+                  <Timeline events={events} assetId={assetId}/>
+                </div>
               )}
             </div>
           </div>

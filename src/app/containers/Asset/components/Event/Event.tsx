@@ -62,9 +62,21 @@ export default class Event extends Component<any, any> {
             className='item__event__single'
             style={{backgroundColor: eventAsset.backgroundColor}}
           >
-            <div className='item__event__single__image'>
-              <img src={eventAsset.iconUrl}/>
-            </div>
+            {
+              event.location ?
+                (
+                  <div className='item__event__single__image'>
+                    <img src={eventAsset.iconUrl}/>
+                  </div>
+                )
+                :
+                (
+                  <div className='item__event__single__image'>
+                  </div>
+                )
+            }
+
+
             <div className='item__event__single__copy '>
               <div className='item__event__single__container '>
                 <h4 className='item__event__single__heading '>{event.name}</h4>
