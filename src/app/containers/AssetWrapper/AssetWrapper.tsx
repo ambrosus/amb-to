@@ -43,12 +43,18 @@ class AssetWrapper extends Component<AssetProps> {
       <>
         {
           brandings && assetId &&
-          (<Suspense fallback={<Loader/>}>
-            <Header assetId={assetId}/>
-            <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
-            <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
-            <Footer/>
-          </Suspense>)
+          (
+            <>
+              <Suspense fallback={<Loader/>}>
+                <Header assetId={assetId}/>
+                <>
+                  <Route exact path='/:assetId' render={lazyLoad(Asset)}/>
+                  <Route exact path='/:assetId/events/:eventId' render={lazyLoad(Event)}/>
+                </>
+                <Footer/>
+              </Suspense>
+            </>
+          )
         }
         {!brandings && (<Loader/>)}
       </>

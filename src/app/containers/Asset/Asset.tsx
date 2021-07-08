@@ -72,9 +72,9 @@ class Asset extends Component<AssetProps, AssetStates> {
                 <AssetDetails asset={asset}/>
               </div>
               {events && (
-                  <div className='item__container'>
-                    <Timeline events={events} assetId={assetId}/>
-                  </div>
+                <div className='item__container'>
+                  <Timeline events={events} assetId={assetId}/>
+                </div>
               )}
             </div>
           </div>

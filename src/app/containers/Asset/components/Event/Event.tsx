@@ -63,14 +63,16 @@ export default class Event extends Component<any, any> {
             style={{backgroundColor: eventAsset.backgroundColor}}
           >
             {
-              event.location.location
-                ? (
+              event.location ?
+                (
                   <div className='item__event__single__image'>
                     <img src={eventAsset.iconUrl}/>
                   </div>
                 )
-                : (
-                  <div className='item__event__single__image'/>
+                :
+                (
+                  <div className='item__event__single__image'>
+                  </div>
                 )
             }
 
