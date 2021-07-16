@@ -12,7 +12,7 @@ const apiInstance = (): AxiosInstance => axios.create({
 });
 
 const getRequest = (url: string) => {
-  return apiInstance().get(url);
+  return apiInstance().get(url,  { withCredentials: false });
 };
 
 const postRequest = (url: string, body: any) => {

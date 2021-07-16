@@ -39,6 +39,7 @@ export default class Event extends Component<any, any> {
 
   public render() {
     const {event, assetId} = this.props;
+    console.log('event',event);
     const eventAsset = this.eventTypeToStyle(event.type);
     return (
       <div id={event.eventId} className='item__event__container'>
@@ -75,7 +76,6 @@ export default class Event extends Component<any, any> {
                   </div>
                 )
             }
-
 
             <div className='item__event__single__copy '>
               <div className='item__event__single__container '>

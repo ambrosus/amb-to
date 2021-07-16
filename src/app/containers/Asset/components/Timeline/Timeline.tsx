@@ -53,6 +53,7 @@ export default class Timeline extends Component<TimelineProps, TimelineState> {
   public renderEvents = () => {
     const { events, assetId } = this.props;
     const { btnObj } = this.state;
+    console.log(events);
     return (
       <React.Fragment>
         {events.map((event: any, i: number) =>

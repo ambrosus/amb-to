@@ -1,0 +1,4 @@
+
+³typescript:S1874"–'SFC' is deprecated. as of recent React versions, function components can no
+longer be considered 'stateless'. Please use `FunctionComponent` instead.(¼ÀçÞ
+typescript:S1874"c'isObject' is deprecated. since v4.0.0 - use `value !== null && typeof value === 'object'` instead.(€›é÷

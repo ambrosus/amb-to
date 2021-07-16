@@ -114,6 +114,7 @@ export class AssetService {
 
   public async getEvent(eventId: string) {
     const {event} = await this.findEventOnAllHermeses(eventId);
+    console.log(event);
     return event;
   }
 

@@ -10,7 +10,7 @@ import './Event.scss';
 import {inject, observer} from 'mobx-react';
 import {AssetStore} from '../../store/asset.store';
 import {Details, DisplayBar, Document, EventValidator, Location} from './components';
-import Loader from "../../components/Loader";
+import Loader from '../../components/Loader';
 
 interface EventProps extends RouteComponentProps<{ assetId: string, eventId: string }> {
   AssetStore?: AssetStore;
@@ -43,9 +43,9 @@ class Event extends Component<EventProps, EventStates> {
       }
 
       if (this.props.AssetStore!.asset) {
-        return
-      } else if (!this.props.AssetStore!.event) {
-        await this.props.AssetStore!.getEvent(eventId)
+        return;
+      }  if (!this.props.AssetStore!.event) {
+        await this.props.AssetStore!.getEvent(eventId).then(e => {console.log('EVNEEENTTT!', e); });
       }
     } catch (error) {
       history.push('/');
@@ -55,6 +55,7 @@ class Event extends Component<EventProps, EventStates> {
   public render() {
     const {assetId, eventId} = this.props.match.params;
     const {event, asset} = this.props.AssetStore!;
+    console.log('event', event);
     if (!asset && !event) {
       return <Preloader/>;
     }
