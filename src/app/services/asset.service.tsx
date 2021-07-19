@@ -21,8 +21,8 @@ export class AssetService {
       if (response.status === 200) {
         return response.data;
       }
-      // tslint:disable-next-line:no-empty
-    } catch {
+    } catch (e) {
+      throw  e
     }
   }
 
