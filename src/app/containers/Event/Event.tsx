@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import {Link, RouteComponentProps, withRouter} from 'react-router-dom';
 import Preloader from '../../components/Preloader/Preloader';
-import {getStyles, scrollTop} from '../../utils';
+import {getStyles} from '../../utils';
 import './Event.scss';
 import {inject, observer} from 'mobx-react';
 import {AssetStore} from '../../store/asset.store';
@@ -36,16 +36,20 @@ class Event extends Component<EventProps, EventStates> {
     const {assetId, eventId} = this.props.match.params;
 
     try {
-      scrollTop();
       if (!assetId || !eventId) {
         history.push('/');
         return;
       }
 
-      if (this.props.AssetStore!.asset) {
-        return
-      } else if (!this.props.AssetStore!.event) {
-        await this.props.AssetStore!.getEvent(eventId)
+      if (!this.props.AssetStore!.event) {
+        // @ts-ignore
+        const {events} = this.props.AssetStore
+        if (events) {
+          const event = events.filter(e => {
+            return e.eventId === eventId
+          })
+          this.setState({event});
+        }
       }
     } catch (error) {
       history.push('/');
@@ -54,8 +58,8 @@ class Event extends Component<EventProps, EventStates> {
 
   public render() {
     const {assetId, eventId} = this.props.match.params;
-    const {event, asset} = this.props.AssetStore!;
-    if (!asset && !event) {
+    const {event} = this.props.AssetStore!;
+    if (!this.state.event && !event) {
       return <Preloader/>;
     }
     return (
@@ -63,22 +67,39 @@ class Event extends Component<EventProps, EventStates> {
         <div className='wrapper'>
           <Link className='back-button' to={`/${assetId}`}>Back to Asset</Link>
           {
-            event ?
-              (
-                <>
-                  <DisplayBar event={event}/>
-                  <div className='Event-container'>
-                    <div className='item__container'>
-                      <Details event={event}/>
-                      <Document event={event}/>
-                      <EventValidator eventId={eventId}/>
-                    </div>
-                    <Location event={event}/>
+            !(event || this.state.event) && <Loader/>
+          }
+          {
+            this.state.event !== null &&
+            (
+              <>
+                <DisplayBar event={this.state.event[0]}/>
+                <div className='Event-container'>
+                  <div className='item__container'>
+                    <Details event={this.state.event[0]}/>
+                    <Document event={this.state.event[0]}/>
+                    <EventValidator eventId={eventId}/>
                   </div>
-                </>
-              )
-              :
-              <Loader/>
+                  <Location event={this.state.event[0]}/>
+                </div>
+              </>
+            )
+          }
+          {
+            event !== null &&
+            (
+              <>
+                <DisplayBar event={event}/>
+                <div className='Event-container'>
+                  <div className='item__container'>
+                    <Details event={event}/>
+                    <Document event={event}/>
+                    <EventValidator eventId={eventId}/>
+                  </div>
+                  <Location event={event}/>
+                </div>
+              </>
+            )
           }
 
         </div>

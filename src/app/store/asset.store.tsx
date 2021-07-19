@@ -2,8 +2,9 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import { observable, action } from 'mobx';
-import { AssetService } from '../services';
+import {action, observable} from 'mobx';
+import {AssetService} from '../services';
+
 export class AssetStore {
   @observable public asset: any = null;
   @observable public events: any = null;
@@ -45,7 +46,8 @@ export class AssetStore {
   public getEvent = (eventId: string) => {
     return new Promise(async (resolve, reject) => {
       try {
-        this.event = await AssetService.getEvent(eventId);
+        const {event} = await AssetService.findEventOnAllHermeses(eventId);
+        this.event = event
         resolve(true);
       } catch (error) {
         reject(error);
