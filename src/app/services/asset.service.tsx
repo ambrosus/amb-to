@@ -2,9 +2,9 @@
  * Copyright 2018 Ambrosus Inc.
  * Email: tech@ambrosus.com
  */
-import { StorageService } from '.';
+import {StorageService} from '.';
 import ambrosusSdk from 'ambrosus-javascript-sdk';
-import { apiInstance } from '../utils';
+import {apiInstance} from '../utils';
 import * as defaultConfig from '../config';
 
 export class AssetService {
@@ -21,8 +21,9 @@ export class AssetService {
       if (response.status === 200) {
         return response.data;
       }
-    // tslint:disable-next-line:no-empty
-    } catch {}
+    } catch (e) {
+      throw  e
+    }
   }
 
   public async getHermesesUrls() {
@@ -43,14 +44,14 @@ export class AssetService {
           try {
             const response = await apiInstance.getRequest(getUrl);
             if (response.status === 200) {
-              if (type === 'events') {
-                resolve({ url: hermes, event: response.data } );
+              if (type === 'event2/info') {
+                resolve({url: hermes, event: response.data});
               }
-              resolve({ url: hermes, asset: response.data } );
+              resolve({url: hermes, asset: response.data});
             }
-            // tslint:disable-next-line:no-empty
-          } catch {}
-          reject();
+          } catch (e) {
+            reject(e)
+          }
         })
       );
     }
@@ -71,12 +72,12 @@ export class AssetService {
     throw new Error('No Asset');
   }
 
-  private async findEventOnAllHermeses(eventId: string): Promise<{
+  async findEventOnAllHermeses(eventId: string): Promise<{
     url: string;
     event: any;
   }> {
     const hermeses = await this.getHermesesUrls();
-    const res = await this.fetchAll(hermeses, eventId, 'events');
+    const res = await this.fetchAll(hermeses, eventId, 'event2/info');
     if (res) {
       return res;
     }
@@ -134,7 +135,7 @@ export class AssetService {
   }
 
   public addHistory(title: string, assetId: string) {
-    const history = { title, id: assetId };
+    const history = {title, id: assetId};
     const tempHistory: any = StorageService.get('history');
     if (tempHistory && tempHistory.length > 0) {
       const newHistory = tempHistory.filter((e: any) => e.id !== assetId);
