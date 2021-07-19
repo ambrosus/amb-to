@@ -50,7 +50,7 @@ export class AssetService {
               resolve({url: hermes, asset: response.data});
             }
           } catch (e) {
-            reject({url: hermes, asset: {}})
+            reject(e)
           }
         })
       );
