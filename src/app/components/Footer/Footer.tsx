@@ -107,7 +107,7 @@ const Footer: SFC<{ AssetStore?: AssetStore }> = inject('AssetStore')(observer((
         </div>
 
         <div className='contact'>
-          <a href='mailto:info@ambrosus.com'>info@ambrosus.com</a>
+          <a href='mailto:info@ambrosus.com'>info@ambrosus.io</a>
         </div>
       </div>
     </div>
